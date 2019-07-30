@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Tuition Management System</string>
+    <string name="loading_activity_heading">Tuition Management System</string>
+    <string name="login_activity_heading">LOGIN</string>
+    <string name="login_username_hint">Username</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_submit_button_txt">Login</string>
+    <string name="login_UserType_Teacher">Teacher</string>
+    <string name="login_UserType_Student">Student</string>
+</resources>
