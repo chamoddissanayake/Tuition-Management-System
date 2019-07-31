@@ -47,7 +47,8 @@ public class StudentDashboard extends AppCompatActivity {
         FeedbackNotificationMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Feedback Management Clicked",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(),FeedBack.class);
+                startActivity(i);
             }
         });
 

@@ -10,6 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".StudentDashboard"></activity>
+        <activity android:name=".TeacherDashboard"></activity>
+        <activity android:name=".FeedBack"></activity>
+        <activity android:name=".Notification"></activity>
+        <activity android:name=".UpdateDeleteFeedback"></activity>
+        <activity android:name=".UpdateDeleteNotification"></activity>
+        <activity android:name=".ViewFeedback"></activity>
+        <activity android:name=".ViewNotification"></activity>
+
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
