@@ -1,6 +1,8 @@
 package com.test.tuitionmanagementsystem;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -122,10 +124,51 @@ public class LoginActivity extends AppCompatActivity {
             RadioButton selectedRadioButton = (RadioButton) findViewById(selectedRadioButtonID);
             String selectedRadioButtonText = selectedRadioButton.getText().toString();
 
-            if(selectedRadioButtonText.equals("Teacher")){
-                Toast.makeText(getApplicationContext(),"Hello "+selectedRadioButtonText,Toast.LENGTH_SHORT).show();
-            }else if(selectedRadioButtonText.equals("Student")){
-                Toast.makeText(getApplicationContext(),"Hello "+selectedRadioButtonText,Toast.LENGTH_SHORT).show();
+            if(selectedRadioButtonText.equals("Student")){
+
+                if(validateStudentCredentials()){
+                        //If found fetch Student data(id, name....) from database.
+                        String usernameInput = textInputUsername.getEditText().getText().toString();
+                        String userpasswordInput = textInputPassword.getEditText().getText().toString();
+                        //   fetchStudentDataFromDB(usernameInput,userpasswordInput);    ->Return details of the student.
+
+                        //Sample values
+                        String  StudentID = "S00001";
+                        String name = "Isuru";
+                        String year = "2019";
+
+                        Intent i = new Intent(getApplicationContext(),StudentDashboard.class);
+                        i.putExtra("StudentID",StudentID);
+                        i.putExtra("sName",name);
+                        i.putExtra("year",year);
+                        startActivity(i);
+
+                    }else{
+                        //Student credentials are incorrect.
+                        Toast.makeText(getApplicationContext(),"Student: Your Username or Password Incorrect.",Toast.LENGTH_SHORT).show();
+                    }
+
+            }else if(selectedRadioButtonText.equals("Teacher")){
+                if(validateTeacherCredentials()){
+                    //If found fetch Teacher data(id, name....) from database.
+                    String usernameInput = textInputUsername.getEditText().getText().toString();
+                    String userpasswordInput = textInputPassword.getEditText().getText().toString();
+                    //   fetchTeacherDataFromDB(usernameInput,userpasswordInput);    ->Return details of the teacher.
+
+                    //Sample values
+                    String  TeacherID = "STF001";
+                    String name = "Saman";
+
+
+                    Intent i = new Intent(getApplicationContext(),TeacherDashboard.class);
+                    i.putExtra("TeacherID",TeacherID);
+                    i.putExtra("tName",name);
+                    startActivity(i);
+
+                }else{
+                    //Teacher credentials are incorrect.
+                    Toast.makeText(getApplicationContext(),"Teacher: Your Username or Password Incorrect.",Toast.LENGTH_SHORT).show();
+                }
             }
 
 
@@ -133,6 +176,22 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    private boolean validateTeacherCredentials() {
+        String usernameInput = textInputUsername.getEditText().getText().toString();
+        String userpasswordInput = textInputPassword.getEditText().getText().toString();
+        //Teacher Credentials validation is here.
+
+        return true;
+    }
+
+    private boolean validateStudentCredentials() {
+        String usernameInput = textInputUsername.getEditText().getText().toString();
+        String userpasswordInput = textInputPassword.getEditText().getText().toString();
+        //Student Credentials validation is here.
+
+        return true;
     }
 
 }
