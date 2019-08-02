@@ -45,7 +45,7 @@ public class StudentDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(getApplicationContext(),StudentRegistration.class);
+                Intent i = new Intent(getApplicationContext(),EditRegistration_Details.class);
                 startActivity(i);
             }
         });

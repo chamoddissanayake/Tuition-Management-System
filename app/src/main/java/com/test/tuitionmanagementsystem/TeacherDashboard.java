@@ -45,11 +45,15 @@ public class TeacherDashboard extends AppCompatActivity {
         AttendanceMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+
                 Intent i = new Intent(getApplicationContext(),StudentRegistration.class);
                 startActivity(i);
             }
         });
+
+
+
+
 
         FeedbackNotificationMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
