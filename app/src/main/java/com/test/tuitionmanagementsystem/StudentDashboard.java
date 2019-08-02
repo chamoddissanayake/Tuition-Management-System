@@ -24,8 +24,8 @@ public class StudentDashboard extends AppCompatActivity {
         StudyMaterialsManagementBtn = (ImageButton) findViewById(R.id.studentStudyMaterialsManagementBtn);
 
         Intent intent = getIntent();
-        String sID = intent.getStringExtra("StudentID");
-        String sName = intent.getStringExtra("sName");
+        final String sID = intent.getStringExtra("StudentID");
+        final String sName = intent.getStringExtra("sName");
 
         helloMsg = (TextView)findViewById(R.id.HiStudentMessage);
         helloMsg.setText("Hi "+sName+",");
@@ -33,7 +33,11 @@ public class StudentDashboard extends AppCompatActivity {
         ResultsMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Result Management Clicked",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"Result Management Clicked",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(),StudentResultManagementDashboard.class);
+                i.putExtra("sID",sID);
+                i.putExtra("sName",sName);
+                startActivity(i);
             }
         });
 

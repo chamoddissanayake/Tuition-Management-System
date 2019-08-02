@@ -20,8 +20,8 @@ public class TeacherDashboard extends AppCompatActivity {
         setContentView(R.layout.activity_teacher_dashboard);
 
         Intent intent = getIntent();
-        String tID = intent.getStringExtra("TeacherID");
-        String tName = intent.getStringExtra("tName");
+        final String tID = intent.getStringExtra("TeacherID");
+        final String tName = intent.getStringExtra("tName");
 
         helloMsg = (TextView)findViewById(R.id.HiTeacherMessage);
         helloMsg.setText("Hi "+tName+",");
@@ -35,6 +35,10 @@ public class TeacherDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"Result Management Clicked",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(),TeacherResultManagementDashboard.class);
+                i.putExtra("tID",tID);
+                i.putExtra("tName",tName);
+                startActivity(i);
             }
         });
 
