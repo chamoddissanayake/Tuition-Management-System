@@ -45,14 +45,16 @@ public class TeacherDashboard extends AppCompatActivity {
         AttendanceMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Attendance Management Clicked",Toast.LENGTH_SHORT).show();
+                
+                Intent i = new Intent(getApplicationContext(),StudentRegistration.class);
+                startActivity(i);
             }
         });
 
         FeedbackNotificationMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),FeedBack.class);
+                Intent i = new Intent(getApplicationContext(),ViewFeedback.class);
                 startActivity(i);
             }
         });

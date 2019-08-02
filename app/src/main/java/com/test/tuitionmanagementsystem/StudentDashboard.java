@@ -44,7 +44,9 @@ public class StudentDashboard extends AppCompatActivity {
         AttendanceMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Attendance Management Clicked",Toast.LENGTH_SHORT).show();
+
+                Intent i = new Intent(getApplicationContext(),StudentRegistration.class);
+                startActivity(i);
             }
         });
 
@@ -52,7 +54,10 @@ public class StudentDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),FeedBack.class);
+                i.putExtra("StudentID",sID);
+                i.putExtra("sName",sName);
                 startActivity(i);
+
             }
         });
 
