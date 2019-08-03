@@ -9,6 +9,14 @@
     android:orientation="vertical"
     android:background="@drawable/wallpaper"
     >
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+        <RelativeLayout
+            android:id="@+id/form_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
 
     <TextView
         android:id="@+id/studentDashboardHeading"
@@ -29,54 +37,121 @@
         android:layout_marginTop="50dp"
         />
 
+    <androidx.cardview.widget.CardView
 
+        android:id="@+id/studentResultsMgtBtncv"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:cardCornerRadius="18dp"
+
+        android:layout_alignTop="@+id/HiStudentMessage"
+        android:layout_marginTop="50dp"
+        >
 
         <ImageButton
             android:id="@+id/studentResultsMgtBtn"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_weight="4"
-            android:src="@drawable/result"
+            android:layout_width="352dp"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:padding="0px"
             android:scaleType="fitCenter"
-            android:layout_alignTop="@+id/HiStudentMessage"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/roundcorner"
-            />
+            android:scaleY="1.1"
+            android:src="@drawable/result" />
+    </androidx.cardview.widget.CardView>
 
+
+
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/studentAttendanceMgtBtncv"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:cardCornerRadius="18dp"
+
+        android:layout_alignTop="@+id/studentResultsMgtBtncv"
+        android:layout_marginTop="120dp"
+        >
         <ImageButton
             android:id="@+id/studentAttendanceMgtBtn"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_weight="4"
-            android:src="@drawable/student_management"
+            android:layout_height="match_parent"
+            android:padding="0px"
+            android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:layout_alignTop="@+id/studentResultsMgtBtn"
-            android:layout_marginTop="120dp"
-            android:background="@drawable/roundcorner"
-            />
+            android:scaleY="1.1"
+            android:src="@drawable/student_management"
 
+            />
+    </androidx.cardview.widget.CardView>
+
+
+
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/studentFeedbackNotificationMgtBtncv"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:cardCornerRadius="8dp"
+
+        android:layout_alignTop="@+id/studentAttendanceMgtBtncv"
+        android:layout_marginTop="120dp"
+        >
         <ImageButton
             android:id="@+id/studentFeedbackNotificationMgtBtn"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_weight="4"
-            android:src="@drawable/feedback"
+            android:layout_height="match_parent"
+            android:padding="0px"
+            android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:layout_alignTop="@+id/studentAttendanceMgtBtn"
-            android:layout_marginTop="120dp"
-            android:background="@drawable/roundcorner"
+            android:scaleY="1.1"
+            android:src="@drawable/feedback"
             />
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+
+
+
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/studentStudyMaterialsManagementBtncv"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:cardCornerRadius="8dp"
+        android:layout_alignTop="@+id/studentFeedbackNotificationMgtBtncv"
+
+        android:layout_marginTop="120dp"
+        >
+
+
 
         <ImageButton
             android:id="@+id/studentStudyMaterialsManagementBtn"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_weight="4"
-            android:src="@drawable/materials"
+            android:layout_height="match_parent"
+            android:padding="0px"
+            android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:layout_alignTop="@+id/studentFeedbackNotificationMgtBtn"
-            android:layout_marginTop="120dp"
-            android:background="@drawable/roundcorner"
+            android:scaleY="1.1"
+            android:src="@drawable/materials"
             />
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>
