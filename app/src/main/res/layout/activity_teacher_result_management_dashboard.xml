@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".TeacherResultManagementDashboard"
     android:background="@drawable/wallpaper"
+    android:orientation="vertical"
     >
 
     <Button

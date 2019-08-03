@@ -2,6 +2,7 @@ package com.test.tuitionmanagementsystem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,7 @@ public class TeacherSearchResults extends AppCompatActivity {
     private  static final String TAG = "TeacherSearchResults";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //block screen rotation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_search_results);
         Log.d(TAG, "onCreate: Started.");
