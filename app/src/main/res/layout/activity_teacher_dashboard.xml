@@ -14,15 +14,16 @@
         android:id="@+id/teacherDashboardHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Teacher Dashboard"
+        android:text="@string/teacher_dashboard"
         android:gravity="center"
         android:textSize="25dp"
+        android:textStyle="bold"
         />
     <TextView
         android:id="@+id/HiTeacherMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hi message"
+        android:text="@string/hi_message"
         android:layout_alignTop="@+id/teacherDashboardHeading"
         android:layout_marginTop="50dp"
         />
@@ -44,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_weight="4"
-        android:src="@drawable/attendance"
+        android:src="@drawable/student_management"
         android:scaleType="fitCenter"
         android:layout_alignTop="@+id/teacherResultsMgtBtn"
         android:layout_marginTop="120dp"

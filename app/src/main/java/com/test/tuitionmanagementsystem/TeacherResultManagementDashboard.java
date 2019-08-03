@@ -8,11 +8,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
+
 public class TeacherResultManagementDashboard extends AppCompatActivity {
 
     TextView TeacherName, TeacherID;
-    Button addResult, deleteResult, searchResult,updateResult;
-
+    Button addResult, searchResult,updateResult;
+    private BarChart marksChart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,14 +37,13 @@ public class TeacherResultManagementDashboard extends AppCompatActivity {
         TeacherID.setText(tID);
 
         addResult = findViewById(R.id.teacherAddStudentResultsButton);
-        deleteResult = findViewById(R.id.teacherDeleteStudentResultsButton);
         searchResult = findViewById(R.id.teacherSearchStudentResultsButton);
         updateResult =findViewById(R.id.teacherUpdateStudentResultsButton);
 
         addResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Add Result",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Add Result",Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(), TeacherAddResults.class);
                 i.putExtra("tID",tID);
                 i.putExtra("tName",tName);
@@ -44,27 +51,50 @@ public class TeacherResultManagementDashboard extends AppCompatActivity {
             }
         });
 
-        deleteResult.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Delete Result",Toast.LENGTH_SHORT).show();
-            }
-        });
+
         searchResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Search Result",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Search Result",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(), TeacherSearchResults.class);
+                i.putExtra("tID",tID);
+                i.putExtra("tName",tName);
+                startActivity(i);
             }
         });
 
         updateResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Update Result",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Update Result",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(), TeacherUpdateDeleteResults.class);
+                i.putExtra("tID",tID);
+                i.putExtra("tName",tName);
+                startActivity(i);
             }
         });
 
 
+        marksChart = (BarChart) findViewById(R.id.teacherMarksChart);
+        marksChart.getDescription().setEnabled(false);
+        setDataToChart(10);
+        marksChart.setFitBars(true);
 
+    }
+
+    private void setDataToChart(int count) {
+        ArrayList<BarEntry> yVals = new ArrayList<>();
+        for(int i=0;i<count;i++){
+            float value = (float)(Math.random()*100);
+            yVals.add(new BarEntry(i,(int)value));
+        }
+        BarDataSet set = new BarDataSet(yVals,"Data Set");
+        set.setColors(ColorTemplate.MATERIAL_COLORS);
+        set.setDrawValues(true);
+
+        BarData data = new BarData(set);
+        marksChart.setData(data);
+        marksChart.invalidate();
+        marksChart.animateY(2000);
     }
 }

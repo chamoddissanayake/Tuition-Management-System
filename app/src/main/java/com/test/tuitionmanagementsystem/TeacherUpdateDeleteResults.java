@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,17 +19,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TeacherAddResults extends AppCompatActivity {
+public class TeacherUpdateDeleteResults extends AppCompatActivity {
 
     TextView TeacherName, TeacherID;
     EditText mark;
     Spinner studentIDspn, subjectspn, ResultExamIDspn;
-    Button Add;
-
+    Button Update, Delete;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_add_results);
+        setContentView(R.layout.activity_teacher_update_delete_results);
 
         Intent intent = getIntent();
         final String tID = intent.getStringExtra("tID");
@@ -40,21 +40,40 @@ public class TeacherAddResults extends AppCompatActivity {
         TeacherName.setText(tName);
         TeacherID.setText(tID);
 
-
-        studentIDspn = (Spinner) findViewById(R.id.addResultStudentIDSpinner);
-        subjectspn = (Spinner) findViewById(R.id.addResultSubjectSpinner);
-        ResultExamIDspn = (Spinner) findViewById(R.id.addResultExamIDSpinner);
+        studentIDspn = (Spinner) findViewById(R.id.updateResultStudentIDSpinner);
+        subjectspn = (Spinner) findViewById(R.id.updateResultSubjectSpinner);
+        ResultExamIDspn = (Spinner) findViewById(R.id.updateResultExamIDSpinner);
         mark = (EditText) findViewById(R.id.markForAdd);
 
         fillStudentSpinner();
         fillSubjectSpinner();
         fillExamID();
 
-        Add = (Button) findViewById(R.id.btnAdd);
+        ResultExamIDspn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-        Add.setOnClickListener(new View.OnClickListener() {
+                if(ResultExamIDspn.getSelectedItemPosition()==0)
+                    mark.setText("89");
+                else if(ResultExamIDspn.getSelectedItemPosition()==1)
+                    mark.setText("78");
+                else if(ResultExamIDspn.getSelectedItemPosition()==2)
+                    mark.setText("73");
+                else if(ResultExamIDspn.getSelectedItemPosition()==3)
+                    mark.setText("85");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        Update = (Button) findViewById(R.id.btnUpdate);
+        Update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(mark.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(),"Please Fill Marks",Toast.LENGTH_SHORT).show();
                 }else if(Integer.parseInt(mark.getText().toString()) >100 || Integer.parseInt(mark.getText().toString()) <0){
@@ -75,6 +94,39 @@ public class TeacherAddResults extends AppCompatActivity {
 
             }
         });
+
+
+
+
+        Delete = (Button) findViewById(R.id.btnDelete);
+        Delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mark.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(),"Please Fill Marks",Toast.LENGTH_SHORT).show();
+                }else if(Integer.parseInt(mark.getText().toString()) >100 || Integer.parseInt(mark.getText().toString()) <0){
+                    Toast.makeText(getApplicationContext(),"Marks should be in  range 0 - 100",Toast.LENGTH_SHORT).show();
+                }else{
+                    String selectedStudent, selectedSubject, selectedExamID;
+                    int inputMark;
+
+                    selectedStudent = studentIDspn.getSelectedItem().toString();
+                    selectedSubject = subjectspn.getSelectedItem().toString();
+                    selectedExamID = ResultExamIDspn.getSelectedItem().toString();
+                    inputMark = Integer.parseInt(mark.getText().toString());
+
+                    //Toast.makeText(getApplicationContext()," "+selectedStudent+" "+selectedSubject+" "+selectedExamID+" "+inputMark+" Added Successfully.",Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view," "+selectedStudent+" "+selectedSubject+" "+selectedExamID+" "+inputMark+" Deleted Successfully.",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+                    mark.setText("");
+                    fillStudentSpinner();
+                    fillSubjectSpinner();
+                    fillExamID();
+
+                }
+            }
+        });
+
+
     }
 
     private void fillStudentSpinner() {
@@ -110,8 +162,4 @@ public class TeacherAddResults extends AppCompatActivity {
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         ResultExamIDspn.setAdapter(spinnerArrayAdapter);
     }
-
-
-
-
 }

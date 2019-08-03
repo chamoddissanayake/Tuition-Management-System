@@ -14,66 +14,69 @@
         android:id="@+id/studentDashboardHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Student Dashboard"
+        android:text="@string/student_dashboard"
         android:gravity="center"
         android:textSize="25dp"
+        android:textStyle="bold"
 
         />
     <TextView
         android:id="@+id/HiStudentMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hi message"
+        android:text="@string/hi_message"
         android:layout_alignTop="@+id/studentDashboardHeading"
         android:layout_marginTop="50dp"
         />
 
-    <ImageButton
-        android:id="@+id/studentResultsMgtBtn"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_weight="4"
-        android:src="@drawable/result"
-        android:scaleType="fitCenter"
-        android:layout_alignTop="@+id/HiStudentMessage"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/roundcorner"
-        />
 
-    <ImageButton
-        android:id="@+id/studentAttendanceMgtBtn"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_weight="4"
-        android:src="@drawable/attendance"
-        android:scaleType="fitCenter"
-        android:layout_alignTop="@+id/studentResultsMgtBtn"
-        android:layout_marginTop="120dp"
-        android:background="@drawable/roundcorner"
-        />
 
-    <ImageButton
-        android:id="@+id/studentFeedbackNotificationMgtBtn"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_weight="4"
-        android:src="@drawable/feedback"
-        android:scaleType="fitCenter"
-        android:layout_alignTop="@+id/studentAttendanceMgtBtn"
-        android:layout_marginTop="120dp"
-        android:background="@drawable/roundcorner"
-        />
+        <ImageButton
+            android:id="@+id/studentResultsMgtBtn"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="4"
+            android:src="@drawable/result"
+            android:scaleType="fitCenter"
+            android:layout_alignTop="@+id/HiStudentMessage"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/roundcorner"
+            />
 
-    <ImageButton
-        android:id="@+id/studentStudyMaterialsManagementBtn"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_weight="4"
-        android:src="@drawable/materials"
-        android:scaleType="fitCenter"
-        android:layout_alignTop="@+id/studentFeedbackNotificationMgtBtn"
-        android:layout_marginTop="120dp"
-        android:background="@drawable/roundcorner"
-        />
+        <ImageButton
+            android:id="@+id/studentAttendanceMgtBtn"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="4"
+            android:src="@drawable/student_management"
+            android:scaleType="fitCenter"
+            android:layout_alignTop="@+id/studentResultsMgtBtn"
+            android:layout_marginTop="120dp"
+            android:background="@drawable/roundcorner"
+            />
+
+        <ImageButton
+            android:id="@+id/studentFeedbackNotificationMgtBtn"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="4"
+            android:src="@drawable/feedback"
+            android:scaleType="fitCenter"
+            android:layout_alignTop="@+id/studentAttendanceMgtBtn"
+            android:layout_marginTop="120dp"
+            android:background="@drawable/roundcorner"
+            />
+
+        <ImageButton
+            android:id="@+id/studentStudyMaterialsManagementBtn"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="4"
+            android:src="@drawable/materials"
+            android:scaleType="fitCenter"
+            android:layout_alignTop="@+id/studentFeedbackNotificationMgtBtn"
+            android:layout_marginTop="120dp"
+            android:background="@drawable/roundcorner"
+            />
 
 </RelativeLayout>

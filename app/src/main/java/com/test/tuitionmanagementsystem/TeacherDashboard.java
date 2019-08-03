@@ -34,7 +34,7 @@ public class TeacherDashboard extends AppCompatActivity {
         ResultsMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Result Management Clicked",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Result Management Clicked",Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(),TeacherResultManagementDashboard.class);
                 i.putExtra("tID",tID);
                 i.putExtra("tName",tName);
