@@ -29,4 +29,10 @@
     <string name="teacher_update_delete_result">Teacher Update | Delete Result</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
+    <string name="students_registration">Students Registration</string>
+    <string name="contactno">ContactNo</string>
+    <string name="address">Address</string>
+    <string name="admissionno">AdmissionNo</string>
+    <string name="submit">Submit</string>
+    <string name="studentName">Student Name</string>
 </resources>

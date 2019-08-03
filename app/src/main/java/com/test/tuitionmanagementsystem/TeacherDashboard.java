@@ -46,7 +46,11 @@ public class TeacherDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                String t = "teacher";
                 Intent i = new Intent(getApplicationContext(),StudentRegistration.class);
+                i.putExtra("ID",tID);
+                i.putExtra("Name",tName);
+                i.putExtra("Type",t);
                 startActivity(i);
             }
         });

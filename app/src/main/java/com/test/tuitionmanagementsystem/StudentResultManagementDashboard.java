@@ -23,6 +23,7 @@ public class StudentResultManagementDashboard extends AppCompatActivity {
     EditText stdName;
     Spinner examIDspn, Subjectspn;
     Button showResult;
+    TextView marklbl, yourMarklbl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +50,25 @@ public class StudentResultManagementDashboard extends AppCompatActivity {
         fillExamIDSpinner();
         fillSubjectSpinner();
 
+        marklbl = (TextView) findViewById(R.id.markDisplaylbl);
+        yourMarklbl = (TextView) findViewById(R.id.yourMarklbl);
+        yourMarklbl.setVisibility(View.INVISIBLE);
+
         showResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"Show Results Clicked.",Toast.LENGTH_SHORT).show();
+                yourMarklbl.setVisibility(View.VISIBLE);
+                //Get marks - start
+
+                //Get marks - end
+                marklbl.setText("56");
             }
         });
 
     }
+
+
 
     private void fillExamIDSpinner() {
 

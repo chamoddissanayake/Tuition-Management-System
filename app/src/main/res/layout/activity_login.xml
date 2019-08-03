@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="25dp"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="@drawable/wallpaper1"
+    >
 
     <ImageView
         android:id="@+id/imageView"
@@ -103,7 +105,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/login_submit_button_txt"
-        android:background="#B8C9F8"
+        android:background="#7B9EF8"
         />
 
 </LinearLayout>
