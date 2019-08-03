@@ -28,7 +28,7 @@ public class TeacherUpdateDeleteResults extends AppCompatActivity {
     Button Update, Delete;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //block screen rotation   
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //block screen rotation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_update_delete_results);
 
