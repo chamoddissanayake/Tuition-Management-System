@@ -90,7 +90,7 @@ public class TeacherUpdateDeleteResults extends AppCompatActivity {
                     inputMark = Integer.parseInt(mark.getText().toString());
 
                     //Toast.makeText(getApplicationContext()," "+selectedStudent+" "+selectedSubject+" "+selectedExamID+" "+inputMark+" Added Successfully.",Toast.LENGTH_SHORT).show();
-                    Snackbar.make(view," "+selectedStudent+" "+selectedSubject+" "+selectedExamID+" "+inputMark+" Added Successfully.",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+                    Snackbar.make(view," "+selectedStudent+" "+selectedSubject+" "+selectedExamID+" "+inputMark+" Updated Successfully.",Snackbar.LENGTH_LONG).setAction("Action",null).show();
                     mark.setText("");
                 }
 
