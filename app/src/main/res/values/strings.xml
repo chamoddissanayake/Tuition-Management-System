@@ -42,4 +42,28 @@
     <string name="studentname">StudentName</string>
     <!--<string name="admissionno">AdmissionNo</string>-->
     <!--<string name="address">Address</string>-->
+
+
+    <string name="updateDeleteFeedbackView">Update Delete Feedbacks</string>
+    <string name="viewFeedbacksView">View Feedbacks</string>
+
+    <string name="sendfeedback">Send Feedback</string>
+    <string name="updatefeedback">Update</string>
+    <string name="deletefeedback">Delete</string>
+    <string name="newSend">Send</string>
+
+    <string name="studentId123">Student ID</string>
+    <string name="studentName123">Student Name</string>
+    <string name="subject123">Subject</string>
+    <string name="feedback123">Feedback</string>
+
+    <string name="studentId1234">Student ID</string>
+    <string name="studentName1234">Student Name</string>
+    <string name="subject1234">Subject</string>
+    <string name="feedback1234">Feedback</string>
+
+
+
+
+
 </resources>
