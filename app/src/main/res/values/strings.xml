@@ -36,15 +36,7 @@
     <string name="submit">Submit</string>
     <string name="studentName">Student Name</string>
     <string name="edit_details">Edit Details</string>
-    <!--<string name="delete">Delete</string>-->
-    <!--<string name="update">Update</string>-->
-    <!--<string name="contactno">ContactNo</string>-->
     <string name="studentname">StudentName</string>
-    <!--<string name="admissionno">AdmissionNo</string>-->
-    <!--<string name="address">Address</string>-->
-
-
-
 
     <string name="updateDeleteFeedbackView">Update Delete Feedbacks</string>
     <string name="viewFeedbacksView">View Feedbacks</string>
@@ -74,14 +66,5 @@
     <string name="subHomework">Submit Homework</string>
     <string name="UpdateHomework">Update</string>
     <string name="DeleteHomework">Delete</string>
-
-
-
-
-
-
-
-
-
 
 </resources>
