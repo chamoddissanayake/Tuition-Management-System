@@ -2,7 +2,9 @@ package com.test.tuitionmanagementsystem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 public class ViewFeedback extends AppCompatActivity {
 
@@ -11,4 +13,6 @@ public class ViewFeedback extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_feedback);
     }
+
+
 }

@@ -3,6 +3,7 @@ package com.test.tuitionmanagementsystem;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -15,6 +16,7 @@ public class StudentDashboard extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //block screen rotation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_dashboard);
 
@@ -24,8 +26,8 @@ public class StudentDashboard extends AppCompatActivity {
         StudyMaterialsManagementBtn = (ImageButton) findViewById(R.id.studentStudyMaterialsManagementBtn);
 
         Intent intent = getIntent();
-        String sID = intent.getStringExtra("StudentID");
-        String sName = intent.getStringExtra("sName");
+        final String sID = intent.getStringExtra("StudentID");
+        final String sName = intent.getStringExtra("sName");
 
         helloMsg = (TextView)findViewById(R.id.HiStudentMessage);
         helloMsg.setText("Hi "+sName+",");
@@ -33,14 +35,24 @@ public class StudentDashboard extends AppCompatActivity {
         ResultsMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Result Management Clicked",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"Result Management Clicked",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(),StudentResultManagementDashboard.class);
+                i.putExtra("sID",sID);
+                i.putExtra("sName",sName);
+                startActivity(i);
             }
         });
 
         AttendanceMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Attendance Management Clicked",Toast.LENGTH_SHORT).show();
+
+                String t = "student";
+                Intent i = new Intent(getApplicationContext(),EditRegistration_Details.class);
+                i.putExtra("ID",sID);
+                i.putExtra("Name",sName);
+                i.putExtra("Type",t);
+                startActivity(i);
             }
         });
 
@@ -48,7 +60,10 @@ public class StudentDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),FeedBack.class);
+                i.putExtra("StudentID",sID);
+                i.putExtra("sName",sName);
                 startActivity(i);
+
             }
         });
 

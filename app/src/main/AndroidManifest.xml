@@ -9,10 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Todolist"></activity>
-        <activity android:name=".Homework" />
-        <activity android:name=".AddTutorials" />
-        <activity android:name=".StudyMaterial" />
+        <activity android:name=".TeacherSearchResults"></activity>
+        <activity android:name=".TeacherUpdateDeleteResults" />
+        <activity android:name=".TeacherAddResults" />
+        <activity android:name=".TeacherResultManagementDashboard" />
+        <activity android:name=".StudentResultManagementDashboard" />
+        <activity android:name=".EditRegistration_Details"></activity>
+        <activity android:name=".StudentRegistration" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".StudentDashboard" />
         <activity android:name=".TeacherDashboard" />
@@ -22,6 +25,11 @@
         <activity android:name=".UpdateDeleteNotification" />
         <activity android:name=".ViewFeedback" />
         <activity android:name=".ViewNotification" />
+        <activity android:name=".Todolist"></activity>
+        <activity android:name=".Homework" />
+        <activity android:name=".AddTutorials" />
+        <activity android:name=".StudyMaterial" />
+
 
 
 
@@ -31,6 +39,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
         </activity>
     </application>
 

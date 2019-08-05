@@ -10,68 +10,147 @@
     android:background="@drawable/wallpaper"
     >
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+        <RelativeLayout
+            android:id="@+id/form_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+
+
     <TextView
         android:id="@+id/teacherDashboardHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Teacher Dashboard"
+        android:text="@string/teacher_dashboard"
         android:gravity="center"
         android:textSize="25dp"
+        android:textStyle="bold"
         />
     <TextView
         android:id="@+id/HiTeacherMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hi message"
+        android:text="@string/hi_message"
         android:layout_alignTop="@+id/teacherDashboardHeading"
         android:layout_marginTop="50dp"
         />
 
+    <androidx.cardview.widget.CardView
 
-    <ImageButton
-        android:id="@+id/teacherResultsMgtBtn"
+        android:id="@+id/teacherResultsMgtBtncv"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        app:cardCornerRadius="18dp"
+
         android:layout_alignTop="@+id/HiTeacherMessage"
         android:layout_marginTop="50dp"
-        android:layout_weight="4"
-        android:background="@drawable/roundcorner"
-        android:scaleType="fitCenter"
-        android:src="@drawable/result" />
+        >
 
-    <ImageButton
-        android:id="@+id/teacherAttendanceMgtBtn"
+        <ImageButton
+            android:id="@+id/teacherResultsMgtBtn"
+            android:layout_width="352dp"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:padding="0px"
+            android:scaleType="fitCenter"
+            android:scaleY="1.1"
+            android:src="@drawable/result" />
+    </androidx.cardview.widget.CardView>
+
+
+
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/teacherAttendanceMgtBtncv"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_weight="4"
-        android:src="@drawable/attendance"
-        android:scaleType="fitCenter"
-        android:layout_alignTop="@+id/teacherResultsMgtBtn"
-        android:layout_marginTop="120dp"
-        android:background="@drawable/roundcorner"
-        />
+        app:cardCornerRadius="18dp"
 
-    <ImageButton
-        android:id="@+id/teacherFeedbackNotificationMgtBtn"
+        android:layout_alignTop="@+id/teacherResultsMgtBtncv"
+        android:layout_marginTop="120dp"
+        >
+        <ImageButton
+            android:id="@+id/teacherAttendanceMgtBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="0px"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:scaleY="1.1"
+            android:src="@drawable/student_management"
+
+            />
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/teacherFeedbackNotificationMgtBtncv"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_weight="4"
-        android:src="@drawable/feedback"
-        android:scaleType="fitCenter"
-        android:layout_alignTop="@+id/teacherAttendanceMgtBtn"
-        android:layout_marginTop="120dp"
-        android:background="@drawable/roundcorner"
-        />
+        app:cardCornerRadius="8dp"
 
-    <ImageButton
-        android:id="@+id/teacherStudyMaterialsManagementBtn"
+        android:layout_alignTop="@+id/teacherAttendanceMgtBtncv"
+        android:layout_marginTop="120dp"
+        >
+        <ImageButton
+            android:id="@+id/teacherFeedbackNotificationMgtBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="0px"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:scaleY="1.1"
+            android:src="@drawable/feedback"
+            />
+    </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/teacherStudyMaterialsManagementBtncv"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_weight="4"
-        android:src="@drawable/materials"
-        android:scaleType="fitCenter"
-        android:layout_alignTop="@+id/teacherFeedbackNotificationMgtBtn"
+        app:cardCornerRadius="8dp"
+        android:layout_alignTop="@+id/teacherFeedbackNotificationMgtBtncv"
         android:layout_marginTop="120dp"
-        android:background="@drawable/roundcorner"
-        />
+        >
+
+
+        <ImageButton
+            android:id="@+id/teacherStudyMaterialsManagementBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:padding="0px"
+            android:scaleType="fitCenter"
+            android:scaleY="1.1"
+            android:src="@drawable/materials" />
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
 </RelativeLayout>
