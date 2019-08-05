@@ -36,10 +36,5 @@
     <string name="submit">Submit</string>
     <string name="studentName">Student Name</string>
     <string name="edit_details">Edit Details</string>
-    <!--<string name="delete">Delete</string>-->
-    <!--<string name="update">Update</string>-->
-    <!--<string name="contactno">ContactNo</string>-->
     <string name="studentname">StudentName</string>
-    <!--<string name="admissionno">AdmissionNo</string>-->
-    <!--<string name="address">Address</string>-->
 </resources>

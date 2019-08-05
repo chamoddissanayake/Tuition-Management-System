@@ -72,7 +72,8 @@ public class TeacherDashboard extends AppCompatActivity {
         StudyMaterialsManagementBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Study Materials Management Clicked",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(),Homework.class);
+                startActivity(i);
             }
         });
 

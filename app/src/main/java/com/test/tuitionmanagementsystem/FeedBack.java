@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class FeedBack extends AppCompatActivity {
 
@@ -35,18 +38,25 @@ public class FeedBack extends AppCompatActivity {
     }
 
     public void sendFeedback(View view){
-        Intent intent01 = new Intent(FeedBack.this,UpdateDeleteFeedback.class);
+
 
         String msg1 = t1.getText().toString();
         String msg2 = t2.getText().toString();
         String msg3 = t3.getText().toString();
         String msg4 = t4.getText().toString();
 
-        intent01.putExtra("FirstText",msg1);
-        intent01.putExtra("SecondText",msg2);
-        intent01.putExtra("ThirdText",msg3);
-        intent01.putExtra("ForthText",msg4);
+        if(msg1.equals("")||msg2.equals("")||msg3.equals("")||msg4.equals("")){
+            Toast.makeText(getApplicationContext(),"All fields must be filled.",Toast.LENGTH_SHORT).show();
+        }else{
+            Intent intent01 = new Intent(FeedBack.this,UpdateDeleteFeedback.class);
+            intent01.putExtra("FirstText",msg1);
+            intent01.putExtra("SecondText",msg2);
+            intent01.putExtra("ThirdText",msg3);
+            intent01.putExtra("ForthText",msg4);
 
-        startActivity(intent01);
+            startActivity(intent01);
+        }
+
+
     }
 }

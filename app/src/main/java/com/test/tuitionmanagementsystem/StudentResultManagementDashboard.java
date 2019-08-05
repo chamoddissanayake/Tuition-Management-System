@@ -59,7 +59,7 @@ public class StudentResultManagementDashboard extends AppCompatActivity {
         showResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Show Results Clicked.",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Show Results Clicked.",Toast.LENGTH_SHORT).show();
                 yourMarklbl.setVisibility(View.VISIBLE);
                 //Get marks - start
 
