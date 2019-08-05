@@ -44,6 +44,8 @@
     <!--<string name="address">Address</string>-->
 
 
+
+
     <string name="updateDeleteFeedbackView">Update Delete Feedbacks</string>
     <string name="viewFeedbacksView">View Feedbacks</string>
 
@@ -61,6 +63,22 @@
     <string name="studentName1234">Student Name</string>
     <string name="subject1234">Subject</string>
     <string name="feedback1234">Feedback</string>
+
+
+
+
+    <string name="tute">Tutorial of the week</string>
+    <string name="todo">To Do List</string>
+    <string name="homework">Homework of the week</string>
+    <string name="subDate">Submision Date</string>
+    <string name="subHomework">Submit Homework</string>
+    <string name="UpdateHomework">Update</string>
+    <string name="DeleteHomework">Delete</string>
+
+
+
+
+
 
 
 
