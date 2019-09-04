@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -39,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Same code in Enter key listener
                 if(validateUsername()){
                     confirmInput();
                 }
@@ -68,12 +72,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 validatePassword();
+
+                if(charSequence.charAt(charSequence.length()-1) == '\n'){
+                    Toast.makeText(getApplicationContext(),"Enter pressed.",Toast.LENGTH_LONG).show();
+                }
+
+
             }
 
             @Override
@@ -81,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     public boolean validateUsername(){

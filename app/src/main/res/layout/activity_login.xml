@@ -96,6 +96,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/login_password_hint"
             android:inputType="textPassword"
+            android:imeOptions="actionSend"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
