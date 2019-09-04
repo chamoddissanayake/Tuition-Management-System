@@ -218,4 +218,9 @@ public class StudentDashboard extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(),Locate_Us.class);
         startActivity(i);
     }
+
+    public void goToContactsUs(View view) {
+        Intent i = new Intent(getApplicationContext(),ContactUs.class);
+        startActivity(i);
+    }
 }

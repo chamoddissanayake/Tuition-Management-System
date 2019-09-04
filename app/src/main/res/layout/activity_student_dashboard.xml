@@ -167,7 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 app:cardCornerRadius="8dp"
-                android:layout_alignTop="@+id/studentFeedbackNotificationMgtBtncv"
+                android:layout_alignTop="@+id/studentStudyMaterialsManagementBtncv"
                 android:layout_marginTop="120dp">
 
                 <ImageButton
@@ -184,6 +184,33 @@
 
 
             </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+
+                android:id="@+id/studentStudyMaterialsManagementBtncv2"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:cardCornerRadius="8dp"
+                android:layout_alignTop="@+id/studentStudyMaterialsManagementBtncv1"
+                android:layout_marginTop="120dp">
+
+                <ImageButton
+                    android:id="@+id/contactUsbtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0px"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:scaleY="1.1"
+                    android:onClick="goToContactsUs"
+                    android:src="#BBE1FF"
+                    />
+
+
+            </androidx.cardview.widget.CardView>
+
+
 
         </RelativeLayout>
 
