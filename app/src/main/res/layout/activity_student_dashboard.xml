@@ -161,6 +161,30 @@
 
              </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+
+                android:id="@+id/studentStudyMaterialsManagementBtncv1"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:cardCornerRadius="8dp"
+                android:layout_alignTop="@+id/studentFeedbackNotificationMgtBtncv"
+                android:layout_marginTop="120dp">
+
+                <ImageButton
+                    android:id="@+id/locatebtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="0px"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:scaleY="1.1"
+                    android:onClick="goToLocateUs"
+                    android:src="#AFF3A9"
+                    />
+
+
+            </androidx.cardview.widget.CardView>
+
         </RelativeLayout>
 
     </ScrollView>

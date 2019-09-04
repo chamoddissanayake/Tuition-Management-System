@@ -213,4 +213,9 @@ public class StudentDashboard extends AppCompatActivity {
             }
         });
     }
+
+    public void goToLocateUs(View view) {
+        Intent i = new Intent(getApplicationContext(),Locate_Us.class);
+        startActivity(i);
+    }
 }

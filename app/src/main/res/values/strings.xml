@@ -57,8 +57,6 @@
     <string name="feedback1234">Feedback</string>
 
 
-
-
     <string name="tute">Tutorial of the week</string>
     <string name="todo">To Do List</string>
     <string name="homework">Homework of the week</string>
@@ -66,5 +64,6 @@
     <string name="subHomework">Submit Homework</string>
     <string name="UpdateHomework">Update</string>
     <string name="DeleteHomework">Delete</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
