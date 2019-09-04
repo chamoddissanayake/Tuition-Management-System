@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "909927833648",
+    "firebase_url": "https://tuitionmanagementsystem-1af02.firebaseio.com",
+    "project_id": "tuitionmanagementsystem-1af02",
+    "storage_bucket": "tuitionmanagementsystem-1af02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909927833648:android:ce56e219e3976823",
+        "android_client_info": {
+          "package_name": "com.test.tuitionmanagementsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "909927833648-vmos7jkf45hidmu2r8850goksk8eldn4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.test.tuitionmanagementsystem",
+            "certificate_hash": "ca56961cee0338aa55620178def0e8345aed30c6"
+          }
+        },
+        {
+          "client_id": "909927833648-qcgq33dgc9ktfbieo23b3id45081nvec.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARmN7EPliBbOaNeGjldwm0vnq3OKiSkO4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "909927833648-qcgq33dgc9ktfbieo23b3id45081nvec.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
