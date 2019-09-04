@@ -26,14 +26,13 @@ public class FeedBack extends AppCompatActivity {
         String sID = intent.getStringExtra("StudentID");
         String sName = intent.getStringExtra("sName");
 
-        t1 = findViewById(R.id.editTextID2);
-        t2 = findViewById(R.id.editTextName2);
+        t1 = findViewById(R.id.editTextID);
+        t2 = findViewById(R.id.editTextName);
         t3 = findViewById(R.id.editTextSubject);
         t4 = findViewById(R.id.editTextFeedback);
 
         t1.setText(sID);
         t2.setText(sName);
-
 
     }
 
@@ -56,7 +55,10 @@ public class FeedBack extends AppCompatActivity {
 
             startActivity(intent01);
         }
+    }
 
-
+    public void back(View view){
+        Intent in = new Intent(FeedBack.this,StudentDashboard.class);
+        startActivity(in);
     }
 }
