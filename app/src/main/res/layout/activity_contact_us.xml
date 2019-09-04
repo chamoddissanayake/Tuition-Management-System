@@ -63,7 +63,17 @@
         android:layout_height="74dp"
         android:layout_marginStart="164dp"
         android:layout_marginTop="392dp"
-        android:background="#456789"
+        android:src="@drawable/sms_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivEmailLogo"
+        android:layout_width="83dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="392dp"
+        android:src="@drawable/emaillogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
