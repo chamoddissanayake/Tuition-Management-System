@@ -19,7 +19,7 @@ public class MainFeedback extends AppCompatActivity {
         startActivity(in1);
     }
     public void viewFeedback(View view){
-        Intent in2 = new Intent(MainFeedback.this,FeedBack.class );
+        Intent in2 = new Intent(MainFeedback.this,searchFeedback.class );
         startActivity(in2);
     }
 }
