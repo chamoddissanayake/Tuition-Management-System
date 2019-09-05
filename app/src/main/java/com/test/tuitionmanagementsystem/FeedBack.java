@@ -53,7 +53,7 @@ public class FeedBack extends AppCompatActivity {
             intent01.putExtra("SecondText",msg2);
             intent01.putExtra("ThirdText",msg3);
             intent01.putExtra("ForthText",msg4);
-            intent01.putExtra("FithText",msg5);
+            intent01.putExtra("FifthText",msg5);
 
             startActivity(intent01);
         }
