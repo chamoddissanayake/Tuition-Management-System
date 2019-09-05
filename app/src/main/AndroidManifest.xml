@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ContactUs"></activity>
+        <activity android:name=".MainFeedback"></activity>
+        <activity android:name=".ContactUs" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -34,7 +35,7 @@
         <activity android:name=".TeacherDashboard" />
         <activity android:name=".FeedBack" />
         <activity android:name=".Notification" />
-        <activity android:name=".UpdateDeleteFeedback" />
+        <activity android:name=".Feedbacknext" />
         <activity android:name=".UpdateDeleteNotification" />
         <activity android:name=".ViewFeedback" />
         <activity android:name=".ViewNotification" />
@@ -54,12 +55,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 </manifest>

@@ -196,7 +196,7 @@ public class StudentDashboard extends AppCompatActivity {
         FeedbackNotificationMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),FeedBack.class);
+                Intent i = new Intent(getApplicationContext(),MainFeedback.class);
                 i.putExtra("StudentID",sID);
                 i.putExtra("sName",sName);
                 startActivity(i);
