@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ public class TeacherDashboard extends AppCompatActivity {
 
     TextView helloMsg;
     ImageButton ResultsMgtBtn,AttendanceMgtBtn,FeedbackNotificationMgtBtn, StudyMaterialsManagementBtn;
+    Button teacherRegisterStudentBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,8 @@ public class TeacherDashboard extends AppCompatActivity {
         AttendanceMgtBtn =(ImageButton) findViewById(R.id.teacherAttendanceMgtBtn);
         FeedbackNotificationMgtBtn =(ImageButton) findViewById(R.id.teacherFeedbackNotificationMgtBtn);
         StudyMaterialsManagementBtn = (ImageButton) findViewById(R.id.teacherStudyMaterialsManagementBtn);
+
+        teacherRegisterStudentBtn = (Button) findViewById(R.id.teacherRegisterStudent);
 
         ResultsMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +81,21 @@ public class TeacherDashboard extends AppCompatActivity {
             }
         });
 
+        teacherRegisterStudentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String t = "teacher";
+                Intent i = new Intent(getApplicationContext(),TeacherRegistration.class);
+                i.putExtra("ID",tID);
+                i.putExtra("Name",tName);
+                i.putExtra("Type",t);
+                startActivity(i);
+
+            }
+        });
 
     }
+
+
 }
