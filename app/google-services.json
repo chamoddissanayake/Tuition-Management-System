@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "909927833648-uvnftappnsgpb3fv08p8igsr6dn718cf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.test.tuitionmanagementsystem",
+            "certificate_hash": "20d8b44eadf91a60e05d1760403d09b2dc9f8fa5"
+          }
+        },
+        {
           "client_id": "909927833648-vmos7jkf45hidmu2r8850goksk8eldn4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
