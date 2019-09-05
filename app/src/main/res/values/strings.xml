@@ -46,6 +46,10 @@
     <string name="deletefeedback">Delete</string>
     <string name="newSend">Send</string>
     <string name="back">Back</string>
+    <string name="save">Save</string>
+    <string name="give">Give Feedback</string>
+    <string name="view">View Feddback</string>
+    <string name="fid">Feddback Id</string>
 
     <string name="studentId123">Student ID</string>
     <string name="studentName123">Student Name</string>
