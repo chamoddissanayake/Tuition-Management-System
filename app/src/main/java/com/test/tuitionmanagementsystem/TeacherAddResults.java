@@ -119,17 +119,57 @@ public class TeacherAddResults extends AppCompatActivity {
     public void addtoDB(View view) {
 
         DatabaseReference dbref;
-        dbref = FirebaseDatabase.getInstance().getReference().child("");
+ //       dbref = FirebaseDatabase.getInstance().getReference().child("Student_take_exam");
 
-        Student_Take_Exam obj = new Student_Take_Exam();
-        obj.setsID("S001");
-        obj.setSubName("Science");
-        obj.setExamID("E001");
-        obj.setMark(80);
-        obj.setDocumentLink("aaaaaaaa");
+//        Student_Take_Exam obj = new Student_Take_Exam();
+//        obj.setsID("S001");
+//        obj.setSubName("Science");
+//        obj.setExamID("E001");
+//        obj.setMark(80);
+//        obj.setDocumentLink("aaaaaaaa");
+//
+//            dbref.child("S001").setValue(obj);
+//            Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
 
-            dbref.push().setValue(obj);
-            Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
+//        dbref = FirebaseDatabase.getInstance().getReference().child("Exam");
+//        Exam obj = new Exam();
+//        obj.setExamID("E001");
+//        obj.setDateTime("2019-08-25");
+//        obj.setVenue("M503");
+//        obj.setDescription("aaaaaa");
+//
+//            dbref.child("E001").setValue(obj);
+//            Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
+
+//        dbref = FirebaseDatabase.getInstance().getReference().child("Teacher");
+//        Teacher obj = new Teacher();
+//        obj.setTid("T001");
+//        obj.settName("aaa");
+//        obj.setNic("123456789V");
+//        obj.setQualification("qqq");
+//        obj.setTel("0771234567");
+//        obj.setEmail("aa@dd.com");
+//        obj.setSpecialized_subject("Science");
+//        obj.setPhotoLink("aaa");
+//
+//
+//        dbref.child("T001").setValue(obj);
+//        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
+
+
+        dbref = FirebaseDatabase.getInstance().getReference().child("Student");
+        Student obj = new Student();
+        obj.setSid("S001");
+        obj.setsName("aaa");
+        obj.setEmail("a@gmail.com");
+        obj.setTel("0771234567");
+        obj.setYor(2019);
+        obj.setPhotoLink("sss");
+        obj.setNic("123456789V");
+
+
+        dbref.child("S001").setValue(obj);
+        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
 
 
     }
