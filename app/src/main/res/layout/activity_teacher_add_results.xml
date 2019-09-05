@@ -199,5 +199,17 @@
         android:background="#24A0ED"
         />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="36dp"
+        android:text="Add Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="addtoDB"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -114,6 +116,21 @@ public class TeacherAddResults extends AppCompatActivity {
     }
 
 
+    public void addtoDB(View view) {
+
+        DatabaseReference dbref;
+        dbref = FirebaseDatabase.getInstance().getReference().child("");
+
+        Student_Take_Exam obj = new Student_Take_Exam();
+        obj.setsID("S001");
+        obj.setSubName("Science");
+        obj.setExamID("E001");
+        obj.setMark(80);
+        obj.setDocumentLink("aaaaaaaa");
+
+            dbref.push().setValue(obj);
+            Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
 
 
+    }
 }

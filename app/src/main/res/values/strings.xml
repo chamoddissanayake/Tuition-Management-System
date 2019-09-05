@@ -45,7 +45,9 @@
     <string name="updatefeedback">Update</string>
     <string name="deletefeedback">Delete</string>
     <string name="newSend">Send</string>
-    <string name="back">Back</string>
+    <style name="give">Give Feedback</style>
+    <style name="view">View Feedback</style>
+    <!--    <string name="back">Back</string>-->
 
     <string name="studentId123">Student ID</string>
     <string name="studentName123">Student Name</string>
