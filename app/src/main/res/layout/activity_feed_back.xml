@@ -8,18 +8,26 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="330dp"
-        android:layout_height="422dp"
+        android:layout_width="328dp"
+        android:layout_height="542dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.802"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.498">
+        app:layout_constraintVertical_bias="0.582">
 
         <EditText
-            android:id="@+id/editTextID"
+            android:id="@+id/editTextFid2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/fid"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editTextID2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -27,7 +35,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editTextName"
+            android:id="@+id/editTextName2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -35,7 +43,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editTextSubject"
+            android:id="@+id/editTextSubject2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -43,7 +51,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editTextFeedback"
+            android:id="@+id/editTextFeedback2"
             android:layout_width="match_parent"
             android:layout_height="249dp"
             android:ems="10"
@@ -51,34 +59,6 @@
             android:hint="@string/feedback123"
             android:inputType="textPersonName" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="316dp"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.72"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.173">
-
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="back"
-            android:text="@string/back" />
-
-        <Button
-            android:id="@+id/btnSendFeedback"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="sendFeedback"
-            android:text="@string/sendfeedback" />
     </LinearLayout>
 
     <TextView
@@ -90,4 +70,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="337dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="567dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="back"
+            android:text="@string/back" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="sendFeedback"
+            android:text="@string/sendfeedback" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
