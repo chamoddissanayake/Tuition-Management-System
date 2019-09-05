@@ -28,7 +28,7 @@ public class Feedbacknext extends AppCompatActivity {
          final EditText nt5 = findViewById(R.id.editTextFid2);
 
          Button btn1 = findViewById(R.id.btnSave);
-         Button btn2 = findViewById(R.id.btnBack);
+
 
          Intent intent2 = getIntent();
          String s1 = intent2.getStringExtra("FirstText");

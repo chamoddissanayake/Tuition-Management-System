@@ -59,8 +59,5 @@ public class FeedBack extends AppCompatActivity {
         }
     }
 
-    public void back(View view){
-        Intent in = new Intent(FeedBack.this,StudentDashboard.class);
-        startActivity(in);
-    }
+
 }
