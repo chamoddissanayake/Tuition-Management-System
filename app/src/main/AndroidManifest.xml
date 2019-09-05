@@ -12,7 +12,7 @@
         <activity android:name=".searchFeedback"></activity>
         <activity android:name=".MainFeedback" />
         <activity android:name=".TeacherRegistration"></activity>
-        <activity android:name=".MainFeedback" />
+
         <activity android:name=".ContactUs" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
