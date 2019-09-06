@@ -23,7 +23,7 @@ public class Homework extends AppCompatActivity {
     EditText txthomeworkID, txtsubName, txtHomeworkDescription;
 
     DatabaseReference dbRef;
-    Homework_tbl hwtbl;
+
 
 
     @Override
@@ -38,12 +38,11 @@ public class Homework extends AppCompatActivity {
         txtdesc = (EditText)findViewById(R.id.txt_HomeworkDescription);
         btnsubmithome = (Button)findViewById(R.id.btnSubmitHomework);
 
-        hwtbl = new Homework_tbl();
-
         btnsubmithome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                Homework_tbl hwtbl = new Homework_tbl();
                 dbRef = FirebaseDatabase.getInstance().getReference().child("Homework_tbl");
 
                 /*try{
@@ -56,7 +55,7 @@ public class Homework extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Please Enter the description",Toast.LENGTH_SHORT).show();
 
                     else{
-
+*/
                         hwtbl.setHomeworkID(txthomeworkID.getText().toString().trim());
                         hwtbl.setSubName(txtsubName.getText().toString().trim());
                         hwtbl.setHoework(txtHomeworkDescription.getText().toString().trim());
@@ -64,7 +63,7 @@ public class Homework extends AppCompatActivity {
                         dbRef.push().setValue(hwtbl);
 
                         Toast.makeText(getApplicationContext(),"Data saves successfully",Toast.LENGTH_SHORT).show();
-                        clearControls();
+                       /*
 
 
                     }
