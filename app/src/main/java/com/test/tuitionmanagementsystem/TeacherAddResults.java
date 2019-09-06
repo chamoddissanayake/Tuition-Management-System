@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -83,6 +85,10 @@ public class TeacherAddResults extends AppCompatActivity {
         String[] students = new String[]{
                 "S0001","S0002","S0003","S0004","S0005","S0006","S0007","S0008","S0009","S0010"
         };
+
+        // Need to fetch list of students form db
+
+
         final List<String> studentsList = new ArrayList<>(Arrays.asList(students));
         final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,studentsList);
 
@@ -114,6 +120,107 @@ public class TeacherAddResults extends AppCompatActivity {
     }
 
 
+    public void addtoDB(View view) {
+
+        DatabaseReference dbref;
+ //       dbref = FirebaseDatabase.getInstance().getReference().child("Student_take_exam");
+
+//        Student_Take_Exam obj = new Student_Take_Exam();
+//        obj.setsID("S001");
+//        obj.setSubName("Science");
+//        obj.setExamID("E001");
+//        obj.setMark(80);
+//        obj.setDocumentLink("aaaaaaaa");
+//
+//            dbref.child("S001").setValue(obj);
+//            Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
+
+//        dbref = FirebaseDatabase.getInstance().getReference().child("Exam");
+//        Exam obj = new Exam();
+//        obj.setExamID("E001");
+//        obj.setDateTime("2019-08-25");
+//        obj.setVenue("M503");
+//        obj.setDescription("aaaaaa");
+//
+//            dbref.child("E001").setValue(obj);
+//            Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
+
+//        dbref = FirebaseDatabase.getInstance().getReference().child("Teacher");
+//        Teacher obj = new Teacher();
+//        obj.setTid("T001");
+//        obj.settName("aaa");
+//        obj.setNic("123456789V");
+//        obj.setQualification("qqq");
+//        obj.setTel("0771234567");
+//        obj.setEmail("aa@dd.com");
+//        obj.setSpecialized_subject("Science");
+//        obj.setPhotoLink("aaa");
+//
+//
+//        dbref.child("T001").setValue(obj);
+//        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
 
 
+//        dbref = FirebaseDatabase.getInstance().getReference().child("Student");
+//        Student obj = new Student();
+//        obj.setSid("S001");
+//        obj.setsName("aaa");
+//        obj.setEmail("a@gmail.com");
+//        obj.setTel("0771234567");
+//        obj.setYor(2019);
+//        obj.setPhotoLink("sss");
+//        obj.setNic("123456789V");
+//
+//
+//        dbref.child("S001").setValue(obj);
+//        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
+
+//        dbref = FirebaseDatabase.getInstance().getReference().child("Subject");
+//        Subject obj = new Subject();
+//        obj.setsName("Maths");
+//
+//        dbref.child(obj.getsName()).setValue(obj);
+//        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
+
+//        dbref = FirebaseDatabase.getInstance().getReference().child("StudentFollowSubject");
+//        StudentFollowSubject obj = new StudentFollowSubject();
+//        obj.setsID("S001");
+//        obj.setSubName("Maths");
+//
+//
+//        dbref.child(obj.getSubName()).setValue(obj);
+//        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
+
+
+//        dbref = FirebaseDatabase.getInstance().getReference().child("StudentFollowSubject");
+//        StudentFollowSubject obj = new StudentFollowSubject();
+//        obj.setsID("S001");
+//        obj.setSubName("Maths");
+//
+//
+//        dbref.child(obj.getSubName()).setValue(obj);
+//        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
+
+
+
+//        dbref = FirebaseDatabase.getInstance().getReference().child("StudentCredentials");
+//        StudentCredentials obj = new StudentCredentials();
+//        obj.setsID("S001");
+//        obj.setSecuredPassword("aaaaaaaaaaaaaaaaaaaaaa");
+//        obj.setSalt("bbbbbbbbbbbbbbbbbbbbbbb");
+//
+//        dbref.child(obj.getsID()).setValue(obj);
+//        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
+
+
+//        dbref = FirebaseDatabase.getInstance().getReference().child("TeacherCredentials");
+//        StudentCredentials obj = new StudentCredentials();
+//        obj.setsID("T001");
+//        obj.setSecuredPassword("aaaaaaaaaaaaaaaaaaaaaa");
+//        obj.setSalt("bbbbbbbbbbbbbbbbbbbbbbb");
+//
+//        dbref.child(obj.getsID()).setValue(obj);
+//        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
+
+    }
 }
