@@ -36,14 +36,15 @@ public class view_of_homework extends AppCompatActivity {
        b1.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               DatabaseReference reafRef = FirebaseDatabase.getInstance().getReference().child("Feedback").child(t1.getText().toString());
+               DatabaseReference reafRef = FirebaseDatabase.getInstance().getReference().child("Homework_tbl").child(t1.getText().toString());
                 reafRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.hasChildren()){
-                            t2.setText(dataSnapshot.child("txthwID").getValue().toString());
-                            t3.setText(dataSnapshot.child("txtsubName").getValue().toString());
-                            t4.setText(dataSnapshot.child("txtDesc").getValue().toString());
+                            t2.setText(dataSnapshot.child("homeworkID").getValue().toString());
+                            t4.setText(dataSnapshot.child("subName").getValue().toString());
+                            t3.setText(dataSnapshot.child("hoework").getValue().toString());
+//                            Toast.makeText(getApplicationContext(), "found.", Toast.LENGTH_SHORT).show();
                         }
 
                         else{

@@ -23,6 +23,7 @@ public class homeworkdashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i33 = new Intent(homeworkdashboard.this,Homework.class);
+                startActivity(i33);
             }
         });
 
@@ -30,6 +31,7 @@ public class homeworkdashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i44 = new Intent(homeworkdashboard.this,view_of_homework.class);
+                startActivity(i44);
             }
         });
 
