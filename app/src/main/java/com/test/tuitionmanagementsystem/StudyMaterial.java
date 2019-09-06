@@ -24,7 +24,7 @@ public class StudyMaterial extends AppCompatActivity {
         btnHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i1 = new Intent(StudyMaterial.this,Homework.class);
+                Intent i1 = new Intent(StudyMaterial.this,homeworkdashboard.class);
                 startActivity(i1);
             }
         });
