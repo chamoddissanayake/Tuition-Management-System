@@ -5,24 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class StudentRegistration extends AppCompatActivity {
 
-    TextView tx1;
-    EditText T1;
-    EditText T2;
-    EditText T3;
-    EditText T4;
 
-    String tID = "";
-    String tName = "";
-    String Type = "";
+    EditText txtID,txtName,txtAddress,txtContact,txtNIC;
+    Button btnSave;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,53 +28,45 @@ public class StudentRegistration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_registration);
 
-        Intent intent = getIntent();
-        tID = intent.getStringExtra("ID");
-        tName = intent.getStringExtra("Name");
-        Type = intent.getStringExtra("Type");
+        txtName = findViewById(R.id.sName);
+        txtID = findViewById(R.id.AdmissionNo);
+        txtAddress = findViewById(R.id.Address);
+        txtContact = findViewById(R.id.EtContactNo);
+        txtNIC = findViewById(R.id.EtNic);
+
+        btnSave =  findViewById(R.id.Submitbutton);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("Student1");
+//                try {
+//                    if (TextUtils.isEmpty(txtName.getText().toString().trim())
+//                            || TextUtils.isEmpty(txtID.getText().toString().trim())
+//                            || TextUtils.isEmpty(txtAddress.getText().toString().trim())
+//                            || TextUtils.isEmpty(txtContact.getText().toString().trim())
+//                            || TextUtils.isEmpty(txtNIC.getText().toString().trim())) {
+//
+//
+//                    } else {
+                        Student std = new Student();
+                        std.setSid(txtID.getText().toString().trim());
+                        std.setsName(txtName.getText().toString().trim());
+                        std.setAddress(txtAddress.getText().toString().trim());
+                        std.setTel(txtContact.getText().toString().trim());
+                        std.setNic(txtNIC.getText().toString().trim());
+
+                        dbRef.child(std.getSid()).setValue(std);
+                        Toast.makeText(getApplicationContext(), "Data added", Toast.LENGTH_SHORT).show();
+//                    }
 
 
-        TextView TeacherName = (TextView) findViewById(R.id.tNamelbl);
-        TextView TeacherID = (TextView) findViewById(R.id.tIDlbl);
+//                } catch (Exception ex) {
+//                    Toast.makeText(getApplicationContext(), "Error"+ex, Toast.LENGTH_SHORT).show();
+//                }
+            }
 
-        TeacherName.setText(tName);
-        TeacherID.setText(tID);
+        });
 
-
-        T1 = (EditText) findViewById(R.id.sName);
-        T2 = (EditText) findViewById(R.id.AdmissionNo);
-        T3 = (EditText) findViewById(R.id.Address);
-        T4 = (EditText) findViewById(R.id.ContactNo1);
-
-
-        //T1.setText(sName);
-        //T2.setText(adNo);
-
-    }
-    public void sendData (View view) {
-        String data1 = T1.getText().toString();
-        String data2 = T2.getText().toString();
-        String data3 = T3.getText().toString();
-        String data4 = T4.getText().toString();
-
-        if (data1.equals("") || data2.equals("") || data3.equals("") || data4.equals("")) {
-            Toast.makeText(getApplicationContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
-        } else {
-            Intent intent01 = new Intent(StudentRegistration.this, EditRegistration_Details.class);
-
-
-            intent01.putExtra("FirstName", data1);
-            intent01.putExtra("SecondText", data2);
-            intent01.putExtra("ThirdText", data3);
-            intent01.putExtra("FourthText", data4);
-            intent01.putExtra("Type",Type);
-            intent01.putExtra("Name",tName);
-            intent01.putExtra("ID",tID);
-
-
-            startActivity(intent01);
-           Toast.makeText(getApplicationContext(), " " + data1 + " details submitted successfully", Toast.LENGTH_SHORT).show();
-        }
     }
 
 }
