@@ -30,10 +30,12 @@
             android:layout_width="match_parent"
             android:layout_height="36dp" />
 
-        <TextView
-            android:id="@+id/txthwDescription"
+        <EditText
+            android:id="@+id/txtDesc"
             android:layout_width="match_parent"
-            android:layout_height="80dp" />
+            android:layout_height="78dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
 
     </LinearLayout>
 
