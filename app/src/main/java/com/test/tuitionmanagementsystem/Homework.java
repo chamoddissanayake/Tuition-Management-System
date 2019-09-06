@@ -60,7 +60,7 @@ public class Homework extends AppCompatActivity {
                         hwtbl.setSubName(txtsubName.getText().toString().trim());
                         hwtbl.setHoework(txtHomeworkDescription.getText().toString().trim());
 
-                        dbRef.push().setValue(hwtbl);
+                        dbRef.child(hwtbl.getHomeworkID()).setValue(hwtbl);
 
                         Toast.makeText(getApplicationContext(),"Data saves successfully",Toast.LENGTH_SHORT).show();
                        /*
