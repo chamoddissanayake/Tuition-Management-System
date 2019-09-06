@@ -35,13 +35,15 @@
     <LinearLayout
         android:layout_width="144dp"
         android:layout_height="268dp"
-        android:layout_marginTop="284dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="289dp"
+        android:layout_marginEnd="210dp"
+        android:layout_marginBottom="174dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView6"
@@ -76,15 +78,27 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="184dp"
-        android:layout_height="276dp"
+        android:layout_width="144dp"
+        android:layout_height="268dp"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="291dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="172dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.828"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.624">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/fid"
+            android:layout_width="match_parent"
+            android:layout_height="54dp" />
+
+        <TextView
+            android:id="@+id/sid2"
+            android:layout_width="match_parent"
+            android:layout_height="49dp" />
 
         <EditText
             android:id="@+id/sname"
@@ -106,16 +120,6 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/sid2"
-            android:layout_width="match_parent"
-            android:layout_height="49dp" />
-
-        <TextView
-            android:id="@+id/fid"
-            android:layout_width="match_parent"
-            android:layout_height="54dp" />
     </LinearLayout>
 
     <LinearLayout
