@@ -27,7 +27,8 @@
     <string name="teacher_search_results">Teacher Search Results</string>
     <string name="search">Search</string>
     <string name="teacher_update_delete_result">Teacher Update | Delete Result</string>
-    <string name="update">Update</string>
+
+    <string name="Save">Save</string>
     <string name="delete">Delete</string>
     <string name="students_registration">Students Registration</string>
     <string name="contactno">ContactNo</string>

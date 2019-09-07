@@ -5,20 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
 public class StudentRegistration extends AppCompatActivity {
 
-    TextView tx1;
+    TextView tx1, tx2;
     EditText T1;
     EditText T2;
     EditText T3;
     EditText T4;
+    Button btnSave;
+    DatabaseReference dbRef;
 
     String tID = "";
     String tName = "";
@@ -26,21 +33,13 @@ public class StudentRegistration extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //block screen rotation
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //block screen rotation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_registration);
 
         Intent intent = getIntent();
-        tID = intent.getStringExtra("ID");
-        tName = intent.getStringExtra("Name");
-        Type = intent.getStringExtra("Type");
-
-
-        TextView TeacherName = (TextView) findViewById(R.id.tNamelbl);
-        TextView TeacherID = (TextView) findViewById(R.id.tIDlbl);
-
-        TeacherName.setText(tName);
-        TeacherID.setText(tID);
+        String sID = intent.getStringExtra("StudentID");
+        String sName = intent.getStringExtra("sName");
 
 
         T1 = (EditText) findViewById(R.id.sName);
@@ -48,35 +47,49 @@ public class StudentRegistration extends AppCompatActivity {
         T3 = (EditText) findViewById(R.id.Address);
         T4 = (EditText) findViewById(R.id.ContactNo1);
 
+        tx1.setText(sID);
+        tx2.setText(sName);
 
-        //T1.setText(sName);
-        //T2.setText(adNo);
+        btnSave = findViewById(R.id.Submitbutton);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StudentDetails_tb stdtb1 = new StudentDetails_tb();
+                dbRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails");
+
+                try {
+
+                    if (TextUtils.isEmpty(T1.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_SHORT).show();
+                    else if (TextUtils.isEmpty(T2.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter the Admission No", Toast.LENGTH_SHORT).show();
+                    else if (TextUtils.isEmpty(T3.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter the Address", Toast.LENGTH_SHORT).show();
+
+
+                    else {
+                        stdtb1.setStudentName(T1.getText().toString().trim());
+                        stdtb1.setAdmissionNo(T2.getText().toString().trim());
+                        stdtb1.getAddress(T3.getText().toString().trim());
+                        stdtb1.getContact(T4.getText().toString().trim());
+
+                        dbRef.child(stdtb1.getAdmissionNo()).setValue(stdtb1);
+
+                        Toast.makeText(getApplicationContext(), "Data saves successfully", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                }
+                catch ( NumberFormatException e){
+
+                }
+
+            }
+
+
+        });
 
     }
-    public void sendData (View view) {
-        String data1 = T1.getText().toString();
-        String data2 = T2.getText().toString();
-        String data3 = T3.getText().toString();
-        String data4 = T4.getText().toString();
-
-        if (data1.equals("") || data2.equals("") || data3.equals("") || data4.equals("")) {
-            Toast.makeText(getApplicationContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
-        } else {
-            Intent intent01 = new Intent(StudentRegistration.this, EditRegistration_Details.class);
-
-
-            intent01.putExtra("FirstName", data1);
-            intent01.putExtra("SecondText", data2);
-            intent01.putExtra("ThirdText", data3);
-            intent01.putExtra("FourthText", data4);
-            intent01.putExtra("Type",Type);
-            intent01.putExtra("Name",tName);
-            intent01.putExtra("ID",tID);
-
-
-            startActivity(intent01);
-           Toast.makeText(getApplicationContext(), " " + data1 + " details submitted successfully", Toast.LENGTH_SHORT).show();
-        }
-    }
-
 }

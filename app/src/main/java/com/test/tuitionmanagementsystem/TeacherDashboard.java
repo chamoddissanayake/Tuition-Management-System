@@ -62,9 +62,6 @@ public class TeacherDashboard extends AppCompatActivity {
         });
 
 
-
-
-
         FeedbackNotificationMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,7 +90,9 @@ public class TeacherDashboard extends AppCompatActivity {
                 startActivity(i);
 
             }
+
         });
+
 
     }
 
