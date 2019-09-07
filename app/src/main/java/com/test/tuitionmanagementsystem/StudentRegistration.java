@@ -47,6 +47,9 @@ public class StudentRegistration extends AppCompatActivity {
         T3 = (EditText) findViewById(R.id.Address);
         T4 = (EditText) findViewById(R.id.ContactNo1);
 
+        tx1 = findViewById(R.id.tNamelbl);
+        tx2 = findViewById(R.id.tIDlbl);
+
         tx1.setText(sID);
         tx2.setText(sName);
 

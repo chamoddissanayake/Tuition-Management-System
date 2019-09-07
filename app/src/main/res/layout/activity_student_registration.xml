@@ -123,7 +123,6 @@
         android:layout_marginBottom="8dp"
         android:background="#24A0ED"
         android:drawableBottom="@color/colorPrimary"
-        android:onClick="sendData"
         android:text="@string/submit"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toBottomOf="parent"
