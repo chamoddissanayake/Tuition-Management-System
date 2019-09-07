@@ -105,7 +105,7 @@ public class view_of_homework extends AppCompatActivity {
                            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("Homework_tbl").child(t2.getText().toString());
                            dbRef.removeValue();
 
-                           Toast.makeText(getApplicationContext(), "Data Deleted Successfully", Toast.LENGTH_SHORT).show();
+                           Toast.makeText(getApplicationContext(), "Homework Deleted Successfully", Toast.LENGTH_SHORT).show();
                        }
 
                        else {
