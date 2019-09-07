@@ -62,9 +62,6 @@ public class TeacherDashboard extends AppCompatActivity {
         });
 
 
-
-
-
         FeedbackNotificationMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +73,11 @@ public class TeacherDashboard extends AppCompatActivity {
         StudyMaterialsManagementBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String t = "teacher";
                 Intent i = new Intent(getApplicationContext(),Homework.class);
+                i.putExtra("ID",tID);
+                i.putExtra("Name",tName);
+                i.putExtra("Type",t);
                 startActivity(i);
             }
         });
@@ -93,7 +94,9 @@ public class TeacherDashboard extends AppCompatActivity {
                 startActivity(i);
 
             }
+
         });
+
 
     }
 
