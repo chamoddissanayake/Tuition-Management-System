@@ -60,6 +60,39 @@ public class view_of_homework extends AppCompatActivity {
            }
        });
 
+       b2.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+
+                DatabaseReference upddRef = FirebaseDatabase.getInstance().getReference().child("Homework_tbl");
+                upddRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        Homework_tbl hwtbl = new Homework_tbl();
+                        if(dataSnapshot.hasChild(t2.getText().toString())){
+                            hwtbl.setHoework(t4.getText().toString());
+
+                            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("Homework_tbl").child(t2.getText().toString());
+                            dbRef.setValue(hwtbl);
+
+                            Toast.makeText(getApplicationContext(),"Data Updated Successfully", Toast.LENGTH_SHORT).show();
+                        }
+
+                        else{
+
+                            Toast.makeText(getApplicationContext(),"No sourse to Update", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+           }
+       });
+
 
 
 
