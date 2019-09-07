@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wallpaper1"
+    tools:context=".tutorialUploader">
+
+    <Button
+        android:id="@+id/btnselectFile"
+        android:layout_width="146dp"
+        android:layout_height="66dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="203dp"
+        android:layout_marginEnd="132dp"
+        android:layout_marginBottom="462dp"
+        android:text="Select File" />
+
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="152dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="129dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginBottom="273dp"
+        android:text="Upload" />
+
+    <TextView
+        android:id="@+id/txtNotification"
+        android:layout_width="178dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="301dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="411dp"
+        android:text="          No file is selected" />
+</RelativeLayout>

@@ -17,8 +17,8 @@ public class Todolist extends AppCompatActivity {
         setContentView(R.layout.activity_todolist);
 
          txt22= findViewById(R.id.textveiwdesc);
-         st = getIntent().getExtras().getString("Desc");
-         txt22.setText(st);
+         //st = getIntent().getExtras().getString("Desc");
+         //txt22.setText(st);
          //txt22.setText(getIntent().getStringExtra("Desc"));
 
     }
