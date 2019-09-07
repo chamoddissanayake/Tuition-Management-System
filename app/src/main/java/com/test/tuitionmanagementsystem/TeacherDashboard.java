@@ -53,7 +53,7 @@ public class TeacherDashboard extends AppCompatActivity {
             public void onClick(View view) {
 
                 String t = "teacher";
-                Intent i = new Intent(getApplicationContext(),StudentRegistration.class);
+                Intent i = new Intent(getApplicationContext(),Register_n_View.class);
                 i.putExtra("ID",tID);
                 i.putExtra("Name",tName);
                 i.putExtra("Type",t);
