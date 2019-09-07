@@ -91,6 +91,36 @@ public class view_of_homework extends AppCompatActivity {
                     }
                 });
            }
+      });
+
+       b3.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+
+               DatabaseReference delRef =FirebaseDatabase.getInstance().getReference().child("Homework_tbl");
+               delRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                       if(dataSnapshot.hasChild(t2.getText().toString())){
+                           DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("Homework_tbl").child(t2.getText().toString());
+                           dbRef.removeValue();
+
+                           Toast.makeText(getApplicationContext(), "Data Deleted Successfully", Toast.LENGTH_SHORT).show();
+                       }
+
+                       else {
+                           Toast.makeText(getApplicationContext(),"No sourse to Delete",Toast.LENGTH_SHORT).show();
+                       }
+
+                   }
+
+                   @Override
+                   public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                   }
+               });
+
+           }
        });
 
 
