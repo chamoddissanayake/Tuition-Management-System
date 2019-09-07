@@ -51,9 +51,6 @@ public class TeacherRegistration extends AppCompatActivity {
     private StorageTask uploadTask;
     private String completeImagePath;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

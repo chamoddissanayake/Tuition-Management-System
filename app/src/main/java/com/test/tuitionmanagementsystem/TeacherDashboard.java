@@ -53,16 +53,13 @@ public class TeacherDashboard extends AppCompatActivity {
             public void onClick(View view) {
 
                 String t = "teacher";
-                Intent i = new Intent(getApplicationContext(),StudentRegistration.class);
+                Intent i = new Intent(getApplicationContext(),Register_n_View.class);
                 i.putExtra("ID",tID);
                 i.putExtra("Name",tName);
                 i.putExtra("Type",t);
                 startActivity(i);
             }
         });
-
-
-
 
 
         FeedbackNotificationMgtBtn.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +73,11 @@ public class TeacherDashboard extends AppCompatActivity {
         StudyMaterialsManagementBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String t = "teacher";
                 Intent i = new Intent(getApplicationContext(),Homework.class);
+                i.putExtra("ID",tID);
+                i.putExtra("Name",tName);
+                i.putExtra("Type",t);
                 startActivity(i);
             }
         });
@@ -93,7 +94,9 @@ public class TeacherDashboard extends AppCompatActivity {
                 startActivity(i);
 
             }
+
         });
+
 
     }
 

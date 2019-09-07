@@ -18,22 +18,39 @@ public class StudyMaterial extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_study_material);
 
+        Intent intent = getIntent();
+        final String id = intent.getStringExtra("ID");
+        final String name = intent.getStringExtra("Name");
+        final String type = intent.getStringExtra("Type");
+
+
         btnTutorial=(ImageButton) findViewById(R.id.btnMoveToTutorial);
         btnHomework=(ImageButton)findViewById(R.id.btnMoveToHomework);
 
         btnHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i1 = new Intent(StudyMaterial.this,Todolist.class);
-                startActivity(i1);
+                if(type =="student"){
+                    Intent i1 = new Intent(StudyMaterial.this,Todolist.class);
+                    startActivity(i1);
+                }else if(type =="teacher"){
+                    Intent i2 = new Intent(StudyMaterial.this,Homework.class);
+                    startActivity(i2);
+                }
+
             }
         });
         btnTutorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent itute = new Intent(StudyMaterial.this,AddTutorials.class);
-                startActivity(itute);
+                if(type =="teacher"){
+                    Intent i1 = new Intent(StudyMaterial.this,tutorialUploader.class);
+                    startActivity(i1);
+                }
+
+//                Intent itute = new Intent(StudyMaterial.this,AddTutorials.class);
+//                startActivity(itute);
 
             }
         });
