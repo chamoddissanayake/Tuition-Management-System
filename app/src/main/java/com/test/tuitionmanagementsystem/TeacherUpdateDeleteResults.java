@@ -115,9 +115,15 @@ public class TeacherUpdateDeleteResults extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if(dataSnapshot.hasChild(selectedExamID)){
-//                                if(dataSnapshot.hasChild(sid)){
-//
-//                                }
+                                if(dataSnapshot.child(selectedExamID).hasChild(selectedStudent)){
+                                   DatabaseReference dbref =  FirebaseDatabase.getInstance().getReference().child("Student_take_exam").child(selectedExamID).child(selectedStudent);
+                                    dbref.removeValue();
+                                    Toast.makeText(getApplicationContext(),"Student Removed Successfully.",Toast.LENGTH_LONG).show();
+                                }else{
+                                    Toast.makeText(getApplicationContext(),"Student not found.",Toast.LENGTH_LONG).show();
+                                }
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Not found.",Toast.LENGTH_LONG).show();
                             }
                         }
 
