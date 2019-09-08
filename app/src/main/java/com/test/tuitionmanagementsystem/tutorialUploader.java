@@ -73,7 +73,10 @@ public class tutorialUploader extends AppCompatActivity {
 
     private void uploadFile(Uri pdfUri) {
 
+        String fileName = System.currentTimeMillis()+"";
         StorageReference storageReference = storage.getReference();
+
+        storageReference.child("Uploads").child(fileName).putFile(pdfUri);
 
     }
 
