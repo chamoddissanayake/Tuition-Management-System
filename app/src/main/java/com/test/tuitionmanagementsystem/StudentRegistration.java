@@ -27,8 +27,8 @@ public class StudentRegistration extends AppCompatActivity {
     Button btnSave;
     DatabaseReference dbRef;
 
-    String tID = "";
-    String tName = "";
+    String ID = "";
+    String Name = "";
     String Type = "";
 
     @Override
@@ -38,9 +38,9 @@ public class StudentRegistration extends AppCompatActivity {
         setContentView(R.layout.activity_student_registration);
 
         Intent intent = getIntent();
-        String sID = intent.getStringExtra("StudentID");
-        String sName = intent.getStringExtra("sName");
-
+        ID = intent.getStringExtra("ID");
+        Name = intent.getStringExtra("Name");
+        Type = intent.getStringExtra("Type");
 
         T1 = (EditText) findViewById(R.id.sName);
         T2 = (EditText) findViewById(R.id.AdmissionNo);
@@ -50,8 +50,8 @@ public class StudentRegistration extends AppCompatActivity {
         tx1 = findViewById(R.id.tNamelbl);
         tx2 = findViewById(R.id.tIDlbl);
 
-        tx1.setText(sID);
-        tx2.setText(sName);
+        tx1.setText(ID);
+        tx2.setText(Name);
 
         btnSave = findViewById(R.id.Submitbutton);
 
@@ -74,8 +74,9 @@ public class StudentRegistration extends AppCompatActivity {
                     else {
                         stdtb1.setStudentName(T1.getText().toString().trim());
                         stdtb1.setAdmissionNo(T2.getText().toString().trim());
-                        stdtb1.getAddress(T3.getText().toString().trim());
-                        stdtb1.getContact(T4.getText().toString().trim());
+                        stdtb1.setAddress(T3.getText().toString().trim());
+                        stdtb1.setTel(T4.getText().toString().trim());
+
 
                         dbRef.child(stdtb1.getAdmissionNo()).setValue(stdtb1);
 

@@ -10,16 +10,29 @@ import android.widget.Button;
 public class Register_n_View extends AppCompatActivity {
 
     Button Register, Editbtn;
-
+    String ID = "";
+    String Name = "";
+    String type="";
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_n__view);
 
+        Intent intent = getIntent();
+        ID = intent.getStringExtra("ID");
+        Name = intent.getStringExtra("Name");
+        type = intent.getStringExtra("t");
+
+        Register = (Button) findViewById(R.id.btnRegister);
+        Editbtn = (Button) findViewById(R.id.btnView);
+
     Register.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Intent i  = new Intent(getApplicationContext(),StudentRegistration.class);
+            i.putExtra("ID",ID);
+            i.putExtra("Name",Name);
+            i.putExtra("Type",type);
             startActivity(i);
         }
     });
