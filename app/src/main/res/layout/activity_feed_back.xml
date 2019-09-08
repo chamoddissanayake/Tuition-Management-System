@@ -78,6 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-black"
             android:onClick="sendFeedback"
             android:text="@string/sendfeedback" />
     </LinearLayout>
@@ -87,6 +88,7 @@
         android:layout_width="126dp"
         android:layout_height="59dp"
         android:text="@string/feedback123"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
