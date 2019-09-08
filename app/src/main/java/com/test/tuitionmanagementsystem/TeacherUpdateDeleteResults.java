@@ -84,7 +84,7 @@ public class TeacherUpdateDeleteResults extends AppCompatActivity {
                     stdtkExamObj.setSubName(subject);
                     stdtkExamObj.setDocumentLink("aaaaaaaaaaaaaaaaaaaa");
 
-                    updateMarkRef.child(stdtkExamObj.getExamID()).setValue(stdtkExamObj);
+                    updateMarkRef.child(stdtkExamObj.getExamID()).child(stdtkExamObj.getsID()).setValue(stdtkExamObj);
                     Toast.makeText(getApplicationContext(),"Updated successfully.",Toast.LENGTH_LONG).show();
 
                     mark.setText("");
@@ -158,7 +158,7 @@ public class TeacherUpdateDeleteResults extends AppCompatActivity {
 
     private void fillResultsOftheSelectedStudentAndExamID(String selectedStudent, String selectedExamID, String subject) {
 
-         String Student = selectedStudent;
+        final String student = selectedStudent;
         final String examID = selectedExamID;
         String subj =subject;
 
@@ -167,7 +167,7 @@ public class TeacherUpdateDeleteResults extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(examID)){
-                    mark.setText(dataSnapshot.child(examID).child("mark").getValue().toString());
+                    mark.setText(dataSnapshot.child(examID).child(student).child("mark").getValue().toString());
                 }else{
                     Toast.makeText(getApplicationContext(),"Not found",Toast.LENGTH_LONG).show();
                 }
