@@ -1,11 +1,14 @@
 package com.test.tuitionmanagementsystem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.test.tuitionmanagementsystem.listeners.TeacherSubjectListner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +33,7 @@ public class TeacherAddResults extends AppCompatActivity {
 
     TextView TeacherName, TeacherID;
     EditText mark;
-    Spinner studentIDspn, subjectspn, ResultExamIDspn;
+    Spinner studentIDspn, ResultExamIDspn;
     Button Add;
 
     @Override
@@ -46,13 +54,13 @@ public class TeacherAddResults extends AppCompatActivity {
 
 
         studentIDspn = (Spinner) findViewById(R.id.addResultStudentIDSpinner);
-        subjectspn = (Spinner) findViewById(R.id.addResultSubjectSpinner);
         ResultExamIDspn = (Spinner) findViewById(R.id.addResultExamIDSpinner);
         mark = (EditText) findViewById(R.id.markForAdd);
 
-        fillStudentSpinner();
-        fillSubjectSpinner();
-        fillExamID();
+        getDetailsFormDB();
+
+       // fillStudentSpinner();
+       // fillExamID();
 
         Add = (Button) findViewById(R.id.btnAdd);
 
@@ -64,60 +72,75 @@ public class TeacherAddResults extends AppCompatActivity {
                 }else if(Integer.parseInt(mark.getText().toString()) >100 || Integer.parseInt(mark.getText().toString()) <0){
                     Toast.makeText(getApplicationContext(),"Marks should be in  range 0 - 100",Toast.LENGTH_SHORT).show();
                 }else{
-                    String selectedStudent, selectedSubject, selectedExamID;
+                    String selectedStudent, selectedExamID, subject;
                     int inputMark;
 
                     selectedStudent = studentIDspn.getSelectedItem().toString();
-                    selectedSubject = subjectspn.getSelectedItem().toString();
                     selectedExamID = ResultExamIDspn.getSelectedItem().toString();
                     inputMark = Integer.parseInt(mark.getText().toString());
+                    subject = teacherObj.getSpecialized_subject();
 
-                    //Toast.makeText(getApplicationContext()," "+selectedStudent+" "+selectedSubject+" "+selectedExamID+" "+inputMark+" Added Successfully.",Toast.LENGTH_SHORT).show();
-                    Snackbar.make(view," "+selectedStudent+" "+selectedSubject+" "+selectedExamID+" "+inputMark+" Added Successfully.",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+                    Toast.makeText(getApplicationContext()," "+selectedStudent+" "+" "+selectedExamID+" "+inputMark+""+subject,Toast.LENGTH_SHORT).show();
+
+                    DatabaseReference addMarkRef = FirebaseDatabase.getInstance().getReference().child("Student_take_exam");
+
+                    Student_Take_Exam stdtkExamObj = new Student_Take_Exam();
+                    stdtkExamObj.setsID(selectedStudent);
+                    stdtkExamObj.setExamID(selectedExamID);
+                    stdtkExamObj.setMark(inputMark);
+                    stdtkExamObj.setSubName(subject);
+                    stdtkExamObj.setDocumentLink("aaaaaaaaaaaaaaaaaaaa");
+
+                    addMarkRef.child(stdtkExamObj.getExamID()).setValue(stdtkExamObj);
+                    Toast.makeText(getApplicationContext(),"Added to database successfully.",Toast.LENGTH_LONG).show();
+
                     mark.setText("");
                 }
 
             }
         });
-    }
 
-    private void fillStudentSpinner() {
-        String[] students = new String[]{
-                "S0001","S0002","S0003","S0004","S0005","S0006","S0007","S0008","S0009","S0010"
-        };
-
-        // Need to fetch list of students form db
-
-
-        final List<String> studentsList = new ArrayList<>(Arrays.asList(students));
-        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,studentsList);
-
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        studentIDspn.setAdapter(spinnerArrayAdapter);
 
     }
 
-    private void fillSubjectSpinner() {
-        String[] subjects = new String[]{
-                "Science","Sinahla","English","Maths"
-        };
-        final List<String> subjectList = new ArrayList<>(Arrays.asList(subjects));
-        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,subjectList);
+    Student_Take_Exam stdTakeExamObj = new Student_Take_Exam();
+    Teacher teacherObj = new Teacher();
 
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        subjectspn.setAdapter(spinnerArrayAdapter);
+    private void getDetailsFormDB() {
+        //Get Specialized subject of the logged in teacher. - start
+        DatabaseReference readref_subject_of_the_teacher = FirebaseDatabase.getInstance().getReference().child("Teacher");
+        readref_subject_of_the_teacher.addListenerForSingleValueEvent(new TeacherSubjectListner(getApplicationContext(),teacherObj,studentIDspn,ResultExamIDspn));
+        //Get Specialized subject of the logged in teacher. - end
+
     }
 
-    private void fillExamID() {
-        String[] examID = new String[]{
-                "E001","E002","E003","E004"
-        };
-        final List<String> examList = new ArrayList<>(Arrays.asList(examID));
-        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,examList);
+//    private void fillStudentSpinner() {
+//        String[] students = new String[]{
+//                "S0001","S0002","S0003","S0004","S0005","S0006","S0007","S0008","S0009","S0010"
+//        };
+//
+//        // Need to fetch list of students form db
+//
+//
+//        final List<String> studentsList = new ArrayList<>(Arrays.asList(students));
+//        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,studentsList);
+//
+//        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+//        studentIDspn.setAdapter(spinnerArrayAdapter);
+//
+//    }
 
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        ResultExamIDspn.setAdapter(spinnerArrayAdapter);
-    }
+
+//    private void fillExamID() {
+//        String[] examID = new String[]{
+//                "E001","E002","E003","E004"
+//        };
+//        final List<String> examList = new ArrayList<>(Arrays.asList(examID));
+//        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,examList);
+//
+//        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+//        ResultExamIDspn.setAdapter(spinnerArrayAdapter);
+//    }
 
 
     public void addtoDB(View view) {
@@ -186,9 +209,9 @@ public class TeacherAddResults extends AppCompatActivity {
 //        StudentFollowSubject obj = new StudentFollowSubject();
 //        obj.setsID("S001");
 //        obj.setSubName("Maths");
-//
-//
-//        dbref.child(obj.getSubName()).setValue(obj);
+
+
+//        dbref.push().setValue(obj);
 //        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
 
 
