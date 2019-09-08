@@ -4,7 +4,7 @@ public class StudentDetails_tb {
 
     private String StudentName;
     private String AdmissionNo;
-    private String address1;
+    private String address;
     private  String tel;
 
     public StudentDetails_tb() {
@@ -14,31 +14,31 @@ public class StudentDetails_tb {
         return StudentName;
     }
 
-    public String getAdmissionNo() {
-        return AdmissionNo;
-    }
-
-    public String getAddress(String trim) {
-        return address1;
-    }
-
-    public String getContact(String trim) {
-        return tel;
-    }
-
     public void setStudentName(String studentName) {
         StudentName = studentName;
+    }
+
+    public String getAdmissionNo() {
+        return AdmissionNo;
     }
 
     public void setAdmissionNo(String admissionNo) {
         AdmissionNo = admissionNo;
     }
 
-    public void setAddress(String address) {
-        address1 = address;
+    public String getAddress() {
+        return address;
     }
 
-    public void setContact(String contact) {
-        tel = contact;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 }

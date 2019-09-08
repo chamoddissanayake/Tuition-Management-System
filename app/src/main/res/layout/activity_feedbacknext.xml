@@ -7,17 +7,33 @@
     android:background="@drawable/bg"
     tools:context=".Feedbacknext">
 
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="369dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="627dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="46dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="212dp"
-        android:layout_height="485dp"
+        android:layout_height="440dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.864"
+        app:layout_constraintHorizontal_bias="0.919"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.418">
+        app:layout_constraintVertical_bias="0.453">
 
         <EditText
             android:id="@+id/editTextFid2"
@@ -54,7 +70,7 @@
         <EditText
             android:id="@+id/editTextFeedback2"
             android:layout_width="match_parent"
-            android:layout_height="249dp"
+            android:layout_height="211dp"
             android:ems="10"
             android:gravity="start|top"
             android:hint="@string/feedback123"
@@ -63,63 +79,66 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="330dp"
-        android:layout_height="66dp"
-        android:orientation="horizontal"
+        android:layout_width="134dp"
+        android:layout_height="440dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <Button
-            android:id="@+id/btnSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-
-            android:text="@string/save" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="123dp"
-        android:layout_height="515dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.801">
+        app:layout_constraintVertical_bias="0.421">
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="49dp"
+            android:fontFamily="sans-serif-black"
             android:text="Feedback ID" />
 
         <TextView
             android:id="@+id/textView20"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
+            android:layout_height="54dp"
+            android:fontFamily="sans-serif-black"
             android:text="@string/studentId123" />
 
         <TextView
             android:id="@+id/textView21"
             android:layout_width="match_parent"
-            android:layout_height="44dp"
+            android:layout_height="55dp"
+            android:fontFamily="sans-serif-black"
             android:text="@string/studentName" />
 
         <TextView
             android:id="@+id/textView22"
             android:layout_width="match_parent"
             android:layout_height="47dp"
+            android:fontFamily="sans-serif-black"
             android:text="@string/subject" />
 
         <TextView
             android:id="@+id/textView24"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="51dp"
+            android:fontFamily="sans-serif-black"
             android:text="@string/feedback123" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="264dp"
+        android:layout_marginBottom="628dp"
+        android:text="Check Your details"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

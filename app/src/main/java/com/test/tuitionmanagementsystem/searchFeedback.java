@@ -3,6 +3,7 @@ package com.test.tuitionmanagementsystem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +34,7 @@ public class searchFeedback extends AppCompatActivity {
         Button b1 = findViewById(R.id.btnView);
         Button b2 = findViewById(R.id.btnUpdate);
         Button b3 = findViewById(R.id.btnDelete);
+        Button b4 = findViewById(R.id.btnNext);
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,5 +125,15 @@ public class searchFeedback extends AppCompatActivity {
                 });
             }
         });
+
+        b4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i1 = new Intent(searchFeedback.this,StudentDashboard.class);
+                startActivity(i1);
+            }
+        });
     }
+
+
 }
