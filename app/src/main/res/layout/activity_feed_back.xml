@@ -85,8 +85,8 @@
 
     <TextView
         android:id="@+id/textView23"
-        android:layout_width="126dp"
-        android:layout_height="59dp"
+        android:layout_width="147dp"
+        android:layout_height="60dp"
         android:text="@string/feedback123"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
