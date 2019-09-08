@@ -81,6 +81,9 @@ public class Feedbacknext extends AppCompatActivity {
                     dbRef.child(feedback.getFid()).setValue(feedback);
 
                     Toast.makeText(getApplicationContext(),"Data Saved Succuessfully!",Toast.LENGTH_SHORT).show();
+
+                    Intent i1 = new Intent(Feedbacknext.this,StudentDashboard.class);
+                    startActivity(i1);
               }
 
             }
