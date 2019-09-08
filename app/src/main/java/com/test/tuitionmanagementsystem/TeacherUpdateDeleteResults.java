@@ -1,5 +1,6 @@
 package com.test.tuitionmanagementsystem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,6 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.test.tuitionmanagementsystem.listeners.TeacherSubjectListner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,9 +29,9 @@ import java.util.List;
 
 public class TeacherUpdateDeleteResults extends AppCompatActivity {
 
-    TextView TeacherName, TeacherID;
+    TextView TeacherName, TeacherID, TeacherSubject;
     EditText mark;
-    Spinner studentIDspn, subjectspn, ResultExamIDspn;
+    Spinner studentIDspn, ResultExamIDspn;
     Button Update, Delete;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,38 +45,16 @@ public class TeacherUpdateDeleteResults extends AppCompatActivity {
 
         TeacherName = (TextView) findViewById(R.id.tNamelbl);
         TeacherID = (TextView) findViewById(R.id.tIDlbl);
+        TeacherSubject= findViewById(R.id.txtvwSubject);
 
         TeacherName.setText(tName);
         TeacherID.setText(tID);
 
         studentIDspn = (Spinner) findViewById(R.id.updateResultStudentIDSpinner);
-        subjectspn = (Spinner) findViewById(R.id.updateResultSubjectSpinner);
         ResultExamIDspn = (Spinner) findViewById(R.id.updateResultExamIDSpinner);
         mark = (EditText) findViewById(R.id.markForAdd);
 
-        fillStudentSpinner();
-        fillSubjectSpinner();
-        fillExamID();
-
-        ResultExamIDspn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                if(ResultExamIDspn.getSelectedItemPosition()==0)
-                    mark.setText("89");
-                else if(ResultExamIDspn.getSelectedItemPosition()==1)
-                    mark.setText("78");
-                else if(ResultExamIDspn.getSelectedItemPosition()==2)
-                    mark.setText("73");
-                else if(ResultExamIDspn.getSelectedItemPosition()==3)
-                    mark.setText("85");
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+        getStudentIDs();
 
         Update = (Button) findViewById(R.id.btnUpdate);
         Update.setOnClickListener(new View.OnClickListener() {
@@ -81,24 +66,32 @@ public class TeacherUpdateDeleteResults extends AppCompatActivity {
                 }else if(Integer.parseInt(mark.getText().toString()) >100 || Integer.parseInt(mark.getText().toString()) <0){
                     Toast.makeText(getApplicationContext(),"Marks should be in  range 0 - 100",Toast.LENGTH_SHORT).show();
                 }else{
-                    String selectedStudent, selectedSubject, selectedExamID;
+                    String selectedStudent, selectedSubject, selectedExamID, subject;
                     int inputMark;
 
                     selectedStudent = studentIDspn.getSelectedItem().toString();
-                    selectedSubject = subjectspn.getSelectedItem().toString();
                     selectedExamID = ResultExamIDspn.getSelectedItem().toString();
                     inputMark = Integer.parseInt(mark.getText().toString());
+                    subject =  TeacherSubject.getText().toString();
 
-                    //Toast.makeText(getApplicationContext()," "+selectedStudent+" "+selectedSubject+" "+selectedExamID+" "+inputMark+" Added Successfully.",Toast.LENGTH_SHORT).show();
-                    Snackbar.make(view," "+selectedStudent+" "+selectedSubject+" "+selectedExamID+" "+inputMark+" Updated Successfully.",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+
+                    DatabaseReference updateMarkRef = FirebaseDatabase.getInstance().getReference().child("Student_take_exam");
+
+                    Student_Take_Exam stdtkExamObj = new Student_Take_Exam();
+                    stdtkExamObj.setsID(selectedStudent);
+                    stdtkExamObj.setExamID(selectedExamID);
+                    stdtkExamObj.setMark(inputMark);
+                    stdtkExamObj.setSubName(subject);
+                    stdtkExamObj.setDocumentLink("aaaaaaaaaaaaaaaaaaaa");
+
+                    updateMarkRef.child(stdtkExamObj.getExamID()).setValue(stdtkExamObj);
+                    Toast.makeText(getApplicationContext(),"Updated successfully.",Toast.LENGTH_LONG).show();
+
                     mark.setText("");
                 }
 
             }
         });
-
-
-
 
         Delete = (Button) findViewById(R.id.btnDelete);
         Delete.setOnClickListener(new View.OnClickListener() {
@@ -109,59 +102,90 @@ public class TeacherUpdateDeleteResults extends AppCompatActivity {
                 }else if(Integer.parseInt(mark.getText().toString()) >100 || Integer.parseInt(mark.getText().toString()) <0){
                     Toast.makeText(getApplicationContext(),"Marks should be in  range 0 - 100",Toast.LENGTH_SHORT).show();
                 }else{
-                    String selectedStudent, selectedSubject, selectedExamID;
+                    final String selectedStudent, selectedSubject, selectedExamID;
                     int inputMark;
 
                     selectedStudent = studentIDspn.getSelectedItem().toString();
-                    selectedSubject = subjectspn.getSelectedItem().toString();
                     selectedExamID = ResultExamIDspn.getSelectedItem().toString();
                     inputMark = Integer.parseInt(mark.getText().toString());
 
-                    //Toast.makeText(getApplicationContext()," "+selectedStudent+" "+selectedSubject+" "+selectedExamID+" "+inputMark+" Added Successfully.",Toast.LENGTH_SHORT).show();
-                    Snackbar.make(view," "+selectedStudent+" "+selectedSubject+" "+selectedExamID+" "+inputMark+" Deleted Successfully.",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+
+                    DatabaseReference deleteMarkRef = FirebaseDatabase.getInstance().getReference().child("Student_take_exam");
+                    deleteMarkRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.hasChild(selectedExamID)){
+//                                if(dataSnapshot.hasChild(sid)){
+//
+//                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
                     mark.setText("");
-                    fillStudentSpinner();
-                    fillSubjectSpinner();
-                    fillExamID();
 
                 }
             }
         });
 
 
+        ResultExamIDspn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String selectedStudent, subject, selectedExamID;
+                int inputMark;
+
+                selectedStudent = studentIDspn.getSelectedItem().toString();
+                selectedExamID = ResultExamIDspn.getSelectedItem().toString();
+
+                subject =  TeacherSubject.getText().toString();
+                fillResultsOftheSelectedStudentAndExamID(selectedStudent,selectedExamID,subject);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
 
-    private void fillStudentSpinner() {
-        String[] students = new String[]{
-                "S0001","S0002","S0003","S0004","S0005","S0006","S0007","S0008","S0009","S0010"
-        };
-        final List<String> studentsList = new ArrayList<>(Arrays.asList(students));
-        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,studentsList);
+    private void fillResultsOftheSelectedStudentAndExamID(String selectedStudent, String selectedExamID, String subject) {
 
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        studentIDspn.setAdapter(spinnerArrayAdapter);
+         String Student = selectedStudent;
+        final String examID = selectedExamID;
+        String subj =subject;
 
+        DatabaseReference dbRefRetrieveMark = FirebaseDatabase.getInstance().getReference().child("Student_take_exam");
+        dbRefRetrieveMark.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(examID)){
+                    mark.setText(dataSnapshot.child(examID).child("mark").getValue().toString());
+                }else{
+                    Toast.makeText(getApplicationContext(),"Not found",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
-    private void fillSubjectSpinner() {
-        String[] subjects = new String[]{
-                "Science","Sinahla","English","Maths"
-        };
-        final List<String> subjectList = new ArrayList<>(Arrays.asList(subjects));
-        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,subjectList);
-
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        subjectspn.setAdapter(spinnerArrayAdapter);
-    }
-
-    private void fillExamID() {
-        String[] examID = new String[]{
-                "E001","E002","E003","E004"
-        };
-        final List<String> examList = new ArrayList<>(Arrays.asList(examID));
-        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,examList);
-
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        ResultExamIDspn.setAdapter(spinnerArrayAdapter);
+    Teacher teacherObj = new Teacher();
+    private void getStudentIDs() {
+        //Get Specialized subject of the logged in teacher. - start
+        DatabaseReference readref_subject_of_the_teacher = FirebaseDatabase.getInstance().getReference().child("Teacher");
+        readref_subject_of_the_teacher.addListenerForSingleValueEvent(new TeacherSubjectListner(getApplicationContext(),teacherObj,studentIDspn,ResultExamIDspn,TeacherSubject));
+        //Get Specialized subject of the logged in teacher. - end
+        Toast.makeText(this, teacherObj.getSpecialized_subject()+"", Toast.LENGTH_SHORT).show();
     }
 }

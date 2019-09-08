@@ -3,6 +3,7 @@ package com.test.tuitionmanagementsystem.listeners;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,24 +19,33 @@ public class TeacherSubjectListner implements ValueEventListener {
     Context appContext;
     Spinner studentIDspn;
     Spinner resultExamId;
+    TextView teacherSubject;
 
-    public TeacherSubjectListner(Context appContext, Teacher teacher, Spinner studentIDspn,Spinner resultExamId) {
-        this.teacherObj=teacher;
-        this.appContext=appContext;
-        this.studentIDspn=studentIDspn;
-        this.resultExamId = resultExamId;
+
+    public TeacherSubjectListner(Context applicationContext, Teacher teacherObj, Spinner studentIDspn, Spinner resultExamIDspn, TextView teacherSubject) {
+        this.teacherObj = teacherObj;
+        this.appContext = applicationContext;
+        this.studentIDspn = studentIDspn;
+        this.resultExamId = resultExamIDspn;
+        this.teacherSubject = teacherSubject;
     }
 
     @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-        if(dataSnapshot.hasChild("T001")){
+        if (dataSnapshot.hasChild("T001")) {
             teacherObj.setSpecialized_subject(dataSnapshot.child("T001").child("specialized_subject").getValue().toString());
 //                    Toast.makeText(getApplicationContext(),teacherObj.getSpecialized_subject()+"",Toast.LENGTH_SHORT).show();
-            TeacherResultManager.loadStudentsOfTeacher(appContext,teacherObj,studentIDspn);
-            TeacherResultManager.loadSubjectExams(appContext,teacherObj,resultExamId);
-        }else{
-            Toast.makeText(appContext,"No source to display",Toast.LENGTH_SHORT).show();
+            teacherSubject.setText(teacherObj.getSpecialized_subject());
+            if(studentIDspn!=null) {
+                TeacherResultManager.loadStudentsOfTeacher(appContext, teacherObj, studentIDspn);
+            }
+            if(resultExamId!=null) {
+                TeacherResultManager.loadSubjectExams(appContext, teacherObj, resultExamId);
+            }
+
+        } else {
+            Toast.makeText(appContext, "No source to display", Toast.LENGTH_SHORT).show();
         }
 
     }

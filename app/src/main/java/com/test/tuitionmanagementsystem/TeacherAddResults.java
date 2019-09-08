@@ -31,7 +31,7 @@ import java.util.List;
 
 public class TeacherAddResults extends AppCompatActivity {
 
-    TextView TeacherName, TeacherID;
+    TextView TeacherName, TeacherID , TeacherSubject;
     EditText mark;
     Spinner studentIDspn, ResultExamIDspn;
     Button Add;
@@ -52,15 +52,13 @@ public class TeacherAddResults extends AppCompatActivity {
         TeacherName.setText(tName);
         TeacherID.setText(tID);
 
+        TeacherSubject = findViewById(R.id.txtvwSubject);
 
         studentIDspn = (Spinner) findViewById(R.id.addResultStudentIDSpinner);
         ResultExamIDspn = (Spinner) findViewById(R.id.addResultExamIDSpinner);
         mark = (EditText) findViewById(R.id.markForAdd);
 
         getDetailsFormDB();
-
-       // fillStudentSpinner();
-       // fillExamID();
 
         Add = (Button) findViewById(R.id.btnAdd);
 
@@ -80,7 +78,7 @@ public class TeacherAddResults extends AppCompatActivity {
                     inputMark = Integer.parseInt(mark.getText().toString());
                     subject = teacherObj.getSpecialized_subject();
 
-                    Toast.makeText(getApplicationContext()," "+selectedStudent+" "+" "+selectedExamID+" "+inputMark+""+subject,Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getApplicationContext()," "+selectedStudent+" "+" "+selectedExamID+" "+inputMark+""+subject,Toast.LENGTH_SHORT).show();
 
                     DatabaseReference addMarkRef = FirebaseDatabase.getInstance().getReference().child("Student_take_exam");
 
@@ -91,7 +89,7 @@ public class TeacherAddResults extends AppCompatActivity {
                     stdtkExamObj.setSubName(subject);
                     stdtkExamObj.setDocumentLink("aaaaaaaaaaaaaaaaaaaa");
 
-                    addMarkRef.child(stdtkExamObj.getExamID()).setValue(stdtkExamObj);
+                    addMarkRef.child(stdtkExamObj.getExamID()).child(stdtkExamObj.getsID()).setValue(stdtkExamObj);
                     Toast.makeText(getApplicationContext(),"Added to database successfully.",Toast.LENGTH_LONG).show();
 
                     mark.setText("");
@@ -99,8 +97,6 @@ public class TeacherAddResults extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     Student_Take_Exam stdTakeExamObj = new Student_Take_Exam();
@@ -109,141 +105,13 @@ public class TeacherAddResults extends AppCompatActivity {
     private void getDetailsFormDB() {
         //Get Specialized subject of the logged in teacher. - start
         DatabaseReference readref_subject_of_the_teacher = FirebaseDatabase.getInstance().getReference().child("Teacher");
-        readref_subject_of_the_teacher.addListenerForSingleValueEvent(new TeacherSubjectListner(getApplicationContext(),teacherObj,studentIDspn,ResultExamIDspn));
+        readref_subject_of_the_teacher.addListenerForSingleValueEvent(new TeacherSubjectListner(getApplicationContext(),teacherObj,studentIDspn,ResultExamIDspn,TeacherSubject));
         //Get Specialized subject of the logged in teacher. - end
-
     }
-
-//    private void fillStudentSpinner() {
-//        String[] students = new String[]{
-//                "S0001","S0002","S0003","S0004","S0005","S0006","S0007","S0008","S0009","S0010"
-//        };
-//
-//        // Need to fetch list of students form db
-//
-//
-//        final List<String> studentsList = new ArrayList<>(Arrays.asList(students));
-//        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,studentsList);
-//
-//        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-//        studentIDspn.setAdapter(spinnerArrayAdapter);
-//
-//    }
-
-
-//    private void fillExamID() {
-//        String[] examID = new String[]{
-//                "E001","E002","E003","E004"
-//        };
-//        final List<String> examList = new ArrayList<>(Arrays.asList(examID));
-//        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,examList);
-//
-//        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-//        ResultExamIDspn.setAdapter(spinnerArrayAdapter);
-//    }
-
 
     public void addtoDB(View view) {
 
         DatabaseReference dbref;
- //       dbref = FirebaseDatabase.getInstance().getReference().child("Student_take_exam");
-
-//        Student_Take_Exam obj = new Student_Take_Exam();
-//        obj.setsID("S001");
-//        obj.setSubName("Science");
-//        obj.setExamID("E001");
-//        obj.setMark(80);
-//        obj.setDocumentLink("aaaaaaaa");
-//
-//            dbref.child("S001").setValue(obj);
-//            Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
-
-//        dbref = FirebaseDatabase.getInstance().getReference().child("Exam");
-//        Exam obj = new Exam();
-//        obj.setExamID("E001");
-//        obj.setDateTime("2019-08-25");
-//        obj.setVenue("M503");
-//        obj.setDescription("aaaaaa");
-//
-//            dbref.child("E001").setValue(obj);
-//            Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
-
-//        dbref = FirebaseDatabase.getInstance().getReference().child("Teacher");
-//        Teacher obj = new Teacher();
-//        obj.setTid("T001");
-//        obj.settName("aaa");
-//        obj.setNic("123456789V");
-//        obj.setQualification("qqq");
-//        obj.setTel("0771234567");
-//        obj.setEmail("aa@dd.com");
-//        obj.setSpecialized_subject("Science");
-//        obj.setPhotoLink("aaa");
-//
-//
-//        dbref.child("T001").setValue(obj);
-//        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
-
-
-//        dbref = FirebaseDatabase.getInstance().getReference().child("Student");
-//        Student obj = new Student();
-//        obj.setSid("S001");
-//        obj.setsName("aaa");
-//        obj.setEmail("a@gmail.com");
-//        obj.setTel("0771234567");
-//        obj.setYor(2019);
-//        obj.setPhotoLink("sss");
-//        obj.setNic("123456789V");
-//
-//
-//        dbref.child("S001").setValue(obj);
-//        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
-
-//        dbref = FirebaseDatabase.getInstance().getReference().child("Subject");
-//        Subject obj = new Subject();
-//        obj.setsName("Maths");
-//
-//        dbref.child(obj.getsName()).setValue(obj);
-//        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
-
-//        dbref = FirebaseDatabase.getInstance().getReference().child("StudentFollowSubject");
-//        StudentFollowSubject obj = new StudentFollowSubject();
-//        obj.setsID("S001");
-//        obj.setSubName("Maths");
-
-
-//        dbref.push().setValue(obj);
-//        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
-
-
-//        dbref = FirebaseDatabase.getInstance().getReference().child("StudentFollowSubject");
-//        StudentFollowSubject obj = new StudentFollowSubject();
-//        obj.setsID("S001");
-//        obj.setSubName("Maths");
-//
-//
-//        dbref.child(obj.getSubName()).setValue(obj);
-//        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
-
-
-
-//        dbref = FirebaseDatabase.getInstance().getReference().child("StudentCredentials");
-//        StudentCredentials obj = new StudentCredentials();
-//        obj.setsID("S001");
-//        obj.setSecuredPassword("aaaaaaaaaaaaaaaaaaaaaa");
-//        obj.setSalt("bbbbbbbbbbbbbbbbbbbbbbb");
-//
-//        dbref.child(obj.getsID()).setValue(obj);
-//        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
-
-
-//        dbref = FirebaseDatabase.getInstance().getReference().child("TeacherCredentials");
-//        StudentCredentials obj = new StudentCredentials();
-//        obj.setsID("T001");
-//        obj.setSecuredPassword("aaaaaaaaaaaaaaaaaaaaaa");
-//        obj.setSalt("bbbbbbbbbbbbbbbbbbbbbbb");
-//
-//        dbref.child(obj.getsID()).setValue(obj);
-//        Toast.makeText(getApplicationContext(),"Data saved successfully",Toast.LENGTH_SHORT).show();
 
     }
 }
