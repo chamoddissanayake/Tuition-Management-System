@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class tutorialUploader extends AppCompatActivity {
 
@@ -55,6 +56,24 @@ public class tutorialUploader extends AppCompatActivity {
             }
         });
 
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(pdfUri != null)
+                    uploadFile(pdfUri);
+                else
+                    Toast.makeText(tutorialUploader.this,"Select a file", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+    }
+
+    private void uploadFile(Uri pdfUri) {
+
+        StorageReference storageReference = storage.getReference();
 
     }
 
