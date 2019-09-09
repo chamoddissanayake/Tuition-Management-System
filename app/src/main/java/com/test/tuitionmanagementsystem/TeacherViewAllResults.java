@@ -27,11 +27,14 @@ public class TeacherViewAllResults extends AppCompatActivity {
 
     ListView listView;
 
-    String listStudentId[]={"S001","S002","S003","S004","S005"};
-    String listSubjectName[]={"Maths","Maths","Science","Maths","English"};
-    String listExamID[]={"E001","E001","E002","E002","E002"};
-    String listMark[]={"90","45","57","97","67"};
-    String listDocument[]={"aa","bb","cc","dd","ee"};
+//    String listStudentId[]={"S001","S002","S003","S004","S005"};
+//    String listSubjectName[]={"Maths","Maths","Science","Maths","English"};
+//    String listExamID[]={"E001","E001","E002","E002","E002"};
+//    String listMark[]={"90","45","57","97","67"};
+//    String listDocument[]={"aa","bb","cc","dd","ee"};
+
+
+
 
     String userName, userId, userType;
     TextView tNamelb, tIDlbl;
@@ -39,6 +42,18 @@ public class TeacherViewAllResults extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_view_all_results);
+
+        final ArrayList<String> listStudentId = new ArrayList<String>();
+        final ArrayList<String> listSubjectName = new ArrayList<String>();
+        final ArrayList<String> listExamID = new ArrayList<String>();
+        final ArrayList<String> listMark = new ArrayList<String>();
+        final ArrayList<String> listDocument = new ArrayList<String>();
+
+//        listStudentId.add("S001");listStudentId.add("S002");listStudentId.add("S003");listStudentId.add("S004");listStudentId.add("S005");
+//        listSubjectName.add("Maths");listSubjectName.add("Maths");listSubjectName.add("English");listSubjectName.add("Maths");listSubjectName.add("Science");
+//        listExamID.add("E001");listExamID.add("E001");listExamID.add("E001");listExamID.add("E001");listExamID.add("E001");
+//        listMark.add("98");listMark.add("90");listMark.add("78");listMark.add("80");listMark.add("65");
+//        listDocument.add("aaaa");listDocument.add("aaaa");listDocument.add("aaaa");listDocument.add("aaaa");listDocument.add("aaaa");
 
         Intent intent = getIntent();
         userName = intent.getStringExtra("ID");
@@ -109,6 +124,15 @@ public class TeacherViewAllResults extends AppCompatActivity {
                                             student_take_examObj.setDocumentLink(documentLink_from_db);
 
                                             student_take_examsArrayList.add(student_take_examObj);
+
+                                            listStudentId.add(sid_from_db);
+                                            listSubjectName.add(subName_from_db) ;
+                                            listExamID.add(examID_from_db) ;
+                                            listMark.add(mark_from_db) ;
+                                            listDocument.add(documentLink_from_db) ;
+
+                                            MyAdapter adapter = new MyAdapter(getApplicationContext(),listStudentId,listSubjectName,listExamID,listMark,listDocument);
+                                            listView.setAdapter(adapter);
                                         }
 
                                         @Override
@@ -116,7 +140,6 @@ public class TeacherViewAllResults extends AppCompatActivity {
 
                                         }
                                     });
-
                                 }
                             }
                         }
@@ -126,7 +149,6 @@ public class TeacherViewAllResults extends AppCompatActivity {
 
                         }
                     });
-
                 }
             }
 
@@ -136,27 +158,72 @@ public class TeacherViewAllResults extends AppCompatActivity {
             }
         });
 
+//        MyAdapter adapter = new MyAdapter(this,listStudentId,listSubjectName,listExamID,listMark,listDocument);
+//        listView.setAdapter(adapter);
 
-        MyAdapter adapter = new MyAdapter(this,listStudentId,listSubjectName,listExamID,listMark,listDocument);
-        listView.setAdapter(adapter);
 
 
     }
+
+
 }
 
 
 
 
+//class MyAdapter extends ArrayAdapter<String>{
+//
+//    Context context;
+//    String listStudentId[];
+//    String listSubjectName[];
+//    String listExamID[];
+//    String listMark[];
+//    String listDocument[];
+//
+//    public MyAdapter(Context c, String[] listStudentId, String[] listSubjectName, String[] listExamID, String[] listMark, String[] listDocument) {
+//        super(c, R.layout.result_row,R.id.textView,listStudentId);
+//
+//        this.listStudentId = listStudentId;
+//        this.listSubjectName = listSubjectName;
+//        this.listExamID = listExamID;
+//        this.listMark = listMark;
+//        this.listDocument = listDocument;
+//    }
+//
+//    @NonNull
+//    @Override
+//    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+//        LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//
+//        View result_row = layoutInflater.inflate(R.layout.result_row,parent,false);
+//
+//        TextView tvStudentId = (TextView) result_row.findViewById(R.id.tvStudentId);
+//        TextView tvSubjectName= (TextView) result_row.findViewById(R.id.tvSubjectName);
+//        TextView tvExamID= (TextView) result_row.findViewById(R.id.tvExamID);
+//        TextView tvMark= (TextView) result_row.findViewById(R.id.tvMark);
+//        TextView tvDocument= (TextView) result_row.findViewById(R.id.tvDocument);
+//
+//        tvStudentId.setText(listStudentId[position]);
+//        tvSubjectName.setText(listSubjectName[position]);
+//        tvExamID.setText(listExamID[position]);
+//        tvMark.setText(listMark[position]);
+//        tvDocument.setText(listDocument[position]);
+//
+//        return result_row;
+//    }
+//}
+
+
 class MyAdapter extends ArrayAdapter<String>{
 
     Context context;
-    String listStudentId[];
-    String listSubjectName[];
-    String listExamID[];
-    String listMark[];
-    String listDocument[];
+    ArrayList listStudentId;
+    ArrayList listSubjectName;
+    ArrayList listExamID;
+    ArrayList listMark;
+    ArrayList listDocument;
 
-    public MyAdapter(Context c, String[] listStudentId, String[] listSubjectName, String[] listExamID, String[] listMark, String[] listDocument) {
+    public MyAdapter(Context c, ArrayList listStudentId, ArrayList listSubjectName, ArrayList listExamID, ArrayList listMark, ArrayList listDocument) {
         super(c, R.layout.result_row,R.id.textView,listStudentId);
 
         this.listStudentId = listStudentId;
@@ -179,11 +246,11 @@ class MyAdapter extends ArrayAdapter<String>{
         TextView tvMark= (TextView) result_row.findViewById(R.id.tvMark);
         TextView tvDocument= (TextView) result_row.findViewById(R.id.tvDocument);
 
-        tvStudentId.setText(listStudentId[position]);
-        tvSubjectName.setText(listSubjectName[position]);
-        tvExamID.setText(listExamID[position]);
-        tvMark.setText(listMark[position]);
-        tvDocument.setText(listDocument[position]);
+        tvStudentId.setText(listStudentId.get(position).toString());
+        tvSubjectName.setText(listSubjectName.get(position).toString());
+        tvExamID.setText(listExamID.get(position).toString());
+        tvMark.setText(listMark.get(position).toString());
+        tvDocument.setText(listDocument.get(position).toString());
 
         return result_row;
     }
