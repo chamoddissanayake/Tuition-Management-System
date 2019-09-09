@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ViewFeedback">
 
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="259dp"
@@ -18,18 +19,21 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintHorizontal_bias="0.639"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.071" />
+        app:layout_constraintVertical_bias="0.074" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="235dp"
-        android:layout_height="473dp"
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="338dp"
+        android:layout_height="486dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.759" />
+        app:layout_constraintVertical_bias="0.714">
 
+    </ListView>
 </androidx.constraintlayout.widget.ConstraintLayout>
