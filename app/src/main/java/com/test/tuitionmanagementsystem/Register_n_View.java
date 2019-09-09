@@ -21,7 +21,7 @@ public class Register_n_View extends AppCompatActivity {
         Intent intent = getIntent();
         ID = intent.getStringExtra("ID");
         Name = intent.getStringExtra("Name");
-        type = intent.getStringExtra("t");
+        type = intent.getStringExtra("type");
 
         Register = (Button) findViewById(R.id.btnRegister);
         Editbtn = (Button) findViewById(R.id.btnView);
@@ -39,7 +39,10 @@ public class Register_n_View extends AppCompatActivity {
     Editbtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent i = new Intent(getApplicationContext(),EditRegistration_Details.class);
+            Intent i = new Intent(getApplicationContext(),ViewStudentDetails.class);
+            i.putExtra("ID",ID);
+            i.putExtra("Name",Name);
+            i.putExtra("Type",type);
             startActivity(i);
         }
     });

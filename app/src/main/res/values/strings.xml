@@ -28,7 +28,7 @@
     <string name="search">Search</string>
     <string name="teacher_update_delete_result">Teacher Update | Delete Result</string>
 
-    <string name="Save">Save</string>
+    <string name="update">Update</string>
     <string name="delete">Delete</string>
     <string name="students_registration">Students Registration</string>
     <string name="contactno">ContactNo</string>
@@ -38,6 +38,9 @@
     <string name="studentName">Student Name</string>
     <string name="edit_details">Edit Details</string>
     <string name="studentname">StudentName</string>
+    <string name="View_studentDetails">View Student Details</string>
+
+
 
     <string name="updateDeleteFeedbackView">Update Delete Feedbacks</string>
     <string name="viewFeedbacksView">View Feedbacks</string>
