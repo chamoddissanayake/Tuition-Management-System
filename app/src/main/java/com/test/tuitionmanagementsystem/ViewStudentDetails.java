@@ -24,10 +24,10 @@ public class ViewStudentDetails extends AppCompatActivity {
         setContentView(R.layout.activity_view_student_details);
 
         final EditText t0 = findViewById(R.id.SearchID);
-        final EditText t1 = findViewById(R.id.sname);
-        final EditText t4 = findViewById(R.id.Address2);
-        final EditText t5 = findViewById(R.id.ContactNo1);
-
+        final EditText t2 = findViewById(R.id.SName2);
+        final EditText t3 = findViewById(R.id.address);
+        final EditText t4 = findViewById(R.id.ContactNo1);
+        final TextView t5 = findViewById(R.id.txtID);
         Button btn1 = findViewById(R.id.btnSearch);
 
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -36,15 +36,20 @@ public class ViewStudentDetails extends AppCompatActivity {
             @Override
 
             public void onClick(View view) {
-                DatabaseReference reafRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails").child(t0.toString());
+                DatabaseReference reafRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails").child(t0.getText().toString());
                 reafRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.hasChildren()) {
-                            t1.setText(dataSnapshot.child("StudentName").getValue().toString());
-                            t4.setText(dataSnapshot.child("address").getValue().toString());
-                            t5.setText(dataSnapshot.child("tel").getValue().toString());
-                            t0.setText(dataSnapshot.child("").getValue().toString());
+
+                            t2.setText(dataSnapshot.child("studentName").getValue().toString());
+                          t5.setText(dataSnapshot.child("admissionNo").getValue().toString());
+                           t3.setText(dataSnapshot.child("address").getValue().toString());
+                            t4.setText(dataSnapshot.child("tel").getValue().toString());
+
+                            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+
+
                         } else {
                             Toast.makeText(getApplicationContext(), "No source to display", Toast.LENGTH_SHORT).show();
                         }
