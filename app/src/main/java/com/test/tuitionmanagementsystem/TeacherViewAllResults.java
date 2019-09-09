@@ -1,10 +1,17 @@
 package com.test.tuitionmanagementsystem;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +24,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class TeacherViewAllResults extends AppCompatActivity {
+
+    ListView listView;
+
+    String listStudentId[]={"S001","S002","S003","S004","S005"};
+    String listSubjectName[]={"Maths","Maths","Science","Maths","English"};
+    String listExamID[]={"E001","E001","E002","E002","E002"};
+    String listMark[]={"90","45","57","97","67"};
+    String listDocument[]={"aa","bb","cc","dd","ee"};
 
     String userName, userId, userType;
     TextView tNamelb, tIDlbl;
@@ -35,6 +50,9 @@ public class TeacherViewAllResults extends AppCompatActivity {
 
         tNamelb.setText(userName);
         tIDlbl.setText(userId);
+
+        listView = (ListView) findViewById(R.id.listview);
+
 
         final ArrayList<Student_Take_Exam> student_take_examsArrayList = new ArrayList<>();
 
@@ -61,7 +79,6 @@ public class TeacherViewAllResults extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if(dataSnapshot.hasChildren()){
-                                Toast.makeText(getApplicationContext(),""+dataSnapshot.getChildrenCount(),Toast.LENGTH_LONG).show();
 
                                 ArrayList<Student> studentsList = new ArrayList<>();
 
@@ -120,9 +137,54 @@ public class TeacherViewAllResults extends AppCompatActivity {
         });
 
 
+        MyAdapter adapter = new MyAdapter(this,listStudentId,listSubjectName,listExamID,listMark,listDocument);
+        listView.setAdapter(adapter);
+
+
+    }
+}
 
 
 
 
+class MyAdapter extends ArrayAdapter<String>{
+
+    Context context;
+    String listStudentId[];
+    String listSubjectName[];
+    String listExamID[];
+    String listMark[];
+    String listDocument[];
+
+    public MyAdapter(Context c, String[] listStudentId, String[] listSubjectName, String[] listExamID, String[] listMark, String[] listDocument) {
+        super(c, R.layout.result_row,R.id.textView,listStudentId);
+
+        this.listStudentId = listStudentId;
+        this.listSubjectName = listSubjectName;
+        this.listExamID = listExamID;
+        this.listMark = listMark;
+        this.listDocument = listDocument;
+    }
+
+    @NonNull
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View result_row = layoutInflater.inflate(R.layout.result_row,parent,false);
+
+        TextView tvStudentId = (TextView) result_row.findViewById(R.id.tvStudentId);
+        TextView tvSubjectName= (TextView) result_row.findViewById(R.id.tvSubjectName);
+        TextView tvExamID= (TextView) result_row.findViewById(R.id.tvExamID);
+        TextView tvMark= (TextView) result_row.findViewById(R.id.tvMark);
+        TextView tvDocument= (TextView) result_row.findViewById(R.id.tvDocument);
+
+        tvStudentId.setText(listStudentId[position]);
+        tvSubjectName.setText(listSubjectName[position]);
+        tvExamID.setText(listExamID[position]);
+        tvMark.setText(listMark[position]);
+        tvDocument.setText(listDocument[position]);
+
+        return result_row;
     }
 }
