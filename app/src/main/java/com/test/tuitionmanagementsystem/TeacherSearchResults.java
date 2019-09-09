@@ -35,6 +35,7 @@ public class TeacherSearchResults extends AppCompatActivity {
     Button buttonSearchResults;
     EditText  examIDforSearch, studentIDforSearch;
     TextView tvSid, tvMark, tvSubName;
+    Button btnViewAllResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,8 @@ public class TeacherSearchResults extends AppCompatActivity {
         tvSid = findViewById(R.id.tvSid);
         tvMark = findViewById(R.id.tvMark);
         tvSubName = findViewById(R.id.tvSubName);
+
+        btnViewAllResults = findViewById(R.id.btnViewAllResults);
 
         buttonSearchResults.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +133,21 @@ public class TeacherSearchResults extends AppCompatActivity {
         });
 
 
+        btnViewAllResults.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                String t = "teacher";
+                Intent i = new Intent(getApplicationContext(),TeacherViewAllResults.class);
+                i.putExtra("ID",id);
+                i.putExtra("Name",name);
+                i.putExtra("Type",t);
+                startActivity(i);
+
+
+
+            }
+        });
 
 
 

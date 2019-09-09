@@ -180,4 +180,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.617" />
 
+    <Button
+        android:id="@+id/btnViewAllResults"
+        android:layout_width="275dp"
+        android:layout_height="47dp"
+        android:text="View Results of All Students"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.94" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
