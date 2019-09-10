@@ -16,8 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ViewStudentDetails extends AppCompatActivity {
-
+public class views_studentdetails extends AppCompatActivity {
 
     Button btnUpdate;
     Button btnDelete;
@@ -26,7 +25,8 @@ public class ViewStudentDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_student_details);
+        setContentView(R.layout.activity_views_studentdetails);
+
 
         final EditText t0 = findViewById(R.id.SearchID);
         final EditText t2 = findViewById(R.id.SName2);
@@ -150,10 +150,8 @@ public class ViewStudentDetails extends AppCompatActivity {
 
 
 
-        }
-
-
     }
 
 
+}
 

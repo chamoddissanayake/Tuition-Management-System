@@ -39,7 +39,7 @@ public class Register_n_View extends AppCompatActivity {
     Editbtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent i = new Intent(getApplicationContext(),ViewStudentDetails.class);
+            Intent i = new Intent(getApplicationContext(), views_studentdetails.class);
             i.putExtra("ID",ID);
             i.putExtra("Name",Name);
             i.putExtra("Type",type);
