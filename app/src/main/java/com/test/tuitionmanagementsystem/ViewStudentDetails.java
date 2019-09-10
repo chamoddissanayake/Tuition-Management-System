@@ -29,6 +29,7 @@ public class ViewStudentDetails extends AppCompatActivity {
         final EditText t4 = findViewById(R.id.ContactNo1);
         final TextView t5 = findViewById(R.id.txtID);
         Button btn1 = findViewById(R.id.btnSearch);
+        Button btn2 = findViewById(R.id.buttonUpdate);
 
         btn1.setOnClickListener(new View.OnClickListener() {
 
@@ -62,8 +63,45 @@ public class ViewStudentDetails extends AppCompatActivity {
                 });
             }
         });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+                public void onClick(View view) {
+                    DatabaseReference updateRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails");
+                    updateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            StudentDetails_tb std = new StudentDetails_tb();
+
+                            if(dataSnapshot.hasChild(t2.getText().toString())){
+
+                                std.setStudentName(t2.getText().toString());
+                                std.setAddress(t3.getText().toString());
+                                std.setTel(t4.getText().toString());
+
+                                DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails").child(t2.getText().toString());
+                                dbRef.setValue(std);
+
+                                Toast.makeText(getApplicationContext(),"Data updated successfully!",Toast.LENGTH_SHORT).show();
+
+                            }else{
+                                Toast.makeText(getApplicationContext(),"No sourse to update",Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            });
+
+        }
+
 
     }
-}
+
 
 
