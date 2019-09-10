@@ -1,4 +1,4 @@
-package com.test.tuitionmanagementsystem;
+/*package com.test.tuitionmanagementsystem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -96,4 +96,4 @@ class MyAdapter2 extends ArrayAdapter<String>{
 
         return frow;
     }
-}
+}*/
