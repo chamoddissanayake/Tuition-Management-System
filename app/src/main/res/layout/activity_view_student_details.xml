@@ -11,8 +11,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/bg"
         tools:context=".EditRegistration_Details"
-        tools:layout_editor_absoluteX="-121dp"
-        tools:layout_editor_absoluteY="22dp">
+        tools:layout_editor_absoluteX="49dp"
+        tools:layout_editor_absoluteY="144dp">
 
         <TextView
             android:id="@+id/tNamelbl"
@@ -73,10 +73,10 @@
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.975"
+            app:layout_constraintHorizontal_bias="0.907"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.282" />
+            app:layout_constraintVertical_bias="0.276" />
 
         <TextView
             android:id="@+id/textView13"
@@ -92,7 +92,7 @@
             app:layout_constraintHorizontal_bias="0.071"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.637" />
+            app:layout_constraintVertical_bias="0.597" />
 
         <EditText
             android:id="@+id/ContactNo1"
@@ -106,10 +106,10 @@
             android:inputType="phone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.156"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.608" />
+            app:layout_constraintVertical_bias="0.585" />
 
         <Button
             android:id="@+id/buttonUpdate"
@@ -172,15 +172,15 @@
             android:text="@string/search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.105"
+            app:layout_constraintHorizontal_bias="0.213"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.161" />
+            app:layout_constraintVertical_bias="0.144" />
 
         <EditText
             android:id="@+id/SearchID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="204dp"
+            android:layout_height="37dp"
             android:layout_marginTop="110dp"
             android:layout_marginEnd="41dp"
             android:ems="10"
@@ -200,18 +200,22 @@
             android:text="StudentID"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.081"
+            app:layout_constraintHorizontal_bias="0.072"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.444" />
+            app:layout_constraintVertical_bias="0.434" />
 
         <TextView
             android:id="@+id/textView35"
             android:layout_width="91dp"
             android:layout_height="50dp"
             android:text="@string/address"
-            tools:layout_editor_absoluteX="22dp"
-            tools:layout_editor_absoluteY="340dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.106"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.488" />
 
         <EditText
             android:id="@+id/address"
@@ -222,25 +226,48 @@
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.927"
+            app:layout_constraintHorizontal_bias="0.881"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.997" />
+            app:layout_constraintVertical_bias="0.925" />
 
         <TextView
             android:id="@+id/txtID"
             android:layout_width="147dp"
             android:layout_height="38dp"
             android:layout_marginStart="218dp"
-            android:layout_marginTop="279dp"
             android:layout_marginEnd="134dp"
             android:layout_marginBottom="433dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.113"
+            app:layout_constraintHorizontal_bias="0.272"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.578" />
+            app:layout_constraintVertical_bias="0.965" />
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/UpdateHomework"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.291"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.85" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/DeleteHomework"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.659"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.85" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
