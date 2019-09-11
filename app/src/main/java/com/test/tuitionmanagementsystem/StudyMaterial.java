@@ -30,11 +30,11 @@ public class StudyMaterial extends AppCompatActivity {
         btnHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(type =="student"){
+                if(type.equals("student") ){
                     Intent i1 = new Intent(StudyMaterial.this,Todolist.class);
                     startActivity(i1);
-                }else if(type =="teacher"){
-                    Intent i2 = new Intent(StudyMaterial.this,Homework.class);
+                }else if(type.equals("teacher") ){
+                    Intent i2 = new Intent(StudyMaterial.this,homeworkdashboard.class);
                     startActivity(i2);
                 }
 
@@ -44,7 +44,7 @@ public class StudyMaterial extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(type =="teacher"){
+                if(type.equals("teacher")){
                     Intent i1 = new Intent(StudyMaterial.this,tutorialUploader.class);
                     startActivity(i1);
                 }
