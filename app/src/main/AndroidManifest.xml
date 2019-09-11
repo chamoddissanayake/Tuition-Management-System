@@ -20,6 +20,7 @@
         <activity android:name=".MainFeedback" />
         <activity android:name=".TeacherRegistration" />
         <activity android:name=".ContactUs" />
+        <activity android:name=".views_studentdetails" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
