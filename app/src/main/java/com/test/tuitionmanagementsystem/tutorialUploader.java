@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -16,8 +17,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -32,6 +36,8 @@ public class tutorialUploader extends AppCompatActivity {
 
     FirebaseStorage storage;
     FirebaseDatabase database;
+    ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,15 +83,34 @@ public class tutorialUploader extends AppCompatActivity {
 
     private void uploadFile(Uri pdfUri) {
 
-        String fileName = System.currentTimeMillis()+"";
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+
+        final String fileName = System.currentTimeMillis()+"";
         StorageReference storageReference = storage.getReference();
 
-        storageReference.child("Uploads").child(fileName).putFile(pdfUri)
+         storageReference.child("Uploads").child(fileName).putFile(pdfUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                     //   String url = taskSnapshot.
+//                        String url = taskSnapshot.getDownloadUrl().toString();
+//
+//                        DatabaseReference reference = database.getReference();
+//
+//                        reference.child(fileName).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Void> task) {
+//
+//                                if(task.isSuccessful())
+//                                    Toast.makeText(tutorialUploader.this, "File successfully uploaded", Toast.LENGTH_SHORT).show();
+//                                else
+//                                    Toast.makeText(tutorialUploader.this, "File not successfully uploaded",Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+                        Toast.makeText(tutorialUploader.this, "Uploaded Successfully.", Toast.LENGTH_SHORT).show();
+
+                        String url = FirebaseStorage.getInstance().getReference().child("Uploads").child(fileName).getDownloadUrl().toString();
 
 
 
@@ -93,6 +118,8 @@ public class tutorialUploader extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+
+                Toast.makeText(tutorialUploader.this, "File not successfully uploaded", Toast.LENGTH_SHORT).show();
 
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
