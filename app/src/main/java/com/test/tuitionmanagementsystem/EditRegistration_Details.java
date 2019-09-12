@@ -40,7 +40,7 @@ public class EditRegistration_Details extends AppCompatActivity {
 //        Toast.makeText(getApplicationContext()," "+UserID+" "+UserName+" "+UserType,Toast.LENGTH_LONG).show();
 
         EditText t1 = (EditText) findViewById(R.id.SName2);
-        EditText t2 = (EditText) findViewById(R.id.AdmissionNo2);
+        TextView t2 = (EditText) findViewById(R.id.Address);
         EditText t3 = (EditText) findViewById(R.id.Address2);
         EditText t4 = (EditText) findViewById(R.id.ContactNo1);
 
@@ -59,16 +59,12 @@ public class EditRegistration_Details extends AppCompatActivity {
             t3.setText(s3);
             t4.setText(s4);
         }else if(UserType.equals("student")){
-            t1.setText(UserName);
-            t2.setText("S001");
-            t2.setEnabled(false);
-            t3.setText("No.10, Kandy Road, Kadawatha");
-            t4.setText("0771234567");
+
 
         }
 
         etName = (EditText) findViewById(R.id.SName2);
-        etAdmissionNo = (EditText) findViewById(R.id.AdmissionNo2);
+        etAdmissionNo = (EditText) findViewById(R.id.Address);
         etAddress = (EditText) findViewById(R.id.Address2);
         etContact = (EditText) findViewById(R.id.ContactNo1);
 

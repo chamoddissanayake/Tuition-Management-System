@@ -65,8 +65,10 @@ public class TeacherDashboard extends AppCompatActivity {
         FeedbackNotificationMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),ViewFeedback.class);
+                Intent i = new Intent(getApplicationContext(),ViewAllFeedbacks.class);
                 startActivity(i);
+
+
             }
         });
 
@@ -74,7 +76,7 @@ public class TeacherDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String t = "teacher";
-                Intent i = new Intent(getApplicationContext(),Homework.class);
+                Intent i = new Intent(getApplicationContext(),StudyMaterial.class);
                 i.putExtra("ID",tID);
                 i.putExtra("Name",tName);
                 i.putExtra("Type",t);

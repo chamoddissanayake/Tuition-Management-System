@@ -1,17 +1,27 @@
 package com.test.tuitionmanagementsystem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.RotateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -21,70 +31,124 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
 public class TeacherSearchResults extends AppCompatActivity {
     TextView TeacherName, TeacherID;
-    TextView StudentIDforSearchResults;
+    String name, id;
     Button buttonSearchResults;
-    String studentIDforSearchR;
-    private  static final String TAG = "TeacherSearchResults";
-
-    static String[][] resultTable ={
-            {"S001","Vimukthi","Science","E001","78"},
-            {"S002","Muditha","Science","E001","66"},
-            {"S003","Buddhika","Science","E001","90"},
-            {"S004","Amila","Science","E001","82"},
-            {"S005","Dilshan","Science","E001","52"},
-            {"S006","Gayan","Science","E001","67"},
-            {"S007","Sameera","Science","E001","71"},
-            {"S008","Thilina","Science","E001","88"},
-            {"S009","Savindu","Science","E001","44"},
-            {"S010","Pubudu","Science","E001","100"},
-            {"S011","Kanishka","Science","E001","62"},
-    };
-    static String[] resultTableHeaders={"No","Name","Subject","ExamID","Mark"};
+    EditText  examIDforSearch, studentIDforSearch;
+    TextView tvSid, tvMark, tvSubName;
+    Button btnViewAllResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //block screen rotation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_search_results);
-        Log.d(TAG, "onCreate: Started.");
 
         Intent intent = getIntent();
-        final String tID = intent.getStringExtra("tID");
-        final String tName = intent.getStringExtra("tName");
+        name = intent.getStringExtra("tID");
+        id = intent.getStringExtra("tName");
 
         TeacherName = (TextView) findViewById(R.id.tNamelbl);
         TeacherID = (TextView) findViewById(R.id.tIDlbl);
 
-        TeacherName.setText(tName);
-        TeacherID.setText(tID);
+        TeacherName.setText(name);
+        TeacherID.setText(id);
 
-        StudentIDforSearchResults = (TextView) findViewById(R.id.studentIDforSearch);
+        studentIDforSearch = (EditText) findViewById(R.id.studentIDforSearch);
+        examIDforSearch = (EditText)findViewById(R.id.examIDforSearch);
         buttonSearchResults = (Button) findViewById(R.id.btnSearchResult);
 
-        studentIDforSearchR = StudentIDforSearchResults.getText().toString();
+
+        tvSid = findViewById(R.id.tvSid);
+        tvMark = findViewById(R.id.tvMark);
+        tvSubName = findViewById(R.id.tvSubName);
+
+        btnViewAllResults = findViewById(R.id.btnViewAllResults);
 
         buttonSearchResults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(studentIDforSearchR.equals("")){
+                if(TextUtils.isEmpty(studentIDforSearch.getText().toString() )){
                     Toast.makeText(getApplicationContext(),"Student ID is empty",Toast.LENGTH_SHORT).show();
+                }else if(TextUtils.isEmpty(examIDforSearch.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Exam ID is empty",Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(getApplicationContext(),"Search clicked",Toast.LENGTH_SHORT).show();
+                    final String sid = studentIDforSearch.getText().toString();
+                    final String eId = examIDforSearch.getText().toString();
+
+//                    Toast.makeText(getApplicationContext(),"Search clicked"+sid+""+eId,Toast.LENGTH_SHORT).show();
+
+                    DatabaseReference dbRefSearchSpecificResult = FirebaseDatabase.getInstance().getReference().child("Student_take_exam");
+                    dbRefSearchSpecificResult.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.hasChild(eId)){
+                                if(dataSnapshot.child(eId).hasChild(sid)){
+                                    //Retrieve data - start
+                                    DatabaseReference dbRefSearchresult = FirebaseDatabase.getInstance().getReference().child("Student_take_exam").child(eId).child(sid);
+
+                                    dbRefSearchresult.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            String exam_ID = dataSnapshot.child("examID").getValue().toString();
+                                            String mark = dataSnapshot.child("mark").getValue().toString();
+                                            String student_ID = dataSnapshot.child("sID").getValue().toString();
+                                            String subject_Name = dataSnapshot.child("subName").getValue().toString();
+                                            String document_Link = dataSnapshot.child("documentLink").getValue().toString();
+
+                                            tvSid.setText(student_ID);
+                                            tvMark.setText(mark);
+                                            tvSubName.setText(subject_Name);
+
+//                                            Toast.makeText(getApplicationContext(), ""+exam_ID+mark+student_ID+subject_Name+document_Link, Toast.LENGTH_SHORT).show();
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+                                    //Retrieve data - end
+                                }else{
+                                    Toast.makeText(getApplicationContext(),"Student not found",Toast.LENGTH_LONG).show();
+                                }
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Exam not found",Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+
+
                 }
 
             }
         });
 
 
+        btnViewAllResults.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        final TableView<String[]> tableView = (TableView<String[]>) findViewById(R.id.tblResults);
-        tableView.setColumnCount(5);
+                String t = "teacher";
+                Intent i = new Intent(getApplicationContext(),TeacherViewAllResults.class);
+                i.putExtra("ID",id);
+                i.putExtra("Name",name);
+                i.putExtra("Type",t);
+                startActivity(i);
 
-        tableView.setBackgroundColor(Color.parseColor("#ADD8E6"));
-        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(this,resultTableHeaders));
-        tableView.setColumnCount(5);
 
-        tableView.setDataAdapter(new SimpleTableDataAdapter(TeacherSearchResults.this,resultTable));
+
+            }
+        });
+
 
 
     }
