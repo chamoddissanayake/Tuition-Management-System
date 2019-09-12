@@ -29,9 +29,9 @@ public class ViewStudentDetails extends AppCompatActivity {
         setContentView(R.layout.activity_view_student_details);
 
         final EditText t0 = findViewById(R.id.SearchID);
-        final EditText t2 = findViewById(R.id.SName2);
+        final EditText t2 = findViewById(R.id.etAdmissionNo);
         final EditText t3 = findViewById(R.id.address);
-        final EditText t4 = findViewById(R.id.ContactNo1);
+        final EditText t4 = findViewById(R.id.etContactNo);
         final TextView t5 = findViewById(R.id.txtID);
         btnUpdate = (Button) findViewById(R.id.btnUpdate);
         btnDelete = (Button) findViewById(R.id.btnDelete);
