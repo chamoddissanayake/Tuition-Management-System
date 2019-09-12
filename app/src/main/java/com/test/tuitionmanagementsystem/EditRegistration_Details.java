@@ -26,7 +26,7 @@ public class EditRegistration_Details extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_registration__details);
+                setContentView(R.layout.activity_edit_registration__details);
 
        // Intent intent = getIntent();
 
@@ -41,8 +41,37 @@ public class EditRegistration_Details extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                DatabaseReference updateRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails");
+                updateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                        StudentDetails_tb std = new StudentDetails_tb();
 
+                        if(dataSnapshot.hasChild(etName.getText().toString())){
+
+                            std.setStudentName(etName.getText().toString());
+                            std.setAddress(etAddress.getText().toString());
+                            std.setTel(etContactNo.getText().toString());
+                            std.setAdmissionNo(etAdmissionNo.getText().toString());
+
+                            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails").child(etName.getText().toString());
+                            dbRef.setValue(std);
+
+                            Toast.makeText(getApplicationContext(),"Data updated successfully!",Toast.LENGTH_SHORT).show();
+
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),"No sourse to update",Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
 
             }
