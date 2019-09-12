@@ -74,7 +74,8 @@ public class searchFeedback extends AppCompatActivity {
                         FeedbackTable ft = new FeedbackTable();
 
                         if(dataSnapshot.hasChild(t2.getText().toString())){
-
+                            ft.setFid(t2.getText().toString());
+                            ft.setSid(t3.getText().toString());
                             ft.setsName(t4.getText().toString());
                             ft.setSubject(t5.getText().toString());
                             ft.setFeedback(t6.getText().toString());
