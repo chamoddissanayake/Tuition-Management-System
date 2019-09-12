@@ -26,5 +26,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="View Details" />
+
+        <Button
+            android:id="@+id/btnAllview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/View_All_studentDetails" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

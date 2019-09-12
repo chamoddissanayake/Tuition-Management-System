@@ -15,8 +15,6 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
-
 public class StudentRegistration extends AppCompatActivity {
 
     TextView tx1, tx2;
@@ -45,7 +43,7 @@ public class StudentRegistration extends AppCompatActivity {
         T1 = (EditText) findViewById(R.id.sName);
         T2 = (EditText) findViewById(R.id.AdmissionNo);
         T3 = (EditText) findViewById(R.id.Address);
-        T4 = (EditText) findViewById(R.id.ContactNo1);
+        T4 = (EditText) findViewById(R.id.etContactNo);
 
         tx1 = findViewById(R.id.tNamelbl);
         tx2 = findViewById(R.id.tIDlbl);
