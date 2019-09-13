@@ -100,6 +100,8 @@ public class TeacherRegistration extends AppCompatActivity {
                     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("Teacher");
                     Teacher teacherobj = new Teacher();
 
+                    uploadPhoto();
+
                     teacherobj.setTid(TID);
                     teacherobj.settName(TName);
                     teacherobj.setNic(Nic);
@@ -107,7 +109,7 @@ public class TeacherRegistration extends AppCompatActivity {
                     teacherobj.setTel(Phone);
                     teacherobj.setEmail(Email);
                     teacherobj.setSpecialized_subject(Specialized);
-                    teacherobj.setPhotoLink("aaaa");
+                    teacherobj.setPhotoLink("");
 
                     dbRef.child(teacherobj.getTid()).setValue(teacherobj);
 
@@ -122,10 +124,6 @@ public class TeacherRegistration extends AppCompatActivity {
                     dbRef2.child(teacherobj.getTid()).setValue(credentialsObj);
 
                     Toast.makeText(getApplicationContext(),"Teacher Registered Successfully.",Toast.LENGTH_SHORT).show();
-
-
-                    uploadPhoto();
-
 
                 }
 
@@ -152,14 +150,14 @@ public class TeacherRegistration extends AppCompatActivity {
     private void uploadPhoto() {
         Long currentTime = System.currentTimeMillis();
 
-        StorageReference riversRef = mStorageRef.child("images/"+currentTime+".jpg");
+        StorageReference teacherRef = mStorageRef.child("TeacherPhotos/"+currentTime+".jpg");
 
-        riversRef.putFile(imguri)
+        teacherRef.putFile(imguri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         // Get a URL to the uploaded content
-                        //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+//                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
                         Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
                     }
                 })
