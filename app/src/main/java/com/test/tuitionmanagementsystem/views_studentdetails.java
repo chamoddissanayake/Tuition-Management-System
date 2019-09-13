@@ -31,7 +31,6 @@ public class views_studentdetails extends AppCompatActivity {
 
     EditText AdmissionNo, sName, ContactNo, Address;
     EditText etSearchID;
-    String photo_Link;
 
     ImageView userPhoto;
 
@@ -39,6 +38,8 @@ public class views_studentdetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_views_studentdetails);
+
+        String photo_Link;
 
         AdmissionNo = (EditText) findViewById(R.id.etAdmissionNo);
         sName = (EditText) findViewById(R.id.etsName);
@@ -69,7 +70,7 @@ public class views_studentdetails extends AppCompatActivity {
                 }else{
                     //fetch data and fill in EditTexts
                     fillStudentData();
-                    fillImage();
+
                 }
 
             }
@@ -177,6 +178,7 @@ public class views_studentdetails extends AppCompatActivity {
         });
     }
 
+    String photo_Link;
     private void fillStudentData() {
         DatabaseReference readRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails").child(etSearchID.getText().toString());
         readRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -190,6 +192,8 @@ public class views_studentdetails extends AppCompatActivity {
                     ContactNo.setText(dataSnapshot.child("tel").getValue().toString());
                     photo_Link = dataSnapshot.child("photoLink").getValue().toString().trim();
                     //Fetch Photo link
+
+                    fillImage();
 
                     AdmissionNo.setEnabled(false);
                     sName.setEnabled(true);

@@ -29,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -57,11 +59,12 @@ public class StudentRegistration extends AppCompatActivity {
     DatabaseReference dbRef;
 
     private StorageTask uploadTask;
-    public String completeImagePath="";
 
     String ID = "";
     String Name = "";
     String Type = "";
+
+    String completeImagePath="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,47 +181,47 @@ public class StudentRegistration extends AppCompatActivity {
             mStorageRef = FirebaseStorage.getInstance().getReference();
             String tempFileName= currentTime + "." + getExtension(imguri);
             final StorageReference  Ref = mStorageRef.child("StudentPhotos").child(tempFileName);
- //           completeImagePath = Ref.getBucket()+Ref.getPath();
-            completeImagePath = Ref.toString();
-
-            uploadTask = Ref.putFile(imguri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(getApplicationContext(),"Image uploaded successfully",Toast.LENGTH_SHORT).show();
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getApplicationContext(),"Error while uploading image.",Toast.LENGTH_SHORT).show();
-                }
-            });
-
-
-
-
-//        File file = new File(String.valueOf(imguri));
-//        FirebaseStorage storage = FirebaseStorage.getInstance();
-//        StorageReference storageRef = storage.getReference().child("StudentPhotos");
+// //           completeImagePath = Ref.getBucket()+Ref.getPath();
+//            completeImagePath = Ref.toString();
 //
-//        storageRef.child(tempFileName).putFile(imguri)
-//                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                    @Override
-//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                        Toast.makeText(getApplicationContext(), "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
-//                        Task<Uri> downloadUri = taskSnapshot.getStorage().getDownloadUrl();
+//            uploadTask = Ref.putFile(imguri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                    Toast.makeText(getApplicationContext(),"Image uploaded successfully",Toast.LENGTH_SHORT).show();
 //
-//                        if(downloadUri.isSuccessful()){
-//                            completeImagePath = downloadUri.getResult().toString();
-//                        }
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Toast.makeText(getApplicationContext(),"",Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception e) {
+//                    Toast.makeText(getApplicationContext(),"Error while uploading image.",Toast.LENGTH_SHORT).show();
+//                }
+//            });
+            uploadTask = Ref.putFile(imguri);
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                // Continue with the task to get the download URL
+                return Ref.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    completeImagePath = task.getResult().toString();
+                    // cant change value of  'completeImagePath' from here.????
+
+                } else {
+                    // Handle failures
+                    // ...
+                }
+            }
+        });
+
     }
 
 
