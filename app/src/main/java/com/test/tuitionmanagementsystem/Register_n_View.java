@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class Register_n_View extends AppCompatActivity {
 
-    Button Register, Editbtn;
+    Button Register, Editbtn, btnViewAll;
     String ID = "";
     String Name = "";
     String type="";
@@ -25,6 +25,7 @@ public class Register_n_View extends AppCompatActivity {
 
         Register = (Button) findViewById(R.id.btnRegister);
         Editbtn = (Button) findViewById(R.id.btnView);
+        btnViewAll = findViewById(R.id.btnAllview);
 
     Register.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -46,6 +47,17 @@ public class Register_n_View extends AppCompatActivity {
             startActivity(i);
         }
     });
+
+        btnViewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), AllStudents.class);
+                i.putExtra("ID",ID);
+                i.putExtra("Name",Name);
+                i.putExtra("Type",type);
+                startActivity(i);
+            }
+        });
 
     }
 
