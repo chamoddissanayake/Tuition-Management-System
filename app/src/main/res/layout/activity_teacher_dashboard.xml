@@ -7,7 +7,7 @@
     tools:context=".TeacherDashboard"
     android:padding="30dp"
     android:orientation="vertical"
-    android:background="@drawable/wallpaper"
+    android:background="@drawable/wallpaper1"
     >
 
     <ScrollView

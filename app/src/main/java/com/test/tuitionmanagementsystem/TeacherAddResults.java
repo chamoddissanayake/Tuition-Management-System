@@ -109,9 +109,4 @@ public class TeacherAddResults extends AppCompatActivity {
         //Get Specialized subject of the logged in teacher. - end
     }
 
-    public void addtoDB(View view) {
-
-        DatabaseReference dbref;
-
-    }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".TeacherAddResults"
     android:orientation="vertical"
-    android:background="@drawable/wallpaper"
+    android:background="@drawable/wallpaper1"
     >
 
 
@@ -194,18 +194,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.764"
         android:background="#24A0ED"
-        />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="36dp"
-        android:text="Add Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:onClick="addtoDB"
         />
 
 

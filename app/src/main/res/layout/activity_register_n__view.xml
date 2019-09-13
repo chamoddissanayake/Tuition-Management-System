@@ -14,7 +14,7 @@
         android:text="Student Management"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="20dp"
+        android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,18 +34,23 @@
             android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#239BFF"
             android:text="Register" />
 
         <Button
             android:id="@+id/btnView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="View Details" />
+            android:background="#239BFF"
+            android:text="View Details"
+            android:layout_marginTop="10dp"/>
 
         <Button
             android:id="@+id/btnAllview"
             android:layout_width="match_parent"
+            android:background="#239BFF"
             android:layout_height="wrap_content"
-            android:text="@string/View_All_studentDetails" />
+            android:text="@string/View_All_studentDetails"
+            android:layout_marginTop="10dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

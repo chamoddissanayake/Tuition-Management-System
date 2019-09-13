@@ -192,6 +192,6 @@ public class TeacherUpdateDeleteResults extends AppCompatActivity {
         DatabaseReference readref_subject_of_the_teacher = FirebaseDatabase.getInstance().getReference().child("Teacher");
         readref_subject_of_the_teacher.addListenerForSingleValueEvent(new TeacherSubjectListner(getApplicationContext(),teacherObj,studentIDspn,ResultExamIDspn,TeacherSubject));
         //Get Specialized subject of the logged in teacher. - end
-        Toast.makeText(this, teacherObj.getSpecialized_subject()+"", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, teacherObj.getSpecialized_subject()+"", Toast.LENGTH_SHORT).show();
     }
 }

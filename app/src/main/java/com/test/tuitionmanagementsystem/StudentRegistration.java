@@ -213,7 +213,7 @@ public class StudentRegistration extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
                     completeImagePath = task.getResult().toString();
-                    // cant change value of  'completeImagePath' from here.????
+                    // cant change value of  'completeImagePath' ????
 
                 } else {
                     // Handle failures
@@ -221,7 +221,6 @@ public class StudentRegistration extends AppCompatActivity {
                 }
             }
         });
-
     }
 
 

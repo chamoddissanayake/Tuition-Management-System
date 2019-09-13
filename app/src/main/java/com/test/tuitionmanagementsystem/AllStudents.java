@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,17 +47,6 @@ public class AllStudents extends AppCompatActivity {
         address = new ArrayList<String>();
         telephone = new ArrayList<String>();
         photo_link = new ArrayList<String>();
-
-        studentID.add("S001");studentID.add("S002");studentID.add("S003");studentID.add("S004");studentID.add("S005");
-        studentName.add("Saman");studentName.add("Isuru");studentName.add("Gayan");studentName.add("Sahan");studentName.add("Silva");
-        address.add("Colombo");address.add("Galle");address.add("Gampaha");address.add("Kandy");address.add("Kurunegala");
-        telephone.add("0771234561");telephone.add("0771234562");telephone.add("0771234563");telephone.add("0771234564");telephone.add("0771234565");
-        photo_link.add("");
-        photo_link.add("");
-        photo_link.add("");
-        photo_link.add("");
-        photo_link.add("");
-
 
         final ArrayList<String> StudentStrList = new ArrayList<>();
         DatabaseReference readRef1 = FirebaseDatabase.getInstance().getReference().child("StudentDetails");
@@ -148,7 +138,9 @@ class MyStudentAdapter extends ArrayAdapter<String> {
         tvTelephone.setText(telephone.get(position).toString());
 
         //Photo add to imageview here
-
+        Glide.with(context)
+                .load(photo_link.get(position).toString())
+                .into(stdPhoto);
         return stdrow;
     }
     MyStudentAdapter(Context c,ArrayList studentID, ArrayList studentName, ArrayList address, ArrayList telephone, ArrayList photo_link){
