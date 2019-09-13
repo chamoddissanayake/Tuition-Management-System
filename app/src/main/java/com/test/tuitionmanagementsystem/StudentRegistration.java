@@ -165,7 +165,22 @@ public class StudentRegistration extends AppCompatActivity {
             }
         });
 
+
+        btnChoosePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FileChooser();
+            }
+        });
+
         //End of onCreate()
+    }
+
+    private void FileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,1);
     }
 
     private void clearTextboxes() {
@@ -181,14 +196,11 @@ public class StudentRegistration extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-//        if(requestCode==1 && resultCode==RESULT_OK && data !=  null && data.getData() != null){
-//            imguri = data.getData();
-//            imgViewInputPhoto.setImageURI(imguri);
-//
-//
-//
-//        }else
-        if(requestCode==0 ){
+        if(requestCode==1 && resultCode==RESULT_OK && data !=  null && data.getData() != null){
+            imguri = data.getData();
+            imgViewInputPhoto.setImageURI(imguri);
+
+        }else if(requestCode==0 ){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imgViewInputPhoto.setImageBitmap(bitmap);
             imguri = getImageUri(getApplicationContext(),bitmap);
