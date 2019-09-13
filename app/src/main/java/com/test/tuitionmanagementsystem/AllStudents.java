@@ -13,6 +13,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -50,8 +57,66 @@ public class AllStudents extends AppCompatActivity {
         photo_link.add("");
         photo_link.add("");
 
-        MyStudentAdapter adapter = new MyStudentAdapter(this,studentID,studentName,address,telephone,photo_link);
-        stdListview.setAdapter(adapter);
+
+        final ArrayList<String> StudentStrList = new ArrayList<>();
+        DatabaseReference readRef1 = FirebaseDatabase.getInstance().getReference().child("StudentDetails");
+        readRef1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                    String StudentStr = dsp.getKey();
+                    StudentStrList.add(StudentStr);
+                }
+                for(int i =0 ; i<StudentStrList.size(); i++){
+                    DatabaseReference readRef2 = FirebaseDatabase.getInstance().getReference().child("StudentDetails").child(StudentStrList.get(i));
+
+                    readRef2.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            String strSid, strName, strAddress, strPhotoLink , strTel;
+
+                            strSid = dataSnapshot.child("admissionNo").getValue().toString();
+                            strName = dataSnapshot.child("studentName").getValue().toString();
+                            strAddress = dataSnapshot.child("address").getValue().toString();
+                            strPhotoLink = dataSnapshot.child("photoLink").getValue().toString();
+                            strTel = dataSnapshot.child("tel").getValue().toString();
+
+                            studentID.add(strSid);
+                            studentName.add(strName);
+                            address.add(strAddress);
+                            telephone.add(strTel);
+                            photo_link.add(strPhotoLink);
+
+                            MyStudentAdapter adapter = new MyStudentAdapter(getApplicationContext(),studentID,studentName,address,telephone,photo_link);
+                            stdListview.setAdapter(adapter);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
 
     }
 }
