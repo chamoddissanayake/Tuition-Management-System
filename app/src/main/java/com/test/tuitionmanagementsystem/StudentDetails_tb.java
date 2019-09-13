@@ -6,6 +6,7 @@ public class StudentDetails_tb {
     private String AdmissionNo;
     private String address;
     private  String tel;
+    private  String photoLink;
 
     public StudentDetails_tb() {
     }
@@ -40,5 +41,13 @@ public class StudentDetails_tb {
 
     public void setTel(String tel) {
         this.tel = tel;
+    }
+
+    public String getPhotoLink() {
+        return photoLink;
+    }
+
+    public void setPhotoLink(String photoLink) {
+        this.photoLink = photoLink;
     }
 }

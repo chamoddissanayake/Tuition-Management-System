@@ -1,5 +1,6 @@
 package com.test.tuitionmanagementsystem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -28,10 +29,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 
@@ -48,7 +53,7 @@ public class StudentRegistration extends AppCompatActivity {
     DatabaseReference dbRef;
 
     private StorageTask uploadTask;
-    private String completeImagePath;
+    public String completeImagePath="";
 
     String ID = "";
     String Name = "";
@@ -106,37 +111,22 @@ public class StudentRegistration extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Please Re-Enter Password", Toast.LENGTH_SHORT).show();
                     else if (!etPassword.getText().toString().equals(etRePassword.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Password and Re-Password not equal", Toast.LENGTH_SHORT).show();
+                    else if (imgViewInputPhoto.getDrawable()==null)
+                        Toast.makeText(getApplicationContext(), "Please Take a photo of the Student from camera or choose existing image", Toast.LENGTH_SHORT).show();
                     else {
 
-                        //Register Student Details in 'StudentDetails'
+                        if(uploadTask !=null && uploadTask.isInProgress()){
+                            Toast.makeText(getApplicationContext(),"Please wait...",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(getApplicationContext(), "Uploading... ", Toast.LENGTH_LONG).show();
+                            uploadImage();
+                            //Register Student Details in 'StudentDetails'
+                            registerStudent();
+                            Toast.makeText(getApplicationContext(),"New Student was registered successfully.",Toast.LENGTH_LONG).show();
+                        }
 
-                        StudentDetails_tb stdtb1 = new StudentDetails_tb();
-                        dbRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails");
 
-                        stdtb1.setStudentName(etsName.getText().toString().trim());
-                        stdtb1.setAdmissionNo(etAdmissionNo.getText().toString().trim());
-                        stdtb1.setAddress(etAddress.getText().toString().trim());
-                        stdtb1.setTel(etContactNo.getText().toString().trim());
 
-                        dbRef.child(stdtb1.getAdmissionNo()).setValue(stdtb1);
-
-                        //Save Student credentials in 'StudentCredentials'
-
-                        StudentCredentials stdCredObj = new StudentCredentials();
-                        dbRef = FirebaseDatabase.getInstance().getReference().child("StudentCredentials");
-
-                        String saltPwd = PasswordUtils.getSalt(30);
-                        String getSecured = PasswordUtils.generateSecurePassword(etPassword.getText().toString(),saltPwd);
-                        stdCredObj.setsID(etAdmissionNo.getText().toString().trim());
-
-                        stdCredObj.setSalt(saltPwd);
-                        stdCredObj.setSecuredPassword(getSecured);
-
-                        dbRef.child(stdCredObj.getsID()).setValue(stdCredObj);
-
-                        Toast.makeText(getApplicationContext(), "Student Registered Successfully.", Toast.LENGTH_SHORT).show();
-
-                        clearTextboxes();
                     }
 
                 }
@@ -174,6 +164,67 @@ public class StudentRegistration extends AppCompatActivity {
         });
 
         //End of onCreate()
+    }
+
+    private void uploadImage() {
+
+
+            Long currentTime = System.currentTimeMillis();
+
+            mStorageRef = FirebaseStorage.getInstance().getReference();
+
+            final StorageReference  Ref = mStorageRef.child("StudentPhotos").child(currentTime + "." + getExtension(imguri));
+ //           completeImagePath = Ref.getBucket()+Ref.getPath();
+            completeImagePath = Ref.toString();
+
+            //  Toast.makeText(getApplicationContext(),""+completePath,Toast.LENGTH_LONG).show();
+
+
+            uploadTask = Ref.putFile(imguri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                  //  Toast.makeText(getApplicationContext(),"Image uploaded successfully",Toast.LENGTH_SHORT).show();
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(),"Error while uploading image.",Toast.LENGTH_SHORT).show();
+                }
+            });
+
+    }
+
+    private void registerStudent() {
+
+        StudentDetails_tb stdtb1 = new StudentDetails_tb();
+        dbRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails");
+
+        stdtb1.setStudentName(etsName.getText().toString().trim());
+        stdtb1.setAdmissionNo(etAdmissionNo.getText().toString().trim());
+        stdtb1.setAddress(etAddress.getText().toString().trim());
+        stdtb1.setTel(etContactNo.getText().toString().trim());
+        stdtb1.setPhotoLink(completeImagePath);
+
+        dbRef.child(stdtb1.getAdmissionNo()).setValue(stdtb1);
+
+        //Save Student credentials in 'StudentCredentials'
+
+        StudentCredentials stdCredObj = new StudentCredentials();
+        dbRef = FirebaseDatabase.getInstance().getReference().child("StudentCredentials");
+
+        String saltPwd = PasswordUtils.getSalt(30);
+        String getSecured = PasswordUtils.generateSecurePassword(etPassword.getText().toString(),saltPwd);
+        stdCredObj.setsID(etAdmissionNo.getText().toString().trim());
+
+        stdCredObj.setSalt(saltPwd);
+        stdCredObj.setSecuredPassword(getSecured);
+
+        dbRef.child(stdCredObj.getsID()).setValue(stdCredObj);
+
+        Toast.makeText(getApplicationContext(), "Student Registered Successfully.", Toast.LENGTH_SHORT).show();
+
+        clearTextboxes();
     }
 
     private void FileChooser() {
