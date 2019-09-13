@@ -18,10 +18,12 @@ import com.google.firebase.database.FirebaseDatabase;
 public class StudentRegistration extends AppCompatActivity {
 
     TextView tx1, tx2;
-    EditText T1;
-    EditText T2;
-    EditText T3;
-    EditText T4;
+//    EditText T1;
+//    EditText T2;
+//    EditText T3;
+//    EditText T4;
+    EditText etsName, etAdmissionNo, etAddress, etContactNo, etPassword, etRePassword;
+
     Button btnSave;
     DatabaseReference dbRef;
 
@@ -40,10 +42,12 @@ public class StudentRegistration extends AppCompatActivity {
         Name = intent.getStringExtra("Name");
         Type = intent.getStringExtra("Type");
 
-        T1 = (EditText) findViewById(R.id.sName);
-        T2 = (EditText) findViewById(R.id.AdmissionNo);
-        T3 = (EditText) findViewById(R.id.Address);
-        T4 = (EditText) findViewById(R.id.etContactNo);
+        etsName = (EditText) findViewById(R.id.etsName);
+        etAdmissionNo = (EditText) findViewById(R.id.etAdmissionNo);
+        etAddress = (EditText) findViewById(R.id.etAddress);
+        etContactNo = (EditText) findViewById(R.id.etContactNo);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        etRePassword = (EditText) findViewById(R.id.etRePassword);
 
         tx1 = findViewById(R.id.tNamelbl);
         tx2 = findViewById(R.id.tIDlbl);
@@ -56,36 +60,62 @@ public class StudentRegistration extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StudentDetails_tb stdtb1 = new StudentDetails_tb();
-                dbRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails");
+
 
                 try {
 
-                    if (TextUtils.isEmpty(T1.getText().toString()))
+                    if (TextUtils.isEmpty(etsName.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_SHORT).show();
-                    else if (TextUtils.isEmpty(T2.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Please Enter the Admission No", Toast.LENGTH_SHORT).show();
-                    else if (TextUtils.isEmpty(T3.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Please Enter the Address", Toast.LENGTH_SHORT).show();
-
-
+                    else if (TextUtils.isEmpty(etAdmissionNo.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter Admission No", Toast.LENGTH_SHORT).show();
+                    else if (TextUtils.isEmpty(etAddress.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter Address", Toast.LENGTH_SHORT).show();
+                    else if (TextUtils.isEmpty(etContactNo.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter Contact Number", Toast.LENGTH_SHORT).show();
+                    else if (TextUtils.isEmpty(etPassword.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter Password", Toast.LENGTH_SHORT).show();
+                    else if (TextUtils.isEmpty(etRePassword.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Re-Enter Password", Toast.LENGTH_SHORT).show();
+                    else if (!etPassword.getText().toString().equals(etRePassword.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Password and Re-Password not equal", Toast.LENGTH_SHORT).show();
                     else {
-                        stdtb1.setStudentName(T1.getText().toString().trim());
-                        stdtb1.setAdmissionNo(T2.getText().toString().trim());
-                        stdtb1.setAddress(T3.getText().toString().trim());
-                        stdtb1.setTel(T4.getText().toString().trim());
 
+                        //Register Student Details in 'StudentDetails'
+
+                        StudentDetails_tb stdtb1 = new StudentDetails_tb();
+                        dbRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails");
+
+                        stdtb1.setStudentName(etsName.getText().toString().trim());
+                        stdtb1.setAdmissionNo(etAdmissionNo.getText().toString().trim());
+                        stdtb1.setAddress(etAddress.getText().toString().trim());
+                        stdtb1.setTel(etContactNo.getText().toString().trim());
 
                         dbRef.child(stdtb1.getAdmissionNo()).setValue(stdtb1);
 
-                        Toast.makeText(getApplicationContext(), "Data saves successfully", Toast.LENGTH_SHORT).show();
+                        //Save Student credentials in 'StudentCredentials'
 
+                        StudentCredentials stdCredObj = new StudentCredentials();
+                        dbRef = FirebaseDatabase.getInstance().getReference().child("StudentCredentials");
 
+                        String saltPwd = PasswordUtils.getSalt(30);
+                        String getSecured = PasswordUtils.generateSecurePassword(etPassword.getText().toString(),saltPwd);
+                        stdCredObj.setsID(etAdmissionNo.getText().toString().trim());
+
+                        stdCredObj.setSalt(saltPwd);
+                        stdCredObj.setSecuredPassword(getSecured);
+
+                        dbRef.child(stdCredObj.getsID()).setValue(stdCredObj);
+
+                        Toast.makeText(getApplicationContext(), "Student Registered Successfully.", Toast.LENGTH_SHORT).show();
+
+                        clearTextboxes();
                     }
 
                 }
                 catch ( NumberFormatException e){
-
+                    Toast.makeText(getApplicationContext(),"Error occurred."+e,Toast.LENGTH_LONG).show();
+                }catch ( Exception e){
+                    Toast.makeText(getApplicationContext(),"Error occurred."+e,Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -93,5 +123,14 @@ public class StudentRegistration extends AppCompatActivity {
 
         });
 
+    }
+
+    private void clearTextboxes() {
+        etsName.setText("");
+        etAdmissionNo.setText("");
+        etAddress.setText("");
+        etContactNo.setText("");
+        etPassword.setText("");
+        etRePassword.setText("");
     }
 }
