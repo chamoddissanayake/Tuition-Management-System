@@ -149,14 +149,19 @@ public class LoginActivity extends AppCompatActivity {
                         //   fetchStudentDataFromDB(usernameInput,userpasswordInput);    ->Return details of the student.
 
                         //Sample values
-                        String  StudentID = "S00001";
+                        String  StudentID = "S005";
                         String name = "Isuru";
-                        String year = "2019";
+                        String address = "Colombo";
+                        String tel = "0771234567";
+                        String photo_link ="hdfgdfgdggfd";
+
 
                         Intent i = new Intent(getApplicationContext(),StudentDashboard.class);
                         i.putExtra("StudentID",StudentID);
                         i.putExtra("sName",name);
-                        i.putExtra("year",year);
+                        i.putExtra("address",address);
+                        i.putExtra("tel",tel);
+                        i.putExtra("photo_link",photo_link);
                         startActivity(i);
 
                     }else{

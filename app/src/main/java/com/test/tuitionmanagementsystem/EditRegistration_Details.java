@@ -23,14 +23,22 @@ public class EditRegistration_Details extends AppCompatActivity {
 
     Button btnUpdate;
     EditText etName, etAdmissionNo, etAddress, etContactNo;
-    String photo_Link="aaa";
+    String photo_Link;
+    String sID,sName,sAddress, sTel;
+    TextView username, userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_edit_registration__details);
 
-       // Intent intent = getIntent();
+        Intent intent = getIntent();
+
+        sID = intent.getStringExtra("ID");
+        sName = intent.getStringExtra("Name");
+        sAddress = intent.getStringExtra("Address");
+        sTel = intent.getStringExtra("Tel");
+        photo_Link = intent.getStringExtra("Photo_link");
 
         btnUpdate = (Button) findViewById(R.id.btnUpdate);
 
@@ -38,6 +46,18 @@ public class EditRegistration_Details extends AppCompatActivity {
         etAdmissionNo = (EditText)findViewById(R.id.etAdmissionNo);
         etAddress = (EditText)findViewById(R.id.etAddress);
         etContactNo = (EditText)findViewById(R.id.etContactNo);
+
+        etName.setText(sName);
+        etAdmissionNo.setText(sID);
+        etAdmissionNo.setEnabled(false);
+        etAddress.setText(sAddress);
+        etContactNo.setText(sTel);
+
+        username = (TextView) findViewById(R.id.username);
+        userid = (TextView) findViewById(R.id.userid);
+
+        username.setText(sName);
+        userid.setText(sID);
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override

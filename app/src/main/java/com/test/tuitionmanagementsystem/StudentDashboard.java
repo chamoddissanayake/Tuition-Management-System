@@ -165,6 +165,10 @@ public class StudentDashboard extends AppCompatActivity {
         Intent intent = getIntent();
         final String sID = intent.getStringExtra("StudentID");
         final String sName = intent.getStringExtra("sName");
+        final String sAddress = intent.getStringExtra("address");
+        final String sTel = intent.getStringExtra("tel");
+        final String sPhoto_link = intent.getStringExtra("photo_link");
+
 
         helloMsg = (TextView)findViewById(R.id.HiStudentMessage);
         helloMsg.setText("Hi "+sName+",");
@@ -188,6 +192,9 @@ public class StudentDashboard extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(),EditRegistration_Details.class);
                 i.putExtra("ID",sID);
                 i.putExtra("Name",sName);
+                i.putExtra("Address",sAddress);
+                i.putExtra("Tel",sTel);
+                i.putExtra("Photo_link",sPhoto_link);
                 i.putExtra("Type",t);
                 startActivity(i);
             }
