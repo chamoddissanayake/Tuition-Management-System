@@ -101,8 +101,17 @@ public class views_studentdetails extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(TextUtils.isEmpty(AdmissionNo.getText().toString())){
 
-                deleteStudentDetails();
+                }else if(TextUtils.isEmpty(sName.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Please Enter Name",Toast.LENGTH_SHORT).show();
+                }else if(TextUtils.isEmpty(ContactNo.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Please Enter Contact Number",Toast.LENGTH_SHORT).show();
+                }else if(TextUtils.isEmpty(Address.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Please Enter Address",Toast.LENGTH_SHORT).show();
+                }else{
+                    deleteStudentDetails();
+                }
 
             }
         });

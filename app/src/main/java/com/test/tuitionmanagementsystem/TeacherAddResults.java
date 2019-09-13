@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +28,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.test.tuitionmanagementsystem.listeners.TeacherSubjectListner;
 
 import java.util.ArrayList;
@@ -35,6 +44,9 @@ public class TeacherAddResults extends AppCompatActivity {
     EditText mark;
     Spinner studentIDspn, ResultExamIDspn;
     Button Add;
+    Button btnChooseResultFile;
+    TextView fileChooseStatus;
+    Uri pdfuri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +70,14 @@ public class TeacherAddResults extends AppCompatActivity {
         ResultExamIDspn = (Spinner) findViewById(R.id.addResultExamIDSpinner);
         mark = (EditText) findViewById(R.id.markForAdd);
 
+        btnChooseResultFile  = (Button) findViewById(R.id.btnChooseResultFile);
+        fileChooseStatus = (TextView) findViewById(R.id.fileChooseStatus);
+
         getDetailsFormDB();
 
         Add = (Button) findViewById(R.id.btnAdd);
+
+        UploadTask uploadTask;
 
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,33 +87,93 @@ public class TeacherAddResults extends AppCompatActivity {
                 }else if(Integer.parseInt(mark.getText().toString()) >100 || Integer.parseInt(mark.getText().toString()) <0){
                     Toast.makeText(getApplicationContext(),"Marks should be in  range 0 - 100",Toast.LENGTH_SHORT).show();
                 }else{
-                    String selectedStudent, selectedExamID, subject;
-                    int inputMark;
+                    uploadDocument(pdfuri);
+                    addResultsToDb();
 
-                    selectedStudent = studentIDspn.getSelectedItem().toString();
-                    selectedExamID = ResultExamIDspn.getSelectedItem().toString();
-                    inputMark = Integer.parseInt(mark.getText().toString());
-                    subject = teacherObj.getSpecialized_subject();
-
-                   // Toast.makeText(getApplicationContext()," "+selectedStudent+" "+" "+selectedExamID+" "+inputMark+""+subject,Toast.LENGTH_SHORT).show();
-
-                    DatabaseReference addMarkRef = FirebaseDatabase.getInstance().getReference().child("Student_take_exam");
-
-                    Student_Take_Exam stdtkExamObj = new Student_Take_Exam();
-                    stdtkExamObj.setsID(selectedStudent);
-                    stdtkExamObj.setExamID(selectedExamID);
-                    stdtkExamObj.setMark(inputMark);
-                    stdtkExamObj.setSubName(subject);
-                    stdtkExamObj.setDocumentLink("aaaaaaaaaaaaaaaaaaaa");
-
-                    addMarkRef.child(stdtkExamObj.getExamID()).child(stdtkExamObj.getsID()).setValue(stdtkExamObj);
-                    Toast.makeText(getApplicationContext(),"Added to database successfully.",Toast.LENGTH_LONG).show();
-
-                    mark.setText("");
                 }
 
             }
         });
+
+        btnChooseResultFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseFileOpen();
+            }
+        });
+
+       //End of the onCreate
+    }
+
+    private void addResultsToDb() {
+        String selectedStudent, selectedExamID, subject;
+        int inputMark;
+
+        selectedStudent = studentIDspn.getSelectedItem().toString();
+        selectedExamID = ResultExamIDspn.getSelectedItem().toString();
+        inputMark = Integer.parseInt(mark.getText().toString());
+        subject = teacherObj.getSpecialized_subject();
+
+        // Toast.makeText(getApplicationContext()," "+selectedStudent+" "+" "+selectedExamID+" "+inputMark+""+subject,Toast.LENGTH_SHORT).show();
+
+        DatabaseReference addMarkRef = FirebaseDatabase.getInstance().getReference().child("Student_take_exam");
+
+        Student_Take_Exam stdtkExamObj = new Student_Take_Exam();
+        stdtkExamObj.setsID(selectedStudent);
+        stdtkExamObj.setExamID(selectedExamID);
+        stdtkExamObj.setMark(inputMark);
+        stdtkExamObj.setSubName(subject);
+        stdtkExamObj.setDocumentLink("aaaaaaaaaaaaaaaaaaaa");
+
+        addMarkRef.child(stdtkExamObj.getExamID()).child(stdtkExamObj.getsID()).setValue(stdtkExamObj);
+        Toast.makeText(getApplicationContext(),"Added to database successfully.",Toast.LENGTH_LONG).show();
+
+
+        mark.setText("");
+        
+    }
+
+    private void uploadDocument(Uri pdfuri) {
+        StorageReference mStorageReference = FirebaseStorage.getInstance().getReference();
+
+        StorageReference sRef = mStorageReference.child("ResultsDocuments/" + System.currentTimeMillis() + ".pdf");
+        sRef.putFile(pdfuri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        Toast.makeText(getApplicationContext(),"Uploaded successfully",Toast.LENGTH_LONG).show();
+                        btnChooseResultFile.setText("File not selected");
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+    }
+
+    private void chooseFileOpen() {
+
+        Intent intent = new Intent();
+        intent.setType("application/pdf");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,1);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==1 && resultCode==RESULT_OK && data !=  null && data.getData() != null){
+            pdfuri = data.getData();
+            fileChooseStatus.setText("File Selected.");
+        }
     }
 
     Student_Take_Exam stdTakeExamObj = new Student_Take_Exam();
