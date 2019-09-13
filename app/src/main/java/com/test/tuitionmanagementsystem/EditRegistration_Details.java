@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ public class EditRegistration_Details extends AppCompatActivity {
 
     Button btnUpdate;
     EditText etName, etAdmissionNo, etAddress, etContactNo;
+    String photo_Link="aaa";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,7 @@ public class EditRegistration_Details extends AppCompatActivity {
 
        // Intent intent = getIntent();
 
-        btnUpdate = (Button) findViewById(R.id.buttonUpdate);
+        btnUpdate = (Button) findViewById(R.id.btnUpdate);
 
         etName = (EditText) findViewById(R.id.etName);
         etAdmissionNo = (EditText)findViewById(R.id.etAdmissionNo);
@@ -41,42 +43,56 @@ public class EditRegistration_Details extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                DatabaseReference updateRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails");
-                updateRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(TextUtils.isEmpty(etAdmissionNo.getText().toString())){
 
-                        StudentDetails_tb std = new StudentDetails_tb();
-
-                        if(dataSnapshot.hasChild(etName.getText().toString())){
-
-                            std.setStudentName(etName.getText().toString());
-                            std.setAddress(etAddress.getText().toString());
-                            std.setTel(etContactNo.getText().toString());
-                            std.setAdmissionNo(etAdmissionNo.getText().toString());
-
-                            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails").child(etName.getText().toString());
-                            dbRef.setValue(std);
-
-                            Toast.makeText(getApplicationContext(),"Data updated successfully!",Toast.LENGTH_SHORT).show();
-
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(),"No sourse to update",Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-
+                }else if(TextUtils.isEmpty(etName.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Name must be filled",Toast.LENGTH_SHORT).show();
+                }else if(TextUtils.isEmpty(etAddress.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Address must be filled",Toast.LENGTH_SHORT).show();
+                }else if(TextUtils.isEmpty(etContactNo.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Contact number must be filled.",Toast.LENGTH_SHORT).show();
+                }else{
+                    updateDetails();
+                }
             }
         });
 
 
+    }
+
+    private void updateDetails() {
+
+        DatabaseReference updateRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails");
+        updateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                StudentDetails_tb stdObj = new StudentDetails_tb();
+
+                if(dataSnapshot.hasChild(etAdmissionNo.getText().toString())){
+
+                    stdObj.setStudentName(etName.getText().toString());
+                    stdObj.setAddress(etAddress.getText().toString());
+                    stdObj.setTel(etContactNo.getText().toString());
+                    stdObj.setAdmissionNo(etAdmissionNo.getText().toString());
+                    stdObj.setPhotoLink(photo_Link);
+
+                    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("StudentDetails").child(etAdmissionNo.getText().toString());
+                    dbRef.setValue(stdObj);
+
+                    Toast.makeText(getApplicationContext(),"Data updated successfully!",Toast.LENGTH_SHORT).show();
+
+                }else{
+                    Toast.makeText(getApplicationContext(),"No record",Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
