@@ -130,6 +130,7 @@ public class StudentRegistration extends AppCompatActivity {
                             //Register Student Details in 'StudentDetails'
                             registerStudent();
                             Toast.makeText(getApplicationContext(),"New Student was registered successfully.",Toast.LENGTH_LONG).show();
+                            imgViewInputPhoto.setImageDrawable(null);
                         }
 
 
