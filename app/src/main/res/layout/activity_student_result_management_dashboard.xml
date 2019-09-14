@@ -230,6 +230,13 @@
                 android:id="@+id/btnResultSheet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="87dp"
+                android:layout_marginTop="2dp"
+                android:background="#9187FF"
+                android:layout_marginEnd="101dp"
                 android:text="Download Result Sheet" />
 
         </RelativeLayout>

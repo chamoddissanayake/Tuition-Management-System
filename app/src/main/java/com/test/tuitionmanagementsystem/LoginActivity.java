@@ -3,6 +3,7 @@ package com.test.tuitionmanagementsystem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -31,9 +33,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginBtn;
     private RadioGroup radioGroup;
     boolean answer = false;
-
+    ProgressBar pb;
     String  A_StudentID, A_name, A_address, A_tel, A_photo_link;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //block screen rotation
@@ -48,11 +49,16 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn = (Button) findViewById(R.id.btnLogin);
         radioGroup = (RadioGroup)findViewById(R.id.userTypeRadioBtnGroup);
 
+        pb=findViewById(R.id.progress_loader);
+
+
+
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Same code in Enter key listener
                 if(validateUsername()){
+                    pb.setVisibility(view.VISIBLE);
                     confirmInput();
                 }
 
@@ -87,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 validatePassword();
 
-                if(charSequence.charAt(charSequence.length()-1) == '\n'){
+                if(charSequence.length()-1 >=0 && charSequence.charAt(charSequence.length()-1) == '\n'){
                     Toast.makeText(getApplicationContext(),"Enter pressed.",Toast.LENGTH_LONG).show();
                 }
 
@@ -151,60 +157,11 @@ public class LoginActivity extends AppCompatActivity {
 
             if(selectedRadioButtonText.equals("Student")){
 
-                if(validateStudentCredentials()){
-                        //If found fetch Student data(id, name....) from database.
-                        final String usernameInput = textInputUsername.getEditText().getText().toString();
-                        final String userpasswordInput = textInputPassword.getEditText().getText().toString();
-                        //   fetchStudentDataFromDB(usernameInput,userpasswordInput);    ->Return details of the student.
-
-                        final DatabaseReference readLoginRef =  FirebaseDatabase.getInstance().getReference().child("StudentDetails");
-                        readLoginRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if(dataSnapshot.hasChild(usernameInput)){
-                                A_name = dataSnapshot.child(usernameInput).child("studentName").getValue().toString();
-                                A_photo_link = dataSnapshot.child(usernameInput).child("photoLink").getValue().toString();
-                                A_tel = dataSnapshot.child(usernameInput).child("tel").getValue().toString();
-                                A_StudentID = dataSnapshot.child(usernameInput).child("admissionNo").getValue().toString();
-                                A_address= dataSnapshot.child(usernameInput).child("address").getValue().toString();
-
-
-
-                                Intent i = new Intent(getApplicationContext(),StudentDashboard.class);
-                                i.putExtra("StudentID",A_StudentID);
-                                i.putExtra("sName",A_name);
-                                i.putExtra("address",A_address);
-                                i.putExtra("tel",A_tel);
-                                i.putExtra("photo_link",A_photo_link);
-                                startActivity(i);
-
-                            }else{
-                                Toast.makeText(getApplicationContext(),"Error occurred.",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                    validateStudentCredentials();
 
 
 
 
-                        //Sample values
-//                        String  A_StudentID = "S001";
-//                        String A_name = "Isuru";
-//                        String A_address = "Colombo";
-//                        String A_tel = "0771234567";
-//                        String A_photo_link ="https://firebasestorage.googleapis.com/v0/b/tuitionmanagementsystem-1af02.appspot.com/o/StudentPhotos%2F1568433584744.jpg?alt=media&token=f9653d33-ffe5-4231-b6ae-282caa6c3780";
-
-
-
-                    }else{
-                        //Student credentials are incorrect.
-                        Toast.makeText(getApplicationContext(),"Student: Your Username or Password Incorrect.",Toast.LENGTH_SHORT).show();
-                    }
 
             }else if(selectedRadioButtonText.equals("Teacher")){
                 if(validateTeacherCredentials()){
@@ -261,12 +218,17 @@ public class LoginActivity extends AppCompatActivity {
                     String secPwdFromDb = dataSnapshot.child(usernameInput).child("securedPassword").getValue().toString();
                     if(PasswordUtils.verifyUserPassword(userpasswordInput,secPwdFromDb,saltFormDb)){
                         answer = true;
+
+                        getUserData();
                     }else{
                         answer = false;
-                    } ;
+                        pb.setVisibility(View.GONE);
+                        Toast.makeText(getApplicationContext(),"Password Incorrect",Toast.LENGTH_SHORT).show();
+                    };
 
                 }else{
                     Toast.makeText(getApplicationContext(),"User not found",Toast.LENGTH_SHORT).show();
+                    pb.setVisibility(View.GONE);
                     answer = false;
                 }
             }
@@ -280,6 +242,60 @@ public class LoginActivity extends AppCompatActivity {
         return answer;
     }
 
+
+    public void getUserData(){
+
+//        pb.dismiss()
+        //If found fetch Student data(id, name....) from database.
+        final String usernameInput = textInputUsername.getEditText().getText().toString();
+        final String userpasswordInput = textInputPassword.getEditText().getText().toString();
+        //   fetchStudentDataFromDB(usernameInput,userpasswordInput);    ->Return details of the student.
+
+        final DatabaseReference readLoginRef =  FirebaseDatabase.getInstance().getReference().child("StudentDetails");
+        readLoginRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(usernameInput)){
+                    A_name = dataSnapshot.child(usernameInput).child("studentName").getValue().toString();
+                    A_photo_link = dataSnapshot.child(usernameInput).child("photoLink").getValue().toString();
+                    A_tel = dataSnapshot.child(usernameInput).child("tel").getValue().toString();
+                    A_StudentID = dataSnapshot.child(usernameInput).child("admissionNo").getValue().toString();
+                    A_address= dataSnapshot.child(usernameInput).child("address").getValue().toString();
+
+                    pb.setVisibility(View.GONE);
+
+
+                    Intent i = new Intent(getApplicationContext(),StudentDashboard.class);
+                    i.putExtra("StudentID",A_StudentID);
+                    i.putExtra("sName",A_name);
+                    i.putExtra("address",A_address);
+                    i.putExtra("tel",A_tel);
+                    i.putExtra("photo_link",A_photo_link);
+                    startActivity(i);
+
+                }else{
+                    pb.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(),"Error occurred.",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+        //Sample values
+//                        String  A_StudentID = "S001";
+//                        String A_name = "Isuru";
+//                        String A_address = "Colombo";
+//                        String A_tel = "0771234567";
+//                        String A_photo_link ="https://firebasestorage.googleapis.com/v0/b/tuitionmanagementsystem-1af02.appspot.com/o/StudentPhotos%2F1568433584744.jpg?alt=media&token=f9653d33-ffe5-4231-b6ae-282caa6c3780";
+
+    }
 }
 
 
