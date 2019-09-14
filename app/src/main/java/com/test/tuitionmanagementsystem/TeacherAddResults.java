@@ -47,6 +47,7 @@ public class TeacherAddResults extends AppCompatActivity {
     Button btnChooseResultFile;
     TextView fileChooseStatus;
     Uri pdfuri;
+    String full_documentLink="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,7 @@ public class TeacherAddResults extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Marks should be in  range 0 - 100",Toast.LENGTH_SHORT).show();
                 }else{
                     uploadDocument(pdfuri);
-                    addResultsToDb();
+
 
                 }
 
@@ -123,7 +124,7 @@ public class TeacherAddResults extends AppCompatActivity {
         stdtkExamObj.setExamID(selectedExamID);
         stdtkExamObj.setMark(inputMark);
         stdtkExamObj.setSubName(subject);
-        stdtkExamObj.setDocumentLink("aaaaaaaaaaaaaaaaaaaa");
+        stdtkExamObj.setDocumentLink(full_documentLink);
 
         addMarkRef.child(stdtkExamObj.getExamID()).child(stdtkExamObj.getsID()).setValue(stdtkExamObj);
         Toast.makeText(getApplicationContext(),"Added to database successfully.",Toast.LENGTH_LONG).show();
@@ -145,6 +146,8 @@ public class TeacherAddResults extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(),"Uploaded successfully",Toast.LENGTH_LONG).show();
                         btnChooseResultFile.setText("File not selected");
+                        full_documentLink = taskSnapshot.getUploadSessionUri().toString();
+                        addResultsToDb();
 
                     }
                 })
