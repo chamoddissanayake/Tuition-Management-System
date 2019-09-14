@@ -27,8 +27,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -48,8 +51,11 @@ public class TeacherRegistration extends AppCompatActivity {
     public Uri imguri;
     private StorageReference mStorageRef;
 
+    String completePath;
     private StorageTask uploadTask;
     private String completeImagePath;
+
+    String TID, TName, Nic, Phone, Email, Description, Password, Qualification, Specialized;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +81,7 @@ public class TeacherRegistration extends AppCompatActivity {
         btn_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String TID, TName, Nic, Phone, Email, Description, Password, Qualification, Specialized;
+
 
                 TID = txt_TID.getText().toString().trim();
                 TName = txt_TName.getText().toString().trim();
@@ -97,33 +103,7 @@ public class TeacherRegistration extends AppCompatActivity {
                 }else{
                     //Add to database
                     //Teacher Details
-                    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("Teacher");
-                    Teacher teacherobj = new Teacher();
-
                     uploadPhoto();
-
-                    teacherobj.setTid(TID);
-                    teacherobj.settName(TName);
-                    teacherobj.setNic(Nic);
-                    teacherobj.setQualification(Qualification);
-                    teacherobj.setTel(Phone);
-                    teacherobj.setEmail(Email);
-                    teacherobj.setSpecialized_subject(Specialized);
-                    teacherobj.setPhotoLink("");
-
-                    dbRef.child(teacherobj.getTid()).setValue(teacherobj);
-
-                    //Password
-                    String saltpwd = PasswordUtils.getSalt(30);
-                    String secpwd = PasswordUtils.generateSecurePassword(Password,saltpwd);
-
-                    DatabaseReference dbRef2 = FirebaseDatabase.getInstance().getReference().child("TeacherCredentials");
-                    StaffCredentials credentialsObj = new StaffCredentials();
-                    credentialsObj.setSalt(saltpwd);
-                    credentialsObj.setSecuredPassword(secpwd);
-                    dbRef2.child(teacherobj.getTid()).setValue(credentialsObj);
-
-                    Toast.makeText(getApplicationContext(),"Teacher Registered Successfully.",Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -146,29 +126,73 @@ public class TeacherRegistration extends AppCompatActivity {
 
     }
 
+    private void registerTeacher() {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("Teacher");
+        Teacher teacherobj = new Teacher();
+
+
+
+        teacherobj.setTid(TID);
+        teacherobj.settName(TName);
+        teacherobj.setNic(Nic);
+        teacherobj.setQualification(Qualification);
+        teacherobj.setTel(Phone);
+        teacherobj.setEmail(Email);
+        teacherobj.setSpecialized_subject(Specialized);
+        teacherobj.setPhotoLink(completePath);
+
+        dbRef.child(teacherobj.getTid()).setValue(teacherobj);
+
+        //Password
+        String saltpwd = PasswordUtils.getSalt(30);
+        String secpwd = PasswordUtils.generateSecurePassword(Password,saltpwd);
+
+        DatabaseReference dbRef2 = FirebaseDatabase.getInstance().getReference().child("TeacherCredentials");
+        StaffCredentials credentialsObj = new StaffCredentials();
+        credentialsObj.setSalt(saltpwd);
+        credentialsObj.setSecuredPassword(secpwd);
+        dbRef2.child(teacherobj.getTid()).setValue(credentialsObj);
+
+        Toast.makeText(getApplicationContext(),"Teacher Registered Successfully.",Toast.LENGTH_SHORT).show();
+    }
+
 
     private void uploadPhoto() {
+
         Long currentTime = System.currentTimeMillis();
 
-        StorageReference teacherRef = mStorageRef.child("TeacherPhotos/"+currentTime+".jpg");
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+        String tempFileName= currentTime + "." + getExtension(imguri);
+        final StorageReference  Ref = mStorageRef.child("TeacherPhotos").child(tempFileName);
 
-        teacherRef.putFile(imguri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // Get a URL to the uploaded content
-//                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                        Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                        // ...
-                        Toast.makeText(getApplicationContext(),"Error"+exception,Toast.LENGTH_SHORT).show();
-                    }
-                });
+        uploadTask = Ref.putFile(imguri);
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                // Continue with the task to get the download URL
+                return Ref.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    completePath = task.getResult().toString();
+                    // cant change value of  'completeImagePath' ????
+                    registerTeacher();
+
+                } else {
+                    // Handle failures
+                    // ...
+                }
+            }
+        });
+
+
     }
 
     private String getExtension(Uri uri){

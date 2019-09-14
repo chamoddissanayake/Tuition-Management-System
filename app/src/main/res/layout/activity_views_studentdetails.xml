@@ -139,8 +139,8 @@
 
     <ImageView
         android:id="@+id/userPhoto"
-        android:layout_width="122dp"
-        android:layout_height="139dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:background="#B3B3B3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

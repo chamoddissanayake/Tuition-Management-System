@@ -182,21 +182,7 @@ public class StudentRegistration extends AppCompatActivity {
             mStorageRef = FirebaseStorage.getInstance().getReference();
             String tempFileName= currentTime + "." + getExtension(imguri);
             final StorageReference  Ref = mStorageRef.child("StudentPhotos").child(tempFileName);
-// //           completeImagePath = Ref.getBucket()+Ref.getPath();
-//            completeImagePath = Ref.toString();
-//
-//            uploadTask = Ref.putFile(imguri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                @Override
-//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                    Toast.makeText(getApplicationContext(),"Image uploaded successfully",Toast.LENGTH_SHORT).show();
-//
-//                }
-//            }).addOnFailureListener(new OnFailureListener() {
-//                @Override
-//                public void onFailure(@NonNull Exception e) {
-//                    Toast.makeText(getApplicationContext(),"Error while uploading image.",Toast.LENGTH_SHORT).show();
-//                }
-//            });
+
             uploadTask = Ref.putFile(imguri);
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override

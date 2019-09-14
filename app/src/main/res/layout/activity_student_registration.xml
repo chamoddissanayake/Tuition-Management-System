@@ -147,8 +147,8 @@
 
     <ImageView
         android:id="@+id/imgViewInputPhoto"
-        android:layout_width="124dp"
-        android:layout_height="141dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:background="#9B9B9B"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
