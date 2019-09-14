@@ -128,7 +128,7 @@ public class StudentRegistration extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Uploading... ", Toast.LENGTH_LONG).show();
                             uploadImage();
                             //Register Student Details in 'StudentDetails'
-                            registerStudent();
+
                             Toast.makeText(getApplicationContext(),"New Student was registered successfully.",Toast.LENGTH_LONG).show();
                             imgViewInputPhoto.setImageDrawable(null);
                         }
@@ -215,6 +215,7 @@ public class StudentRegistration extends AppCompatActivity {
                     Uri downloadUri = task.getResult();
                     completeImagePath = task.getResult().toString();
                     // cant change value of  'completeImagePath' ????
+                    registerStudent();
 
                 } else {
                     // Handle failures
@@ -222,6 +223,8 @@ public class StudentRegistration extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
 
