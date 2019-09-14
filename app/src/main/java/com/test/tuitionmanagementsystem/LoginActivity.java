@@ -155,11 +155,11 @@ public class LoginActivity extends AppCompatActivity {
                         //   fetchStudentDataFromDB(usernameInput,userpasswordInput);    ->Return details of the student.
 
                         //Sample values
-                        String  StudentID = "S005";
+                        String  StudentID = "S001";
                         String name = "Isuru";
                         String address = "Colombo";
                         String tel = "0771234567";
-                        String photo_link ="hdfgdfgdggfd";
+                        String photo_link ="https://firebasestorage.googleapis.com/v0/b/tuitionmanagementsystem-1af02.appspot.com/o/StudentPhotos%2F1568433584744.jpg?alt=media&token=f9653d33-ffe5-4231-b6ae-282caa6c3780";
 
 
                         Intent i = new Intent(getApplicationContext(),StudentDashboard.class);

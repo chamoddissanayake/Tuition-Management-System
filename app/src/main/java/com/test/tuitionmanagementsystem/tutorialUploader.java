@@ -36,7 +36,6 @@ public class tutorialUploader extends AppCompatActivity {
 
     FirebaseStorage storage;
     FirebaseDatabase database;
-    ProgressDialog progressDialog;
 
 
     @Override
@@ -83,8 +82,6 @@ public class tutorialUploader extends AppCompatActivity {
 
     private void uploadFile(Uri pdfUri) {
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 
         final String fileName = System.currentTimeMillis()+"";
         StorageReference storageReference = storage.getReference();
