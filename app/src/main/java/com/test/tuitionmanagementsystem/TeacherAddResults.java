@@ -143,10 +143,12 @@ public class TeacherAddResults extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        StorageReference mStorageReference = FirebaseStorage.getInstance().getReference();
 
                         Toast.makeText(getApplicationContext(),"Uploaded successfully",Toast.LENGTH_LONG).show();
                         btnChooseResultFile.setText("File not selected");
-                        full_documentLink = taskSnapshot.getUploadSessionUri().toString();
+                        //full_documentLink = taskSnapshot.getUploadSessionUri().toString();
+                        full_documentLink  = taskSnapshot.getMetadata().getReference().toString();
                         addResultsToDb();
 
                     }
