@@ -10,6 +10,8 @@
     android:background="@drawable/wallpaper1"
     >
 
+
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
@@ -37,14 +39,6 @@
         android:layout_alignTop="@+id/teacherDashboardHeading"
         android:layout_marginTop="50dp"
         />
-
-            <Button
-                android:id="@+id/teacherRegisterStudent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Register"
-
-                />
 
             <androidx.cardview.widget.CardView
 

@@ -1,5 +1,6 @@
 package com.test.tuitionmanagementsystem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -7,6 +8,9 @@ import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -223,6 +227,29 @@ public class StudentDashboard extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.student_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.locateUs:
+                Intent intLocateus = new Intent(getApplicationContext(),Locate_Us.class);
+                startActivity(intLocateus);
+                return true;
+            case R.id.contactUs:
+                Intent intContactus = new Intent(getApplicationContext(),ContactUs.class);
+                startActivity(intContactus);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void goToLocateUs(View view) {

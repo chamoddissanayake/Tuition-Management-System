@@ -1,10 +1,14 @@
 package com.test.tuitionmanagementsystem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -15,7 +19,9 @@ public class TeacherDashboard extends AppCompatActivity {
 
     TextView helloMsg;
     ImageButton ResultsMgtBtn,AttendanceMgtBtn,FeedbackNotificationMgtBtn, StudyMaterialsManagementBtn;
-    Button teacherRegisterStudentBtn;
+
+    String tID;
+    String tName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +30,8 @@ public class TeacherDashboard extends AppCompatActivity {
         setContentView(R.layout.activity_teacher_dashboard);
 
         Intent intent = getIntent();
-        final String tID = intent.getStringExtra("TeacherID");
-        final String tName = intent.getStringExtra("tName");
+        tID = intent.getStringExtra("TeacherID");
+        tName = intent.getStringExtra("tName");
 
         helloMsg = (TextView)findViewById(R.id.HiTeacherMessage);
         helloMsg.setText("Hi "+tName+",");
@@ -35,7 +41,6 @@ public class TeacherDashboard extends AppCompatActivity {
         FeedbackNotificationMgtBtn =(ImageButton) findViewById(R.id.teacherFeedbackNotificationMgtBtn);
         StudyMaterialsManagementBtn = (ImageButton) findViewById(R.id.teacherStudyMaterialsManagementBtn);
 
-        teacherRegisterStudentBtn = (Button) findViewById(R.id.teacherRegisterStudent);
 
         ResultsMgtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,23 +89,42 @@ public class TeacherDashboard extends AppCompatActivity {
             }
         });
 
-        teacherRegisterStudentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.example_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.regTeacher:
                 String t = "teacher";
                 Intent i = new Intent(getApplicationContext(),TeacherRegistration.class);
                 i.putExtra("ID",tID);
                 i.putExtra("Name",tName);
                 i.putExtra("Type",t);
                 startActivity(i);
-
-            }
-
-        });
+                return true;
+            case R.id.locateUs:
+                Intent intLocateus = new Intent(getApplicationContext(),Locate_Us.class);
+                startActivity(intLocateus);
+                return true;
+            case R.id.contactUs:
+                Intent intContactus = new Intent(getApplicationContext(),ContactUs.class);
+                startActivity(intContactus);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
 
     }
-
-
 }
