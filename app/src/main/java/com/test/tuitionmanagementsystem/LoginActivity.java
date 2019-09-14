@@ -30,6 +30,9 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout textInputPassword;
     private Button loginBtn;
     private RadioGroup radioGroup;
+    boolean answer = false;
+
+    String  A_StudentID, A_name, A_address, A_tel, A_photo_link;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,25 +153,53 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(validateStudentCredentials()){
                         //If found fetch Student data(id, name....) from database.
-                        String usernameInput = textInputUsername.getEditText().getText().toString();
-                        String userpasswordInput = textInputPassword.getEditText().getText().toString();
+                        final String usernameInput = textInputUsername.getEditText().getText().toString();
+                        final String userpasswordInput = textInputPassword.getEditText().getText().toString();
                         //   fetchStudentDataFromDB(usernameInput,userpasswordInput);    ->Return details of the student.
 
+                        final DatabaseReference readLoginRef =  FirebaseDatabase.getInstance().getReference().child("StudentDetails");
+                        readLoginRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.hasChild(usernameInput)){
+                                A_name = dataSnapshot.child(usernameInput).child("studentName").getValue().toString();
+                                A_photo_link = dataSnapshot.child(usernameInput).child("photoLink").getValue().toString();
+                                A_tel = dataSnapshot.child(usernameInput).child("tel").getValue().toString();
+                                A_StudentID = dataSnapshot.child(usernameInput).child("admissionNo").getValue().toString();
+                                A_address= dataSnapshot.child(usernameInput).child("address").getValue().toString();
+
+
+
+                                Intent i = new Intent(getApplicationContext(),StudentDashboard.class);
+                                i.putExtra("StudentID",A_StudentID);
+                                i.putExtra("sName",A_name);
+                                i.putExtra("address",A_address);
+                                i.putExtra("tel",A_tel);
+                                i.putExtra("photo_link",A_photo_link);
+                                startActivity(i);
+
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Error occurred.",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+
+
                         //Sample values
-                        String  StudentID = "S001";
-                        String name = "Isuru";
-                        String address = "Colombo";
-                        String tel = "0771234567";
-                        String photo_link ="https://firebasestorage.googleapis.com/v0/b/tuitionmanagementsystem-1af02.appspot.com/o/StudentPhotos%2F1568433584744.jpg?alt=media&token=f9653d33-ffe5-4231-b6ae-282caa6c3780";
+//                        String  A_StudentID = "S001";
+//                        String A_name = "Isuru";
+//                        String A_address = "Colombo";
+//                        String A_tel = "0771234567";
+//                        String A_photo_link ="https://firebasestorage.googleapis.com/v0/b/tuitionmanagementsystem-1af02.appspot.com/o/StudentPhotos%2F1568433584744.jpg?alt=media&token=f9653d33-ffe5-4231-b6ae-282caa6c3780";
 
 
-                        Intent i = new Intent(getApplicationContext(),StudentDashboard.class);
-                        i.putExtra("StudentID",StudentID);
-                        i.putExtra("sName",name);
-                        i.putExtra("address",address);
-                        i.putExtra("tel",tel);
-                        i.putExtra("photo_link",photo_link);
-                        startActivity(i);
 
                     }else{
                         //Student credentials are incorrect.
@@ -219,30 +250,34 @@ public class LoginActivity extends AppCompatActivity {
 
         //Student Credentials validation is here.
 
-//        DatabaseReference dbRef_Validate = FirebaseDatabase.getInstance().getReference().child("StudentCredentials");
-//        dbRef_Validate.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.hasChild(usernameInput)){
-//
-//                    String saltFormDb = dataSnapshot.child("salt").getValue().toString();
-//                    String secPwdFromDb = dataSnapshot.child("securedPassword").getValue().toString();
-//                    if(PasswordUtils.verifyUserPassword(userpasswordInput,secPwdFromDb,saltFormDb)){
-//
-//                    };
-//
-//                }else{
-//                    Toast.makeText(getApplicationContext(),"User not found",Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//
-        return true;
+
+        DatabaseReference dbRef_Validate = FirebaseDatabase.getInstance().getReference().child("StudentCredentials");
+        dbRef_Validate.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(usernameInput)){
+
+                    String saltFormDb = dataSnapshot.child(usernameInput).child("salt").getValue().toString();
+                    String secPwdFromDb = dataSnapshot.child(usernameInput).child("securedPassword").getValue().toString();
+                    if(PasswordUtils.verifyUserPassword(userpasswordInput,secPwdFromDb,saltFormDb)){
+                        answer = true;
+                    }else{
+                        answer = false;
+                    } ;
+
+                }else{
+                    Toast.makeText(getApplicationContext(),"User not found",Toast.LENGTH_SHORT).show();
+                    answer = false;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                answer = false;
+            }
+        });
+
+        return answer;
     }
 
 }
