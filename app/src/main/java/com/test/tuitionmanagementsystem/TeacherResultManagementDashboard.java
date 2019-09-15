@@ -21,7 +21,7 @@ public class TeacherResultManagementDashboard extends AppCompatActivity {
 
     TextView TeacherName, TeacherID;
     Button addResult, searchResult,updateResult;
-    private BarChart marksChart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //block screen rotation
@@ -77,26 +77,9 @@ public class TeacherResultManagementDashboard extends AppCompatActivity {
         });
 
 
-        marksChart = (BarChart) findViewById(R.id.teacherMarksChart);
-        marksChart.getDescription().setEnabled(false);
-        setDataToChart(10);
-        marksChart.setFitBars(true);
+
 
     }
 
-    private void setDataToChart(int count) {
-        ArrayList<BarEntry> yVals = new ArrayList<>();
-        for(int i=0;i<count;i++){
-            float value = (float)(Math.random()*100);
-            yVals.add(new BarEntry(i,(int)value));
-        }
-        BarDataSet set = new BarDataSet(yVals,"Data Set");
-        set.setColors(ColorTemplate.MATERIAL_COLORS);
-        set.setDrawValues(true);
 
-        BarData data = new BarData(set);
-        marksChart.setData(data);
-        marksChart.invalidate();
-        marksChart.animateY(2000);
-    }
 }
