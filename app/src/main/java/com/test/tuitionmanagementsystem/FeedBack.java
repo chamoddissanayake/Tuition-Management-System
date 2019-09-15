@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 public class FeedBack extends AppCompatActivity {
 
+    //declare EditTexts
     EditText t1;
     EditText t2;
     EditText t3;
@@ -21,23 +22,26 @@ public class FeedBack extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_back);
 
+        //get student details from the login
         Intent intent = getIntent();
         String sID = intent.getStringExtra("StudentID");
         String sName = intent.getStringExtra("sName");
 
+        //set ids
         t1 = findViewById(R.id.editTextID2);
         t2 = findViewById(R.id.editTextName2);
         t3 = findViewById(R.id.editTextSubject2);
         t4 = findViewById(R.id.editTextFeedback2);
         t5 = findViewById(R.id.editTextFid2);
 
+        //set student details
         t1.setText(sID);
         t2.setText(sName);
 
     }
 
+    //create a method to send details to the next page
     public void sendFeedback(View view){
-
 
         String msg1 = t1.getText().toString();
         String msg2 = t2.getText().toString();
@@ -45,6 +49,7 @@ public class FeedBack extends AppCompatActivity {
         String msg4 = t4.getText().toString();
         String msg5 = t5.getText().toString();
 
+        //empty field validations
         if(msg1.equals("")||msg2.equals("")||msg3.equals("")||msg4.equals("")||msg5.equals("")){
             Toast.makeText(getApplicationContext(),"All fields must be filled.",Toast.LENGTH_SHORT).show();
         }else{
