@@ -27,7 +27,7 @@ public class FeedBack extends AppCompatActivity {
         String sID = intent.getStringExtra("StudentID");
         String sName = intent.getStringExtra("sName");
 
-        //set ids
+        //set ids.
         t1 = findViewById(R.id.editTextID2);
         t2 = findViewById(R.id.editTextName2);
         t3 = findViewById(R.id.editTextSubject2);
