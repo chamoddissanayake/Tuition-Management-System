@@ -72,7 +72,7 @@ public class searchFeedback extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                         FeedbackTable ft = new FeedbackTable();
-
+                        
                         if(dataSnapshot.hasChild(t2.getText().toString())){
                             ft.setFid(t2.getText().toString());
                             ft.setSid(t3.getText().toString());
