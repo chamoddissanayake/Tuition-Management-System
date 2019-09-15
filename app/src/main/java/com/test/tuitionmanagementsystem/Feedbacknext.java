@@ -21,6 +21,7 @@ public class Feedbacknext extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedbacknext);
 
+        //set ids
          final EditText nt1 = findViewById(R.id.editTextID2);
          final EditText nt2 = findViewById(R.id.editTextName2);
          final EditText nt3 = findViewById(R.id.editTextSubject2);
@@ -30,6 +31,7 @@ public class Feedbacknext extends AppCompatActivity {
          Button btn1 = findViewById(R.id.btnSave);
 
 
+         //get details from previous page
          Intent intent2 = getIntent();
          String s1 = intent2.getStringExtra("FirstText");
          String s2 = intent2.getStringExtra("SecondText");
@@ -37,23 +39,26 @@ public class Feedbacknext extends AppCompatActivity {
          String s4 = intent2.getStringExtra("ForthText");
          String s5 = intent2.getStringExtra("FifthText");
 
-        nt1.setText(s1);
-        nt2.setText(s2);
-        nt3.setText(s3);
-        nt4.setText(s4);
-        nt5.setText(s5);
+         //set details
+         nt1.setText(s1);
+         nt2.setText(s2);
+         nt3.setText(s3);
+         nt4.setText(s4);
+         nt5.setText(s5);
 
 
-
+        //insert data to the db
         btn1.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 DatabaseReference dbRef;
 
+                //db connection
                 dbRef = FirebaseDatabase.getInstance().getReference().child("Feedback");
                 FeedbackTable feedback = new FeedbackTable();
 
+                //Empty field validation
                 if (TextUtils.isEmpty(nt5.getText().toString())){
                     Toast.makeText(getApplicationContext(),"Please enter feedback ID",Toast.LENGTH_SHORT).show();
                 }
@@ -77,12 +82,11 @@ public class Feedbacknext extends AppCompatActivity {
                     feedback.setFeedback(nt4.getText().toString().trim());
 
 
-
-
                     dbRef.child(feedback.getFid()).setValue(feedback);
 
-                    Toast.makeText(getApplicationContext(),"Data Saved Succuessfully!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Data Saved Successfully!",Toast.LENGTH_SHORT).show();
 
+                    //intent to dashboard
                     Intent i1 = new Intent(Feedbacknext.this,StudentDashboard.class);
                     startActivity(i1);
               }
