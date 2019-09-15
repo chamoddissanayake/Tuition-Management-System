@@ -22,7 +22,7 @@ public class FeedBack extends AppCompatActivity {
         setContentView(R.layout.activity_feed_back);
 
         Intent intent = getIntent();
-        String sID = intent.getStringExtra("StudentID");
+        String sID = intent.getStringExtra("sID");
         String sName = intent.getStringExtra("sName");
 
         t1 = findViewById(R.id.editTextID2);
