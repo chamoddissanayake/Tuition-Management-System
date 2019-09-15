@@ -24,10 +24,7 @@ public class searchFeedback extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_feedback);
 
-        Intent intent = getIntent();
-        String sID = intent.getStringExtra("sID");
-        String sName = intent.getStringExtra("sName");
-
+        //set ids
         final EditText t1 = findViewById(R.id.fid1);
         final TextView t2 = findViewById(R.id.fid);
         final TextView t3 = findViewById(R.id.sid2);
@@ -40,9 +37,7 @@ public class searchFeedback extends AppCompatActivity {
         Button b3 = findViewById(R.id.btnDelete);
         Button b4 = findViewById(R.id.btnNext);
 
-        t3.setText(sID);
-        t4.setText(sName);
-
+        //view data from db from a id
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,6 +65,7 @@ public class searchFeedback extends AppCompatActivity {
             }
         });
 
+        //update details
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,7 +75,7 @@ public class searchFeedback extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                         FeedbackTable ft = new FeedbackTable();
-                        
+
                         if(dataSnapshot.hasChild(t2.getText().toString())){
                             ft.setFid(t2.getText().toString());
                             ft.setSid(t3.getText().toString());
@@ -106,6 +102,7 @@ public class searchFeedback extends AppCompatActivity {
             }
         });
 
+        //delete details
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,6 +131,7 @@ public class searchFeedback extends AppCompatActivity {
             }
         });
 
+        //intent to dashboard
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
