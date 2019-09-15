@@ -6,13 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class FeedBack extends AppCompatActivity {
 
     //declare EditTexts
-    EditText t1;
-    EditText t2;
+    TextView t1;
+    TextView t2;
     EditText t3;
     EditText t4;
     EditText t5;
