@@ -36,6 +36,7 @@ public class ViewAllFeedbacks extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_feedbacks);
 
+        //set id
         lv = (ListView) findViewById(R.id.fbListview);
 
         feedbackID = new ArrayList<String>();
@@ -111,7 +112,7 @@ public class ViewAllFeedbacks extends AppCompatActivity {
     }
 }
 
-
+//MyFeedbackAdapter class
 class MyFeedbackAdapter extends ArrayAdapter<String> {
     Context context;
 
