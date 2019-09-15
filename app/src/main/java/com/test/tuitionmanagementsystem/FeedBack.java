@@ -24,7 +24,7 @@ public class FeedBack extends AppCompatActivity {
 
         //get student details from the login
         Intent intent = getIntent();
-        String sID = intent.getStringExtra("StudentID");
+        String sID = intent.getStringExtra("sID");
         String sName = intent.getStringExtra("sName");
 
         //set ids.

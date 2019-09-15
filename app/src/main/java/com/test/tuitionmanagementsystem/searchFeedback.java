@@ -24,6 +24,10 @@ public class searchFeedback extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_feedback);
 
+        Intent intent = getIntent();
+        String sID = intent.getStringExtra("sID");
+        String sName = intent.getStringExtra("sName");
+
         final EditText t1 = findViewById(R.id.fid1);
         final TextView t2 = findViewById(R.id.fid);
         final TextView t3 = findViewById(R.id.sid2);
@@ -35,6 +39,9 @@ public class searchFeedback extends AppCompatActivity {
         Button b2 = findViewById(R.id.btnUpdate);
         Button b3 = findViewById(R.id.btnDelete);
         Button b4 = findViewById(R.id.btnNext);
+
+        t3.setText(sID);
+        t4.setText(sName);
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
