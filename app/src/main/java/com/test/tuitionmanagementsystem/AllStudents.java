@@ -100,14 +100,6 @@ public class AllStudents extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
     }
 }
 
