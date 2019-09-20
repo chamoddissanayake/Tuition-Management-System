@@ -1,7 +1,6 @@
 package com.test.tuitionmanagementsystem;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -12,8 +11,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.annotations.Nullable;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -33,6 +35,8 @@ public class tutorialUploader extends AppCompatActivity {
     Button btnselectFile, btnUpload;
     TextView txtNotification;
     Uri pdfUri;
+    String full_documentLink="";
+    EditText etTopic, etDescription;
 
     FirebaseStorage storage;
     FirebaseDatabase database;
@@ -50,117 +54,98 @@ public class tutorialUploader extends AppCompatActivity {
         btnUpload = findViewById(R.id.btnUpload);
         txtNotification = findViewById(R.id.txtNotification);
 
+        etTopic = (EditText) findViewById(R.id.etTopic);
+        etDescription = (EditText) findViewById(R.id.etDescription);
+
         btnselectFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(ContextCompat.checkSelfPermission(tutorialUploader.this, Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED){
-                    selectPdf();
-                }
-
-                else{
-                    ActivityCompat.requestPermissions(tutorialUploader.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 9);
-                }
-
+                chooseFileOpen();
             }
         });
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(pdfUri != null)
-                    uploadFile(pdfUri);
-                else
-                    Toast.makeText(tutorialUploader.this,"Select a file", Toast.LENGTH_SHORT).show();
-
+                if(TextUtils.isEmpty(etTopic.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Please enter topic",Toast.LENGTH_SHORT).show();
+                }else if(TextUtils.isEmpty(etDescription.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Please enter description",Toast.LENGTH_SHORT).show();
+                }else if(pdfUri == null)
+                {
+                    Toast.makeText(getApplicationContext(),"Please select a file to upload",Toast.LENGTH_SHORT).show();
+                }else{
+                    uploadDocument(pdfUri);
+                    pdfUri = null;
+                }
             }
         });
 
 
     }
 
-    private void uploadFile(Uri pdfUri) {
+    private void uploadDocument(Uri pdfUri) {
+        StorageReference mStorageReference = FirebaseStorage.getInstance().getReference();
 
-
-        final String fileName = System.currentTimeMillis()+"";
-        StorageReference storageReference = storage.getReference();
-
-         storageReference.child("Uploads").child(fileName).putFile(pdfUri)
+        StorageReference sRef = mStorageReference.child("Uploads/" + System.currentTimeMillis() + ".pdf");
+        sRef.putFile(pdfUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        StorageReference mStorageReference = FirebaseStorage.getInstance().getReference();
 
-//                        String url = taskSnapshot.getDownloadUrl().toString();
-//
-//                        DatabaseReference reference = database.getReference();
-//
-//                        reference.child(fileName).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<Void> task) {
-//
-//                                if(task.isSuccessful())
-//                                    Toast.makeText(tutorialUploader.this, "File successfully uploaded", Toast.LENGTH_SHORT).show();
-//                                else
-//                                    Toast.makeText(tutorialUploader.this, "File not successfully uploaded",Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-                        Toast.makeText(tutorialUploader.this, "Uploaded Successfully.", Toast.LENGTH_SHORT).show();
-
-                        String url = FirebaseStorage.getInstance().getReference().child("Uploads").child(fileName).getDownloadUrl().toString();
-
-
+                        Toast.makeText(getApplicationContext(),"Uploaded successfully",Toast.LENGTH_LONG).show();
+                        txtNotification.setText("File not selected");
+                        full_documentLink  = taskSnapshot.getMetadata().getReference().toString();
+                        //Add Record to DB
+                        addTutorialUploadingDataToDb();
 
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-                Toast.makeText(tutorialUploader.this, "File not successfully uploaded", Toast.LENGTH_SHORT).show();
-
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-
-            }
-        });
-
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    private void addTutorialUploadingDataToDb() {
+        String inputTopic, inputDescription;
+        inputTopic = etTopic.getText().toString();
+        inputDescription = etDescription.getText().toString();
 
-        if(requestCode == 9 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-        {
-            selectPdf();
-        }
+        DatabaseReference addTutRef = FirebaseDatabase.getInstance().getReference().child("TutorialUploads");
 
-        else
+        TutorialUploads uploadObj = new TutorialUploads();
+        uploadObj.setTopic(inputTopic);
+        uploadObj.setDescription(inputDescription);
+        uploadObj.setUploadPath(full_documentLink);
 
-            Toast.makeText(tutorialUploader.this, "Please provide Permisson", Toast.LENGTH_SHORT).show();
+        addTutRef.push().setValue(uploadObj);
+        Toast.makeText(getApplicationContext(),"Record Added successfully",Toast.LENGTH_SHORT).show();
 
-
+        etDescription.setText("");
+        etTopic.setText("");
     }
 
-    private void selectPdf() {
+    private void chooseFileOpen() {
 
-        Intent i55 = new Intent();
-        i55.setType("application/pdf");
-        i55.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(i55,86);
+        Intent intent = new Intent();
+        intent.setType("application/pdf");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,1);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == 86 && resultCode == RESULT_OK && data != null){
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if(requestCode==1 && resultCode==RESULT_OK && data !=  null && data.getData() != null){
             pdfUri = data.getData();
-        }
-        else{
-
-            Toast.makeText(tutorialUploader.this,"Please select a file", Toast.LENGTH_SHORT).show();
-
+            txtNotification.setText("File Selected.");
         }
     }
+
 }
