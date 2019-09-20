@@ -48,6 +48,7 @@ import java.io.File;
 
 public class StudentRegistration extends AppCompatActivity {
 
+    //declare edittext
     TextView tx1, tx2;
     EditText etsName, etAdmissionNo, etAddress, etContactNo, etPassword, etRePassword;
     ImageView imgViewInputPhoto;
@@ -149,9 +150,6 @@ public class StudentRegistration extends AppCompatActivity {
 
         });
 
-
-
-
         btnTakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -212,9 +210,6 @@ public class StudentRegistration extends AppCompatActivity {
 
 
     }
-
-
-
 
 
     private void registerStudent() {

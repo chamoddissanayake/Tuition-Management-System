@@ -33,8 +33,21 @@
     <string name="students_registration">Students Registration</string>
     <string name="contactno">ContactNo</string>
     <string name="address">Address</string>
+    <string name="password">Password</string>
+    <string name="Reenter_password">Reenter_Password</string>
     <string name="admissionno">AdmissionNo</string>
-    <string name="submit">Submit</string>
+    <string name="register">Register</string>
+    <string name="take">Take photo</string>
+    <string name="choose">Choose photo</string>
+    <string name="etsName">StudentName</string>
+    <string name="etAdmissionNo">AdmissionNo</string>
+    <string name="contact">ContactNo</string>
+    <string name="password1">Reenter_Password</string>
+
+
+
+
+
     <string name="studentName">Student Name</string>
     <string name="edit_details">Edit Details</string>
     <string name="studentname">StudentName</string>
