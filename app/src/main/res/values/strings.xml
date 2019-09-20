@@ -86,6 +86,8 @@
     <string name="subHomework">Submit Homework</string>
     <string name="UpdateHomework">Update</string>
     <string name="DeleteHomework">Delete</string>
+    <string name="upload">Upload</string>
+    <string name="update_delete">Update and Delete</string>
     <string name="title_activity_maps">Map</string>
 
 </resources>

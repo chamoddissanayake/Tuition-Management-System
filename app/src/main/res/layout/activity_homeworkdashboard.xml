@@ -11,24 +11,23 @@
         android:id="@+id/btnuploadHomework"
         android:layout_width="162dp"
         android:layout_height="40dp"
-        android:text="Upload Homework"
+        android:text="@string/upload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.617"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.366" />
+        app:layout_constraintVertical_bias="0.338" />
 
     <Button
         android:id="@+id/btnviewHomework"
-        android:layout_width="155dp"
-        android:layout_height="42dp"
-        android:text="Update/Delete Homework"
+        android:layout_width="184dp"
+        android:layout_height="65dp"
+        android:text="@string/update_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.587"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537" />
+        app:layout_constraintVertical_bias="0.526" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
