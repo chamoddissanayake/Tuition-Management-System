@@ -72,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-               // Toast.makeText(getApplicationContext(),"aaaa",Toast.LENGTH_SHORT).show();
                 validateUsernameLength();
                 validateUsername();
             }
