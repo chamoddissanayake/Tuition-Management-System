@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +49,7 @@ public class TeacherAddResults extends AppCompatActivity {
     TextView fileChooseStatus;
     Uri pdfuri;
     String full_documentLink="";
+    ProgressBar pb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,8 @@ public class TeacherAddResults extends AppCompatActivity {
 
         Add = (Button) findViewById(R.id.btnAdd);
 
+        pb=findViewById(R.id.progress_loader);
+
         UploadTask uploadTask;
 
         Add.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +91,11 @@ public class TeacherAddResults extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Please Fill Marks",Toast.LENGTH_SHORT).show();
                 }else if(Integer.parseInt(mark.getText().toString()) >100 || Integer.parseInt(mark.getText().toString()) <0){
                     Toast.makeText(getApplicationContext(),"Marks should be in  range 0 - 100",Toast.LENGTH_SHORT).show();
-                }else{
+                }else if(pdfuri == null){
+                    Toast.makeText(getApplicationContext(),"Please select a file to upload",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    pb.setVisibility(view.VISIBLE);
                     uploadDocument(pdfuri);
 
 
@@ -127,10 +135,12 @@ public class TeacherAddResults extends AppCompatActivity {
         stdtkExamObj.setDocumentLink(full_documentLink);
 
         addMarkRef.child(stdtkExamObj.getExamID()).child(stdtkExamObj.getsID()).setValue(stdtkExamObj);
+        pb.setVisibility(View.GONE);
         Toast.makeText(getApplicationContext(),"Added to database successfully.",Toast.LENGTH_LONG).show();
 
 
         mark.setText("");
+
         
     }
 
@@ -146,7 +156,7 @@ public class TeacherAddResults extends AppCompatActivity {
                         StorageReference mStorageReference = FirebaseStorage.getInstance().getReference();
 
                         Toast.makeText(getApplicationContext(),"Uploaded successfully",Toast.LENGTH_LONG).show();
-                        btnChooseResultFile.setText("File not selected");
+                        fileChooseStatus.setText("File not selected");
                         //full_documentLink = taskSnapshot.getUploadSessionUri().toString();
                         full_documentLink  = taskSnapshot.getMetadata().getReference().toString();
                         addResultsToDb();
@@ -157,6 +167,7 @@ public class TeacherAddResults extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
                         Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                        pb.setVisibility(View.GONE);
                     }
                 });
 

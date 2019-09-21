@@ -98,6 +98,31 @@
     <string name="upload">Upload</string>
     <string name="update_delete">Update and Delete</string>
     <string name="title_activity_maps">Map</string>
+    <string name="choose_a_file_to_upload">Choose a File to upload</string>
+    <string name="add_result">Add Result</string>
+    <string name="file_not_selected">File not selected</string>
+    <string name="dash">-</string>
+    <string name="update_result">update</string>
+
+    <string name="student_id_result">Student ID :</string>
+
+    <string name="dashsymbol1">-</string>
+    <string name="subject_name">Subject Name :</string>
+    <string name="dashsymb2">-</string>
+    <string name="dashsymb3">-</string>
+    <string name="dashsymb4">Mark :</string>
+    <string name="view_results_of_all_students">View Results of All Students</string>
+    <string name="results_of_all_students">Results of All Students</string>
+    <string name="student_id_result1">Student ID:</string>
+    <string name="subject_name_result_row">Subject Name:</string>
+    <string name="exam_id_result_row">Exam ID:</string>
+    <string name="document_result_row">Document :</string>
+    <string name="dash_result_row">_</string>
+    <string name="mark_result_row">Mark :</string>
+    <string name="dash1_result_row">_</string>
+    <string name="dash2_result_row">_</string>
+    <string name="dash3_result_row">_</string>
+    <string name="dash4_result_row">_</string>
 
     <string name="staff">Staff Registration</string>
     <string name="txtTID">Teacher ID</string>

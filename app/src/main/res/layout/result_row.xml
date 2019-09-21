@@ -25,31 +25,31 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Student ID: "
+            android:text="@string/student_id_result1"
             android:textStyle="bold"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Subject Name:         "
+            android:text="@string/subject_name_result_row"
             android:textStyle="bold"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Exam ID: "
+            android:text="@string/exam_id_result_row"
             android:textStyle="bold"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Mark :"
+            android:text="@string/mark_result_row"
             android:textStyle="bold"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Document :"
+            android:text="@string/document_result_row"
             android:textStyle="bold"
             />
     </LinearLayout>
@@ -61,31 +61,31 @@
                 android:id="@+id/tvStudentId"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="_"
+                android:text="@string/dash1_result_row"
                 />
         <TextView
             android:id="@+id/tvSubjectName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="_"
+            android:text="@string/dash_result_row"
             />
         <TextView
             android:id="@+id/tvExamID"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="_"
+            android:text="@string/dash2_result_row"
             />
         <TextView
             android:id="@+id/tvMark"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="_      "
+            android:text="@string/dash3_result_row"
             />
         <TextView
             android:id="@+id/tvDocument"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="_      "
+            android:text="@string/dash4_result_row"
             />
 
     </LinearLayout>
