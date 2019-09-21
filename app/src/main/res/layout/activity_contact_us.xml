@@ -13,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
-        android:text="Contact Us"
-        android:textSize="30dp"
+        android:text="@string/contact1"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
@@ -29,10 +29,10 @@
         android:layout_marginTop="160dp"
 
         android:background="@android:color/transparent"
+        android:contentDescription="@string/phone"
         android:src="@drawable/phone_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 
     <EditText
@@ -41,8 +41,9 @@
         android:layout_height="67dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="296dp"
+        android:autofillHints="@string/type"
         android:ems="10"
-        android:hint="Type Your Message Here"
+        android:hint="@string/type"
         android:inputType="textMultiLine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -53,6 +54,7 @@
         android:layout_height="74dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="392dp"
+        android:contentDescription="@string/phone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/whatsapp_logo" />
@@ -63,6 +65,7 @@
         android:layout_height="74dp"
         android:layout_marginStart="164dp"
         android:layout_marginTop="392dp"
+        android:contentDescription="@string/phone"
         android:src="@drawable/sms_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -73,6 +76,7 @@
         android:layout_height="74dp"
         android:layout_marginStart="272dp"
         android:layout_marginTop="392dp"
+        android:contentDescription="@string/phone"
         android:src="@drawable/emaillogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

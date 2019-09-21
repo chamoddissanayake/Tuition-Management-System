@@ -11,6 +11,10 @@
     <string name="hi_message">Hi message</string>
     <string name="teacher_dashboard">Teacher Dashboard</string>
     <string name="hi">Hi</string>
+    <string name="contact1">Contact Us</string>
+    <string name="phone"></string>
+    <string name="type">Type your message here</string>
+
     <string name="student_results_management_dashboard">Student Results Management Dashboard</string>
     <string name="name">Name:</string>
     <string name="subject">Subject</string>
