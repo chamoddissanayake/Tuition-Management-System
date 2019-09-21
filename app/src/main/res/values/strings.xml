@@ -43,6 +43,7 @@
     <string name="password">Password</string>
     <string name="Reenter_password">Reenter_Password</string>
     <string name="admissionno">AdmissionNo</string>
+    <string name="editS">Edit Student Details</string>
     <string name="register">Register</string>
     <string name="take">Take photo</string>
     <string name="choose">Choose photo</string>
