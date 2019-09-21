@@ -86,6 +86,8 @@
 
     <string name="tute">Tutorial of the week</string>
     <string name="todo">To Do List</string>
+    <string name="tuition"></string>
+    <string name="homework1"></string>
     <string name="homework">Homework of the week</string>
     <string name="subDate">Submision Date</string>
     <string name="subHomework">Submit Homework</string>
