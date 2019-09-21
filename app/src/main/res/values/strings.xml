@@ -45,7 +45,10 @@
     <string name="password1">Reenter_Password</string>
     <string name="register1">Register</string>
     <string name="viewd">ViewDetails</string>
+    <string name="student">Student Management</string>
     <string name="viewall">View All StudentDetails</string>
+    <string name="imgViewInputPhoto"></string>
+
 
 
 
