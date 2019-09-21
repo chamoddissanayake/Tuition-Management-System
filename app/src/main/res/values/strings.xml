@@ -20,6 +20,8 @@
     <string name="student_id">Student ID</string>
     <string name="mark">Mark</string>
     <string name="add">ADD</string>
+    <string name="addResult">Add Result</string>
+    <string name="ChooseFile">Choose a File to upload</string>
     <string name="search_result_of_a_student">Search Result of a student</string>
     <string name="add_student_results">Add student Results</string>
     <string name="update_delete_student_results">Update | Delete Student Results</string>
@@ -96,5 +98,25 @@
     <string name="upload">Upload</string>
     <string name="update_delete">Update and Delete</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="staff">Staff Registration</string>
+    <string name="txtTID">Teacher ID</string>
+    <string name="registerT">Register Teacher</string>
+    <string name="NIC">NIC</string>
+    <string name="telephone">Telephone</string>
+    <string name="email">Email</string>
+    <string name="qualifications">Qualifications</string>
+    <string name="specified">Specified Subjects</string>
+    <string name="passwrd">Password</string>
+    <string name="takephoto">Take Photo</string>
+    <string name="photo"></string>
+
+
+
+
+    <string name="tName">Name</string>
+
+
+
 
 </resources>
