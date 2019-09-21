@@ -14,6 +14,7 @@
     <string name="contact1">Contact Us</string>
     <string name="phone"></string>
     <string name="type">Type your message here</string>
+    <string name="locate">Locate Us</string>
 
     <string name="student_results_management_dashboard">Student Results Management Dashboard</string>
     <string name="name">Name:</string>

@@ -13,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
-        android:text="Locate Us"
-        android:textSize="30dp"
+        android:text="@string/locate"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
@@ -26,11 +26,11 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="176dp"
+        android:background="@drawable/maplocation"
+        android:contentDescription="@string/phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/maplocation"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageButton
@@ -39,6 +39,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="460dp"
         android:adjustViewBounds="true"
+        android:contentDescription="@string/phone"
         android:scaleType="fitXY"
         android:src="@drawable/startnavi"
         app:layout_constraintEnd_toEndOf="parent"
