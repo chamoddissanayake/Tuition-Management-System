@@ -123,6 +123,7 @@
     <string name="dash2_result_row">_</string>
     <string name="dash3_result_row">_</string>
     <string name="dash4_result_row">_</string>
+    <string name="details_of_all_students">Details of All Students</string>
 
     <string name="staff">Staff Registration</string>
     <string name="txtTID">Teacher ID</string>

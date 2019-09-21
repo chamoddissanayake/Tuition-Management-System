@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
 
         android:layout_marginTop="36dp"
-        android:text="Details of All Students"
+        android:text="@string/details_of_all_students"
         android:textSize="28dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/stdListview"
