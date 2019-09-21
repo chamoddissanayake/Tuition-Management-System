@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Homework extends AppCompatActivity {
     EditText txtdesc;
     Button btnsubmithome;
-    Button update,delete;
+//    Button update,delete;
 
     EditText txthomeworkID, txtsubName, txtHomeworkDescription;
 
@@ -37,6 +37,9 @@ public class Homework extends AppCompatActivity {
 
         txtdesc = (EditText)findViewById(R.id.txt_HomeworkDescription);
         btnsubmithome = (Button)findViewById(R.id.btnSubmitHomework);
+
+//        update = findViewById(R.id.btnUpdate);
+//        delete = findViewById(R.id.btnDelete);
 
         btnsubmithome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,22 +88,21 @@ public class Homework extends AppCompatActivity {
         });
 
 
-        update = findViewById(R.id.btnUpdate);
-        delete = findViewById(R.id.btnDelete);
 
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view," updated successfully",Snackbar.LENGTH_SHORT).setAction("Action",null).show();
-            }
-        });
 
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view," Deleted successfully",Snackbar.LENGTH_SHORT).setAction("Action",null).show();
-            }
-        });
+//        update.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view," updated successfully",Snackbar.LENGTH_SHORT).setAction("Action",null).show();
+//            }
+//        });
+//
+//        delete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view," Deleted successfully",Snackbar.LENGTH_SHORT).setAction("Action",null).show();
+//            }
+//        });
 
 
 
