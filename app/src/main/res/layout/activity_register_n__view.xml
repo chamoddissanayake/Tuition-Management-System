@@ -34,7 +34,7 @@
             android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#239BFF"
+            android:background="#BDC3C7"
             android:text="@string/register1" />
 
         <Button
@@ -42,15 +42,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="#239BFF"
+            android:background="#BDC3C7"
             android:text="@string/viewd" />
 
         <Button
             android:id="@+id/btnAllview"
             android:layout_width="match_parent"
-            android:background="#239BFF"
             android:layout_height="wrap_content"
-            android:text="@string/View_All_studentDetails"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:background="#BDC3C7"
+            android:text="@string/View_All_studentDetails" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

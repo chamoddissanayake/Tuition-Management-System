@@ -93,11 +93,12 @@
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#7B9EF8"
+        android:background="#BDC3C7"
         android:text="@string/login_submit_button_txt" />
 
 

@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bbg"
+    android:background="@drawable/wallpaper1"
     tools:context=".view_of_homework">
 
     <Button
         android:id="@+id/btnsearchDetails"
         android:layout_width="119dp"
         android:layout_height="50dp"
+        android:background="#BDC3C7"
         android:text="Search Details"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,6 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#BDC3C7"
             android:text="@string/UpdateHomework" />
 
         <Button
@@ -87,6 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#239BFF"
             android:text="@string/DeleteHomework" />
     </LinearLayout>
 

@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/wallpaper1"
     tools:context=".searchFeedback">
 
     <Button
         android:id="@+id/btnView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#BDC3C7"
         android:fontFamily="sans-serif-black"
         android:text="View"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -163,6 +164,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#BDC3C7"
             android:fontFamily="sans-serif-black"
             android:text="Update" />
 
@@ -171,6 +173,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#239BFF"
             android:fontFamily="sans-serif-black"
             android:text="Delete" />
 
@@ -179,6 +182,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#BDC3C7"
             android:fontFamily="sans-serif-black"
             android:text="Dashboard" />
     </LinearLayout>

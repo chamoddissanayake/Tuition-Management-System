@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/wallpaper1"
     tools:context=".MainFeedback">
 
     <Button
         android:id="@+id/btnuploadHomework"
         android:layout_width="162dp"
         android:layout_height="40dp"
+        android:background="#BDC3C7"
         android:text="@string/upload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,6 +24,7 @@
         android:id="@+id/btnviewHomework"
         android:layout_width="184dp"
         android:layout_height="65dp"
+        android:background="#BDC3C7"
         android:text="@string/update_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

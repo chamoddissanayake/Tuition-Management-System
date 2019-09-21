@@ -170,14 +170,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:background="#BDC3C7"
             android:text="@string/show_my_results"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.884"
-            android:background="#FF24A0ED"
-            />
+            app:layout_constraintVertical_bias="0.884" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -236,8 +235,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="87dp"
                 android:layout_marginTop="2dp"
-                android:background="#9187FF"
                 android:layout_marginEnd="101dp"
+                android:background="#BDC3C7"
                 android:text="Download Result Sheet" />
 
         </RelativeLayout>
