@@ -43,7 +43,9 @@
     <string name="etAdmissionNo">AdmissionNo</string>
     <string name="contact">ContactNo</string>
     <string name="password1">Reenter_Password</string>
-
+    <string name="register1">Register</string>
+    <string name="viewd">ViewDetails</string>
+    <string name="viewall">View All StudentDetails</string>
 
 
 

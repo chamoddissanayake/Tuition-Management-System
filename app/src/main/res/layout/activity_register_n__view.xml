@@ -35,15 +35,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#239BFF"
-            android:text="Register" />
+            android:text="@string/register1" />
 
         <Button
             android:id="@+id/btnView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="#239BFF"
-            android:text="View Details"
-            android:layout_marginTop="10dp"/>
+            android:text="@string/viewd" />
 
         <Button
             android:id="@+id/btnAllview"
