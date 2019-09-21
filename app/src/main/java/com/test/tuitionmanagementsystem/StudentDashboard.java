@@ -16,6 +16,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +44,29 @@ public class StudentDashboard extends AppCompatActivity {
         //Swipe video - start
         videoList = new ArrayList<>();
 
+//        DatabaseReference readRefYtd = FirebaseDatabase.getInstance().getReference().child("YoutubeLinks");
+//
+//        readRefYtd.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+//                    String img, title, link;
+//                    img = dsp.child("image").getValue().toString();
+//                    title = dsp.child("title").getValue().toString();
+//                    link = dsp.child("link").getValue().toString();
+//
+//
+//                videoList.add(new ModelVideo(img, title, link));
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+
         videoList.add(new ModelVideo(
                 "https://i.ytimg.com/vi/VS07PI3rEE4/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLDK-RGXEwXcLieu2W1kpqI7JB-qDA",
                 "Tissa Jananayake - Episode 20 | කොහොම හරි කැම්පස් යන්නයි ඕනේ",
@@ -48,7 +77,8 @@ public class StudentDashboard extends AppCompatActivity {
                 "Tissa Jananayake - Episode 19 | දත ගැලවීම",
                 "https://www.youtube.com/watch?v=3H4t_G5SJDw"));
 
-        videoList.add(new ModelVideo("https://i.ytimg.com/vi/KiLjS9n7YTQ/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLA66Cq70iotzHWy2Ys3_i4fnZj2DQ",
+        videoList.add(new ModelVideo(
+                "https://i.ytimg.com/vi/KiLjS9n7YTQ/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLA66Cq70iotzHWy2Ys3_i4fnZj2DQ",
                 "Tissa Jananayake - Episode 18 | ටියුෂන් කාරයාගේ ඇතුලාන්තය",
                 "https://www.youtube.com/watch?v=KiLjS9n7YTQ"));
 

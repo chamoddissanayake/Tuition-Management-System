@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     boolean answer = false;
     ProgressBar pb;
     String  A_StudentID, A_name, A_address, A_tel, A_photo_link;
+    String  A_TeacherID, A_TeacherName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //block screen rotation
@@ -158,31 +159,28 @@ public class LoginActivity extends AppCompatActivity {
 
                     validateStudentCredentials();
 
-
-
-
-
             }else if(selectedRadioButtonText.equals("Teacher")){
-                if(validateTeacherCredentials()){
-                    //If found fetch Teacher data(id, name....) from database.
-                    String usernameInput = textInputUsername.getEditText().getText().toString();
-                    String userpasswordInput = textInputPassword.getEditText().getText().toString();
-                    //   fetchTeacherDataFromDB(usernameInput,userpasswordInput);    ->Return details of the teacher.
+//                if(validateTeacherCredentials()){
+                    validateTeacherCredentials();
+//                    //If found fetch Teacher data(id, name....) from database.
+//                    String usernameInput = textInputUsername.getEditText().getText().toString();
+//                    String userpasswordInput = textInputPassword.getEditText().getText().toString();
+//                    //   fetchTeacherDataFromDB(usernameInput,userpasswordInput);    ->Return details of the teacher.
+//
+//                    //Sample values
+//                    String  TeacherID = "STF001";
+//                    String name = "Saman";
+//
+//
+//                    Intent i = new Intent(getApplicationContext(),TeacherDashboard.class);
+//                    i.putExtra("TeacherID",TeacherID);
+//                    i.putExtra("tName",name);
+//                    startActivity(i);
 
-                    //Sample values
-                    String  TeacherID = "STF001";
-                    String name = "Saman";
-
-
-                    Intent i = new Intent(getApplicationContext(),TeacherDashboard.class);
-                    i.putExtra("TeacherID",TeacherID);
-                    i.putExtra("tName",name);
-                    startActivity(i);
-
-                }else{
-                    //Teacher credentials are incorrect.
-                    Toast.makeText(getApplicationContext(),"Teacher: Your Username or Password Incorrect.",Toast.LENGTH_SHORT).show();
-                }
+//                }else{
+//                    //Teacher credentials are incorrect.
+//                    Toast.makeText(getApplicationContext(),"Teacher: Your Username or Password Incorrect.",Toast.LENGTH_SHORT).show();
+//                }
             }
 
 
@@ -193,11 +191,80 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean validateTeacherCredentials() {
-        String usernameInput = textInputUsername.getEditText().getText().toString();
-        String userpasswordInput = textInputPassword.getEditText().getText().toString();
+        final String usernameInput = textInputUsername.getEditText().getText().toString();
+        final String userpasswordInput = textInputPassword.getEditText().getText().toString();
         //Teacher Credentials validation is here.
 
-        return true;
+        DatabaseReference dbRef_Validate = FirebaseDatabase.getInstance().getReference().child("TeacherCredentials");
+        dbRef_Validate.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(usernameInput)){
+
+                    String saltFormDb = dataSnapshot.child(usernameInput).child("salt").getValue().toString();
+                    String secPwdFromDb = dataSnapshot.child(usernameInput).child("securedPassword").getValue().toString();
+                    if(PasswordUtils.verifyUserPassword(userpasswordInput,secPwdFromDb,saltFormDb)){
+                        answer = true;
+
+                        getTeacherData();
+                    }else{
+                        answer = false;
+                        pb.setVisibility(View.GONE);
+                        Toast.makeText(getApplicationContext(),"Password Incorrect",Toast.LENGTH_SHORT).show();
+                    };
+
+                }else{
+                    Toast.makeText(getApplicationContext(),"Teacher not found",Toast.LENGTH_SHORT).show();
+                    pb.setVisibility(View.GONE);
+                    answer = false;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                answer = false;
+            }
+        });
+
+        return answer;
+    }
+
+    private void getTeacherData() {
+        //If found fetch Student data(id, name....) from database.
+        final String usernameInput = textInputUsername.getEditText().getText().toString();
+        final String userpasswordInput = textInputPassword.getEditText().getText().toString();
+        //   fetchStudentDataFromDB(usernameInput,userpasswordInput);    ->Return details of the Teacher.
+
+        final DatabaseReference readLoginRef =  FirebaseDatabase.getInstance().getReference().child("Teacher");
+        readLoginRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(usernameInput)){
+
+                    A_TeacherID = dataSnapshot.child(usernameInput).child("tid").getValue().toString();
+                    A_TeacherName = dataSnapshot.child(usernameInput).child("tName").getValue().toString();
+                    pb.setVisibility(View.GONE);
+
+
+                    Intent i = new Intent(getApplicationContext(),TeacherDashboard.class);
+                    i.putExtra("TeacherID",A_TeacherID);
+                    i.putExtra("tName",A_TeacherName);
+                    pb.setVisibility(View.GONE);
+                    startActivity(i);
+
+                }else{
+                    pb.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(),"Error occurred.",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
     private boolean validateStudentCredentials() {
@@ -226,7 +293,7 @@ public class LoginActivity extends AppCompatActivity {
                     };
 
                 }else{
-                    Toast.makeText(getApplicationContext(),"User not found",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Student not found",Toast.LENGTH_SHORT).show();
                     pb.setVisibility(View.GONE);
                     answer = false;
                 }
