@@ -31,7 +31,7 @@
             android:id="@+id/btnView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#24A0ED"
+            android:background="#BDC3C7"
             android:fontFamily="sans-serif-black"
             android:onClick="viewFeedback"
             android:text="@string/view" />
