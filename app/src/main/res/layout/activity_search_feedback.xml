@@ -14,7 +14,10 @@
         android:background="#BDC3C7"
         android:fontFamily="sans-serif-black"
         android:text="View"
-        app:layout_constraintBottom_toBottomOf="parent"
+        
+
+
+    app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -185,5 +188,8 @@
             android:background="#BDC3C7"
             android:fontFamily="sans-serif-black"
             android:text="Dashboard" />
+
+
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

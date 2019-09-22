@@ -12,7 +12,7 @@
         android:id="@+id/btnAdd"
         android:layout_width="330dp"
         android:layout_height="45dp"
-        android:layout_marginTop="236dp"
+        android:layout_marginTop="228dp"
         android:background="#BDC3C7"
         android:fontFamily="sans-serif-black"
         android:onClick="addFeedback"
@@ -22,7 +22,7 @@
         app:layout_constraintHorizontal_bias="0.604"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.088" />
+        app:layout_constraintVertical_bias="0.076" />
 
     <Button
         android:id="@+id/btnView2"
@@ -36,7 +36,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.604"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
