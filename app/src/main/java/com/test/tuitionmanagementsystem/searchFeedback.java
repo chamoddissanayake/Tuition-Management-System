@@ -88,6 +88,9 @@ public class searchFeedback extends AppCompatActivity {
 
                             Toast.makeText(getApplicationContext(),"Data updated successfully!",Toast.LENGTH_SHORT).show();
 
+                            Intent i1 = new Intent(searchFeedback.this,StudentDashboard.class);
+                            startActivity(i1);
+
                         }else{
                             Toast.makeText(getApplicationContext(),"No sourse to update",Toast.LENGTH_SHORT).show();
 
@@ -115,7 +118,8 @@ public class searchFeedback extends AppCompatActivity {
                             dbRef.removeValue();
 
                             Toast.makeText(getApplicationContext(),"Data deleted succesfully!",Toast.LENGTH_SHORT).show();
-
+                            Intent i2 = new Intent(searchFeedback.this,StudentDashboard.class);
+                            startActivity(i2);
                         }
 
                         else{
