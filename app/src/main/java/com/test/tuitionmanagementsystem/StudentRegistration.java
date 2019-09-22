@@ -49,7 +49,7 @@ import java.io.File;
 public class StudentRegistration extends AppCompatActivity {
 
     //declare edittext
-    TextView tx1, tx2;
+   // TextView tx1, tx2;
     EditText etsName, etAdmissionNo, etAddress, etContactNo, etPassword, etRePassword;
     ImageView imgViewInputPhoto;
 
@@ -90,11 +90,11 @@ public class StudentRegistration extends AppCompatActivity {
 
         imgViewInputPhoto= findViewById(R.id.imgViewInputPhoto);
 
-        tx1 = findViewById(R.id.tNamelbl);
-        tx2 = findViewById(R.id.tIDlbl);
+//        tx1 = findViewById(R.id.tNamelbl);
+//        tx2 = findViewById(R.id.tIDlbl);
 
-        tx1.setText(ID);
-        tx2.setText(Name);
+//        tx1.setText(ID);
+//        tx2.setText(Name);
 
         btnSave = findViewById(R.id.Submitbutton);
 
