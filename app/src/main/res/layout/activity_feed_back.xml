@@ -24,6 +24,7 @@
             android:id="@+id/editTextFid2"
             android:layout_width="match_parent"
             android:layout_height="58dp"
+            android:autofillHints="@string/fid"
             android:ems="10"
             android:hint="@string/fid"
             android:inputType="textPersonName" />
@@ -32,6 +33,7 @@
             android:id="@+id/editTextSubject2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints="@string/subject123"
             android:ems="10"
             android:hint="@string/subject123"
             android:inputType="textPersonName" />
@@ -40,6 +42,7 @@
             android:id="@+id/editTextFeedback2"
             android:layout_width="match_parent"
             android:layout_height="249dp"
+            android:autofillHints="@string/feedback123"
             android:ems="10"
             android:gravity="start|top"
             android:hint="@string/feedback123"
@@ -49,6 +52,7 @@
             android:id="@+id/editTextName2"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:autofillHints="@string/studentName123"
             android:ems="10"
             android:hint="@string/studentName123"
             android:inputType="textPersonName" />
