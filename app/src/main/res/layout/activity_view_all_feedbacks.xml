@@ -27,8 +27,8 @@
 
     <ListView
         android:id="@+id/fbListview"
-        android:layout_width="394dp"
-        android:layout_height="623dp"
+        android:layout_width="415dp"
+        android:layout_height="563dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
