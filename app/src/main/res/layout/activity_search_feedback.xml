@@ -14,7 +14,7 @@
         android:background="#BDC3C7"
         android:fontFamily="sans-serif-black"
         android:text="View"
-        
+
 
 
     app:layout_constraintBottom_toBottomOf="parent"

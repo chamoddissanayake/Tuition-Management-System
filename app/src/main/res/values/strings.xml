@@ -44,6 +44,8 @@
     <string name="Reenter_password">Reenter_Password</string>
     <string name="admissionno">AdmissionNo</string>
     <string name="editS">Edit Student Details</string>
+    <string name="edityr">Edit Your Details</string>
+
     <string name="register">Register</string>
     <string name="take">Take photo</string>
     <string name="choose">Choose photo</string>
@@ -80,11 +82,14 @@
     <string name="give">Give Feedback</string>
     <string name="view">View Feddback</string>
     <string name="fid">Feddback Id</string>
+    <string name="viewNoti">View Notifications</string>
 
     <string name="studentId123">Student ID</string>
     <string name="studentName123">Student Name</string>
     <string name="subject123">Subject</string>
     <string name="feedback123">Feedback</string>
+    <string name="notification">Notification</string>
+    <string name="sendnotifi">Send Notification</string>
 
     <string name="studentId1234">Student ID</string>
     <string name="studentName1234">Student Name</string>
@@ -108,7 +113,13 @@
     <string name="add_result">Add Result</string>
     <string name="file_not_selected">File not selected</string>
     <string name="dash">-</string>
+    <string name="topic">Topic</string>
+    <string name="description">Description</string>
+    <string name="selectF">Select File</string>
+    <string name="upload12">Upload</string>
+    <string name="nofile">No file is selected</string>
     <string name="update_result">update</string>
+    <string name="viewandDownload">View And Download all Tutorials</string>
 
     <string name="student_id_result">Student ID :</string>
 

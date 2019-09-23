@@ -89,20 +89,13 @@ public class AllStudents extends AppCompatActivity {
                         }
                     });
                 }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
-
-
-
     }
 }
-
 class MyStudentAdapter extends ArrayAdapter<String> {
     Context context;
 
@@ -111,7 +104,6 @@ class MyStudentAdapter extends ArrayAdapter<String> {
     ArrayList address;
     ArrayList telephone;
     ArrayList photo_link;
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -135,6 +127,7 @@ class MyStudentAdapter extends ArrayAdapter<String> {
                 .into(stdPhoto);
         return stdrow;
     }
+
     MyStudentAdapter(Context c,ArrayList studentID, ArrayList studentName, ArrayList address, ArrayList telephone, ArrayList photo_link){
         super(c, R.layout.student_row, R.id.tvStudentID, studentID);
         this.context = c;
