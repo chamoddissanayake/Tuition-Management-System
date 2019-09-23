@@ -10,17 +10,18 @@
     tools:context=".LoginActivity">
 
 
-
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="99dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/LoadingName"
-
-        app:srcCompat="@drawable/logo" />
-
+        android:layout_width="241dp"
+        android:layout_height="97dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/classlogo" />
 
     <LinearLayout
         android:layout_width="match_parent"
