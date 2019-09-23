@@ -38,9 +38,11 @@ public class TeacherSubjectListner implements ValueEventListener {
 //                    Toast.makeText(getApplicationContext(),teacherObj.getSpecialized_subject()+"",Toast.LENGTH_SHORT).show();
             teacherSubject.setText(teacherObj.getSpecialized_subject());
             if(studentIDspn!=null) {
+                //load students for the teacher(Subject)
                 TeacherResultManager.loadStudentsOfTeacher(appContext, teacherObj, studentIDspn);
             }
             if(resultExamId!=null) {
+                //load subjects for the exam
                 TeacherResultManager.loadSubjectExams(appContext, teacherObj, resultExamId);
             }
 

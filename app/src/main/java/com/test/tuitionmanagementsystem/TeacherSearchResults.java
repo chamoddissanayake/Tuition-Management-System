@@ -75,6 +75,8 @@ public class TeacherSearchResults extends AppCompatActivity {
                     final String sid = studentIDforSearch.getText().toString();
                     final String eId = examIDforSearch.getText().toString();
 
+                    //Search Result of selected Student, Exam ID
+
 //                    Toast.makeText(getApplicationContext(),"Search clicked"+sid+""+eId,Toast.LENGTH_SHORT).show();
 
                     DatabaseReference dbRefSearchSpecificResult = FirebaseDatabase.getInstance().getReference().child("Student_take_exam");

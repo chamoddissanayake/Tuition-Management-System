@@ -83,6 +83,7 @@ public class VideoAdapter extends PagerAdapter {
                 Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + youtubeLinkID));
                 Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + youtubeLinkID ));
                 try {
+                    appIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(appIntent);
                 } catch (ActivityNotFoundException ex) {
                     context.startActivity(webIntent);

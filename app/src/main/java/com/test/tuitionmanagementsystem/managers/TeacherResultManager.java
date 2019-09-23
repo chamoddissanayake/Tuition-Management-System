@@ -35,6 +35,7 @@ public class TeacherResultManager {
                     ArrayList<String> studentList = new ArrayList<>();
                     for(DataSnapshot ds : slist.getChildren()) {
 
+                        //Get IDs of students in his class.
                         String studentId = ds.getKey();
 
                         Student std= new Student();
@@ -79,6 +80,7 @@ public class TeacherResultManager {
                     ArrayList<String> ExamIDArrList = new ArrayList<>();
                     for(DataSnapshot ds : examIDList.getChildren()) {
 
+                        //Get exam IDs of the subject
                         String examId = ds.getKey();
 
                         SubjectExam subjectExamObj = new SubjectExam();

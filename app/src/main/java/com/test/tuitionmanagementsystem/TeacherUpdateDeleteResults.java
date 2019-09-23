@@ -80,6 +80,7 @@ public class TeacherUpdateDeleteResults extends AppCompatActivity {
                     inputMark = Integer.parseInt(mark.getText().toString());
                     subject =  TeacherSubject.getText().toString();
 
+                    //get document path
                     getPathSelectedStudentExam(selectedStudent,selectedExamID );
 
                     
@@ -162,6 +163,7 @@ public class TeacherUpdateDeleteResults extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 pathForUpdate = dataSnapshot.child("documentLink").getValue().toString();
 
+                //Update results in DB
                 updateResultDetails();
             }
 
@@ -258,6 +260,7 @@ public class TeacherUpdateDeleteResults extends AppCompatActivity {
         readLinkforDelete.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               //Get Path for delete
                 pathForDelete =  dataSnapshot.child("documentLink").getValue().toString();
 
                 deleteDocumentFromStorage();

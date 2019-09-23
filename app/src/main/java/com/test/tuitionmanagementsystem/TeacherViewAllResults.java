@@ -107,6 +107,7 @@ public class TeacherViewAllResults extends AppCompatActivity {
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                      String examidStr = dsp.getKey();
 
+                     //get a list of exam IDs
                     ExamIDStrList.add(examidStr);
 
                      //Toast.makeText(TeacherViewAllResults.this, examidStr+"", Toast.LENGTH_SHORT).show();
@@ -123,6 +124,7 @@ public class TeacherViewAllResults extends AppCompatActivity {
 
                                 for (DataSnapshot dsp1 : dataSnapshot.getChildren()) {
 
+                                    //Get student IDs
                                     final String student_ID =dsp1.getKey();
                                    // long a = dataSnapshot.getChildrenCount();
 
@@ -133,6 +135,7 @@ public class TeacherViewAllResults extends AppCompatActivity {
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             Student_Take_Exam student_take_examObj = new Student_Take_Exam();
 
+                                            //Get Result Details
 
                                             String sid_from_db = dataSnapshot.child(student_ID).child("sID").getValue().toString();
                                             String subName_from_db = dataSnapshot.child(student_ID).child("subName").getValue().toString();
@@ -233,7 +236,7 @@ public class TeacherViewAllResults extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(getApplicationContext(), "Download Incompleted", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Download incompleted", Toast.LENGTH_LONG).show();
             }
         });
     }

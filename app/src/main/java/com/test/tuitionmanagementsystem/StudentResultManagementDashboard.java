@@ -197,10 +197,9 @@ public class StudentResultManagementDashboard extends AppCompatActivity {
                             readResultRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                                    dataSnapshot.child("sID").getValue().toString();
-//                                    dataSnapshot.child("subName").getValue().toString();
+
                                     mark = dataSnapshot.child("mark").getValue().toString();
-//                                    dataSnapshot.child("examID").getValue().toString();
+
                                     document_link = dataSnapshot.child("documentLink").getValue().toString();
                                     fillMark();
                                 }

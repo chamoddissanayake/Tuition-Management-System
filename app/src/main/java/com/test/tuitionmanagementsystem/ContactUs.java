@@ -9,6 +9,7 @@ import android.Manifest.permission.*;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,8 +33,10 @@ public class ContactUs extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //block screen rotation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_us);
+
 
         phoneImage = (ImageView) findViewById(R.id.phoneImg);
         whatsappLogo = (ImageView) findViewById(R.id.ivWhatsappLogo);

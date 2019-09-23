@@ -57,6 +57,7 @@ public class TeacherAddResults extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_add_results);
 
+        //get logged in teacher details
         Intent intent = getIntent();
         final String tID = intent.getStringExtra("tID");
         final String tName = intent.getStringExtra("tName");
@@ -125,6 +126,7 @@ public class TeacherAddResults extends AppCompatActivity {
 
         // Toast.makeText(getApplicationContext()," "+selectedStudent+" "+" "+selectedExamID+" "+inputMark+""+subject,Toast.LENGTH_SHORT).show();
 
+        //Add result to the database
         DatabaseReference addMarkRef = FirebaseDatabase.getInstance().getReference().child("Student_take_exam");
 
         Student_Take_Exam stdtkExamObj = new Student_Take_Exam();
@@ -154,6 +156,8 @@ public class TeacherAddResults extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         StorageReference mStorageReference = FirebaseStorage.getInstance().getReference();
+
+                        //document uploaded successfully.
 
                         Toast.makeText(getApplicationContext(),"Uploaded successfully",Toast.LENGTH_LONG).show();
                         fileChooseStatus.setText("File not selected");
